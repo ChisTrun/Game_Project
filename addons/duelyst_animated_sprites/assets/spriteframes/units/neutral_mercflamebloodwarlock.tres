@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=78 format=3 uid="uid://ctc1bww7t24s"]
 
-[ext_resource type="Texture2D" uid="uid://d0a882ga0jd7a" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/neutral_mercflamebloodwarlock.png" id="1_iea64"]
+[ext_resource type="Texture2D" uid="uid://bybqlxxuqhbws" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/neutral_mercflamebloodwarlock.png" id="1_iea64"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w8k87"]
 atlas = ExtResource("1_iea64")

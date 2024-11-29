@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=110 format=3 uid="uid://d25udnsnf5msm"]
 
-[ext_resource type="Texture2D" uid="uid://dqpkf3kb0tchf" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/neutral_mirrormancer.png" id="1_gyplg"]
+[ext_resource type="Texture2D" uid="uid://u7t54y7jn3bj" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/neutral_mirrormancer.png" id="1_gyplg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fgbea"]
 atlas = ExtResource("1_gyplg")

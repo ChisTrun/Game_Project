@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=82 format=3 uid="uid://ctydfahrshfdj"]
 
-[ext_resource type="Texture2D" uid="uid://4dh0611tgxgc" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/neutral_golem_crossbones.png" id="1_cdp40"]
+[ext_resource type="Texture2D" uid="uid://bvb0c845iw47x" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/neutral_golem_crossbones.png" id="1_cdp40"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yafrg"]
 atlas = ExtResource("1_cdp40")

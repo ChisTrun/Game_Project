@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Linq.Expressions;
 
 public partial class Player : CharacterBody2D
 {
@@ -15,6 +14,12 @@ public partial class Player : CharacterBody2D
 
 	private bool isAttacking = false; // Cờ để kiểm tra trạng thái tấn công
 
+	private bool isHitting = false;
+	private bool isKnockedBack = false; // Cờ để kiểm tra trạng thái knockback
+	private float knockbackDuration = 0.1f; // Thời gian knockback
+	private float knockbackSpeed = 200.0f; // Tốc độ knockback
+	private Vector2 knockbackDirection; // Hướng knockback
+
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -22,12 +27,11 @@ public partial class Player : CharacterBody2D
 		animatedSprite.AnimationFinished += OnAnimationFinished;
 	}
 
-	
-
 	public override void _PhysicsProcess(double delta)
 	{
-		if (isAttacking)
+		if (isAttacking || isKnockedBack)
 		{
+			// Không di chuyển khi đang tấn công hoặc bị knockback
 			return;
 		}
 
@@ -62,13 +66,55 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
+	public void OnHit()
+	{
+		if (!isHitting)
+		{
+			isHitting = true;
+			GD.Print("duma Đao!");
+			animatedSprite.Play("hit");
+
+			// Tạo hiệu ứng knockback
+			KnockBack();
+		}
+	}
+
+	private void KnockBack()
+	{
+		if (!isKnockedBack)
+		{
+			isKnockedBack = true;
+
+			// Tính toán hướng knockback (ngược lại với hướng của player)
+			knockbackDirection = -character_direction.Normalized();
+
+			// Áp dụng knockback lên velocity
+			Velocity = knockbackDirection * knockbackSpeed;
+
+			// Sau thời gian knockback, quay lại trạng thái bình thường
+			var timer = new Timer();
+			AddChild(timer);
+			timer.WaitTime = knockbackDuration;
+			timer.OneShot = true;
+			timer.Timeout += () => 
+			{
+				isKnockedBack = false;
+				timer.QueueFree();
+			};
+			timer.Start();
+		}
+	}
+
 	private void UpdateAnimation()
 	{
-	
-
 		if (isAttacking)
 		{
 			// Không thay đổi animation nếu đang tấn công
+			return;
+		}
+
+		if (isHitting)
+		{
 			return;
 		}
 
@@ -92,7 +138,6 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-
 	private void OnAnimationFinished()
 	{
 		// Lấy tên animation vừa kết thúc
@@ -102,6 +147,10 @@ public partial class Player : CharacterBody2D
 		{
 			isAttacking = false;
 		}
-	}
 
+		if (finishedAnimation == "hit")
+		{
+			isHitting = false;
+		}
+	}
 }
