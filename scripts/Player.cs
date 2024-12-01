@@ -20,7 +20,9 @@ public partial class Player : CharacterBody2D
 	private float knockbackSpeed = 200.0f; // Tốc độ knockback
 	private Vector2 knockbackDirection; // Hướng knockback
 
+	[Export]
 	public int maxHealth = 82;
+	[Export]
 	public int currentHealth;
 
     private TextureProgressBar healthBar;
