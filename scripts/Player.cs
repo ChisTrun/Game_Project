@@ -25,14 +25,14 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public int currentHealth;
 
-    private TextureProgressBar healthBar;
+	private TextureProgressBar healthBar;
 
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthBar = GetNode<TextureProgressBar>("HealthBar");
 
-        GD.Print(healthBar.Value);
+		GD.Print(healthBar.Value);
 
 		animatedSprite.AnimationFinished += OnAnimationFinished;
 
@@ -187,7 +187,7 @@ public partial class Player : CharacterBody2D
 			currentHealth = 13;
 		}
 
-        healthBar.Value = currentHealth;
+		healthBar.Value = currentHealth;
 
 		if (currentHealth == 13)
 		{
