@@ -548,7 +548,7 @@ speed_scale = 2.0
 
 [node name="Player" type="CharacterBody2D" parent="."]
 z_index = 100
-position = Vector2(468, 567)
+position = Vector2(493, 564)
 scale = Vector2(0.981734, 1.0026)
 script = ExtResource("8_mtmnc")
 
