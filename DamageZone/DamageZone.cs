@@ -26,7 +26,7 @@ public partial class DamageZone : TileMap
 
 			if (cellId != -1 )
 			{
-				player.OnHit();
+				player.OnHit(-10);
 			}
 		}
 	}

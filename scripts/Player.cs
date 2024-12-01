@@ -20,11 +20,23 @@ public partial class Player : CharacterBody2D
 	private float knockbackSpeed = 200.0f; // Tốc độ knockback
 	private Vector2 knockbackDirection; // Hướng knockback
 
+	private int maxHealth = 100;
+	private int currentHealth;
+
+	private TextureProgressBar healthBar;
+
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		healthBar = GetNode<TextureProgressBar>("HealthBar");
+
+		GD.Print(healthBar);
 
 		animatedSprite.AnimationFinished += OnAnimationFinished;
+
+		// Khởi tạo máu
+		currentHealth = maxHealth;
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -66,13 +78,17 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	public void OnHit()
+	public void OnHit(int amount)
 	{
 		if (!isHitting)
 		{
 			isHitting = true;
 			GD.Print("duma Đao!");
 			animatedSprite.Play("hit");
+
+			ChangeHealth(amount);
+
+			GD.Print("Máu hiện tại: " + currentHealth);
 
 			// Tạo hiệu ứng knockback
 			KnockBack();
@@ -151,6 +167,36 @@ public partial class Player : CharacterBody2D
 		if (finishedAnimation == "hit")
 		{
 			isHitting = false;
+		}
+	}
+
+	private void UpdateHealthBar()
+	{
+		if (healthBar != null)
+		{
+			healthBar.Value = currentHealth;
+		}
+	}
+
+	public void ChangeHealth(int amount)
+	{
+		currentHealth += amount;
+
+		if (currentHealth > maxHealth)
+		{
+			currentHealth = maxHealth;
+		}
+
+		if (currentHealth < 0)
+		{
+			currentHealth = 0;
+		}
+
+		UpdateHealthBar();
+
+		if (currentHealth == 0)
+		{
+			GD.Print("Player đã chết!");
 		}
 	}
 }
