@@ -654,11 +654,9 @@ position = Vector2(508, 533)
 
 [node name="HealthPotion2" parent="." instance=ExtResource("19_b6hc6")]
 position = Vector2(279, 484)
-scale = Vector2(0.35043, 0.27702)
 
 [node name="HealthPotion3" parent="." instance=ExtResource("19_b6hc6")]
 position = Vector2(85, 575)
-scale = Vector2(0.35043, 0.27702)
 
 [connection signal="body_entered" from="NPC/NPCTrigger" to="NPC/NPCTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="NPC/NPCTrigger" to="NPC/NPCTrigger" method="_on_body_exited"]
