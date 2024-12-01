@@ -25,14 +25,16 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public int currentHealth;
 
-    private TextureProgressBar healthBar;
+	private TextureProgressBar healthBar;
+
+	private bool isDead = false;
 
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthBar = GetNode<TextureProgressBar>("HealthBar");
 
-        GD.Print(healthBar.Value);
+		GD.Print(healthBar.Value);
 
 		animatedSprite.AnimationFinished += OnAnimationFinished;
 
@@ -44,6 +46,11 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (isDead)
+		{
+			return;
+		}
+
 		if (isAttacking || isKnockedBack)
 		{
 			// Không di chuyển khi đang tấn công hoặc bị knockback
@@ -175,7 +182,12 @@ public partial class Player : CharacterBody2D
 
 	public void ChangeHealth(int amount)
 	{
+		if (isDead)
+		{
+			return;
+		}
 		currentHealth += amount;
+		GD.Print("Máu sau khi thay đổi: " + currentHealth + "/" + maxHealth);
 
 		if (currentHealth > maxHealth)
 		{
@@ -187,11 +199,38 @@ public partial class Player : CharacterBody2D
 			currentHealth = 13;
 		}
 
-        healthBar.Value = currentHealth;
+		healthBar.Value = currentHealth;
 
 		if (currentHealth == 13)
 		{
 			GD.Print("Player đã chết!");
+			Die();
+		}
+	}
+
+	private void Die()
+	{
+		isDead = true; // Đánh dấu Player đã chết
+
+		// Chuyển animation sang "death"
+		animatedSprite.Play("death");
+
+		GD.Print("Player đã chết!");
+
+		// Đợi animation "death" kết thúc rồi xử lý tiếp
+		animatedSprite.AnimationFinished += OnDeathAnimationFinished;
+	}
+
+	private void OnDeathAnimationFinished()
+	{
+		if (animatedSprite.Animation == "death")
+		{
+			// Hiển thị thông báo kết thúc game
+			GD.Print("Game Over!");
+
+			// Ví dụ: Kết thúc game hoặc chuyển scene
+			GetTree().Paused = true;
+			// GetTree().ChangeScene("res://Scenes/GameOver.tscn"); // Chuyển đến màn hình Game Over
 		}
 	}
 }
