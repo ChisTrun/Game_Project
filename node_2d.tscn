@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=25 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -528,6 +528,17 @@ layer_2/z_index = 2
 layer_2/tile_data = PackedInt32Array(2031646, 65541, 1, 2097182, 65541, 2, 2031647, 131077, 1, 2097183, 131077, 2, 2097158, 65541, 1, 2162694, 65541, 2, 1900564, 65541, 1, 1966100, 65541, 2, 1900563, 131077, 1, 1966099, 131077, 2, 1835026, 196613, 1, 1900562, 196613, 2, 2031623, 65541, 1, 2097159, 65541, 2, 2162695, 131077, 1, 2228231, 131077, 2, 1310737, 65541, 1, 1376273, 65541, 2, 1114105, 65541, 1, 1179641, 65541, 2, 1114106, 131077, 1, 1179642, 131077, 2, 1048626, 65541, 1, 1114162, 65541, 2, 1048627, 65541, 1, 1114163, 65541, 2, 1048628, 65541, 1, 1114164, 65541, 2, 1048629, 65541, 1, 1114165, 65541, 2, 1048630, 131077, 1, 1114166, 131077, 2, 1048631, 131077, 1, 1114167, 131077, 2, 327704, 65541, 1, 393240, 65541, 2, 327719, 131077, 1, 393255, 131077, 2, -1310694, 65541, 1, -1245158, 65541, 2, -1179622, 65541, 1, -1114086, 65541, 2, -1507259, 65541, 1, -1441723, 65541, 2, -1376187, 65541, 1, -1310651, 65541, 2, -2949107, 65541, 1, -2883571, 65541, 2, -2818034, 65541, 1, -2752498, 65541, 2, -2818033, 65541, 1, -2752497, 65541, 2, -2818032, 65541, 1, -2752496, 65541, 2, -2949105, 65541, 1, -2883569, 65541, 2, -2752500, 131077, 1, -2686964, 131077, 2, -2883574, 131077, 1, -2818038, 131077, 2, -2883531, 65541, 1, -2817995, 65541, 2, -2883530, 65541, 1, -2817994, 65541, 2, -2752458, 65541, 1, -2686922, 65541, 2, -2752460, 65541, 1, -2686924, 65541, 2, -2621388, 65541, 1, -2555852, 65541, 2, -2555854, 196613, 1, -2490318, 196613, 2, -3669968, 196613, 1, -3604432, 196613, 2, -3604429, 196613, 1, -3538893, 196613, 2, -3473357, 196613, 1, -3407821, 196613, 2, -3473358, 196613, 1, -3407822, 196613, 2, -3473359, 196613, 1, -3407823, 196613, 2, -3604431, 196613, 1, -3538895, 196613, 2, -3670002, 65541, 1, -3604466, 65541, 2, -3538930, 65541, 1, -3473394, 65541, 2, -3473396, 65541, 1, -3407860, 65541, 2, -3604468, 65541, 1, -3538932, 65541, 2, -3538897, 65541, 1, -3473361, 65541, 2, -3538896, 65541, 1, -3473360, 65541, 2, -3473355, 65541, 1, -3407819, 65541, 2)
 script = ExtResource("8_ydwfu")
 
+[node name="Enemy" type="CharacterBody2D" parent="."]
+position = Vector2(552, 517)
+script = ExtResource("10_gi3wp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
+position = Vector2(-13.2419, -17.9533)
+scale = Vector2(0.977029, 0.977029)
+sprite_frames = ExtResource("10_8s76d")
+animation = &"attack"
+speed_scale = 2.0
+
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(468, 567)
 scale = Vector2(0.981734, 1.0026)
@@ -544,7 +555,6 @@ zoom = Vector2(4, 4)
 position = Vector2(-13.2419, -17.9533)
 scale = Vector2(0.977029, 0.977029)
 sprite_frames = ExtResource("11_shvi8")
-
 animation = &"attack"
 speed_scale = 2.0
 
@@ -552,17 +562,6 @@ speed_scale = 2.0
 texture_repeat = 1
 offset_left = -153.809
 offset_top = -86.7744
-offset_right = -8.80948
+offset_right = -8.80946
 offset_bottom = 58.2256
 texture_progress = ExtResource("11_5052i")
-
-[node name="Enemy" type="CharacterBody2D" parent="."]
-
-position = Vector2(552, 517)
-script = ExtResource("10_gi3wp")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
-scale = Vector2(0.56, 0.56)
-sprite_frames = ExtResource("10_8s76d")
-animation = &"run"
-speed_scale = 2.0

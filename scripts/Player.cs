@@ -30,7 +30,7 @@ public partial class Player : CharacterBody2D
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthBar = GetNode<TextureProgressBar>("HealthBar");
 
-		GD.Print(healthBar)
+		GD.Print(healthBar);
 
 		animatedSprite.AnimationFinished += OnAnimationFinished;
 
@@ -172,31 +172,31 @@ public partial class Player : CharacterBody2D
 
 	private void UpdateHealthBar()
 	{
-        if (healthBar != null)
+		if (healthBar != null)
 		{
-            healthBar.Value = currentHealth;
-        }
-    }
+			healthBar.Value = currentHealth;
+		}
+	}
 
 	public void ChangeHealth(int amount)
 	{
-        currentHealth += amount;
+		currentHealth += amount;
 
-        if (currentHealth > maxHealth)
+		if (currentHealth > maxHealth)
 		{
-            currentHealth = maxHealth;
-        }
+			currentHealth = maxHealth;
+		}
 
-        if (currentHealth < 0)
+		if (currentHealth < 0)
 		{
-            currentHealth = 0;
-        }
+			currentHealth = 0;
+		}
 
-        UpdateHealthBar();
+		UpdateHealthBar();
 
 		if (currentHealth == 0)
 		{
 			GD.Print("Player đã chết!");
 		}
-    }
+	}
 }
