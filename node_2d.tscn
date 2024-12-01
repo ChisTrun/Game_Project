@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
 [ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
-[ext_resource type="AudioStream" uid="uid://bfsqewpclgbfw" path="res://addons/backgroundMusic.wav" id="18_ihs83"]
+[ext_resource type="AudioStream" uid="uid://cbcck2oamv5a0" path="res://addons/videoplayback.wav" id="18_j6pdt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nssai"]
 texture = ExtResource("1_xywr5")
@@ -634,7 +634,7 @@ sprite_frames = ExtResource("12_lope8")
 animation = &"run"
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("18_ihs83")
+stream = ExtResource("18_j6pdt")
 autoplay = true
 
 [connection signal="body_entered" from="NPCTrigger" to="NPCTrigger" method="_on_body_entered"]
