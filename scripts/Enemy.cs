@@ -19,7 +19,7 @@ public partial class Enemy : CharacterBody2D
 	[Export]
 	public int DamagePerSecond = 6; // Sát thương mỗi giây
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		player = GetNodeOrNull<Node2D>("../Player");
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -52,7 +52,7 @@ public partial class Enemy : CharacterBody2D
 		}
 	}
 
-    private void Patrol(double delta)
+	private void Patrol(double delta)
 	{
 		// Nếu còn thời gian dừng lại, không di chuyển
 		if (patrolPauseTimer > 0)
