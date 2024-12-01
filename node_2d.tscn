@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=25 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" path="res://DamageZone/DamageZone.cs" id="8_ydwfu"]
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="10_gi3wp"]
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="11_shvi8"]
+[ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
+[ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
+[ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nssai"]
 texture = ExtResource("1_xywr5")
@@ -428,6 +431,9 @@ sources/8 = SubResource("TileSetAtlasSource_htch4")
 [sub_resource type="CircleShape2D" id="CircleShape2D_6a08o"]
 radius = 6.58807
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_j7wqh"]
+radius = 18.4391
+
 [node name="world" type="Node2D"]
 position = Vector2(-48, -37)
 
@@ -443,7 +449,7 @@ layer_2/name = "Damage_Layer"
 layer_2/tile_data = PackedInt32Array(2031646, 65541, 1, 2097182, 65541, 2, 2031647, 131077, 1, 2097183, 131077, 2)
 script = ExtResource("8_ydwfu")
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
 position = Vector2(468, 567)
 scale = Vector2(0.981734, 1.0026)
 script = ExtResource("8_mtmnc")
@@ -477,3 +483,63 @@ speed_scale = 2.0
 
 [node name="DatNode" type="Node2D" parent="."]
 position = Vector2(519.528, 528.603)
+
+[node name="NPC" type="Node2D" parent="."]
+position = Vector2(460, 506)
+script = ExtResource("12_5ywv7")
+
+[node name="Label" type="Label" parent="NPC"]
+visible = false
+offset_left = -32.0
+offset_top = -59.0
+offset_right = 147.0
+offset_bottom = -36.0
+text = "Hello! Where r u going?"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC"]
+position = Vector2(0, 1.00003)
+scale = Vector2(0.35, 0.381249)
+sprite_frames = ExtResource("12_lope8")
+animation = &"run"
+
+[node name="NPCTrigger" type="Area2D" parent="."]
+position = Vector2(459, 507)
+script = ExtResource("14_q34pk")
+NPCPath = NodePath("../NPC")
+DialogueUIPath = NodePath("../DialogueUI")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCTrigger"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_j7wqh")
+
+[node name="DialogueUI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="DialogueUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 491.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="DialogueUI"]
+anchors_preset = -1
+anchor_left = 0.027
+anchor_top = 0.015
+anchor_right = 0.027
+anchor_bottom = 0.015
+offset_left = 181.896
+offset_top = 481.28
+offset_right = 1120.9
+offset_bottom = 638.28
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DialogueUI"]
+position = Vector2(81, 525)
+scale = Vector2(3.2875, 3.48281)
+sprite_frames = ExtResource("12_lope8")
+animation = &"run"
+
+[connection signal="body_entered" from="NPCTrigger" to="NPCTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="NPCTrigger" to="NPCTrigger" method="_on_body_exited"]
