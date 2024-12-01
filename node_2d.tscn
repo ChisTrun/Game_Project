@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=23 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bgiaqn4slailq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [fencesAndWalls].png" id="7_g75i5"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="8_mtmnc"]
 [ext_resource type="Script" path="res://DamageZone/DamageZone.cs" id="8_ydwfu"]
+[ext_resource type="SpriteFrames" uid="uid://b38iok8ul0swf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_2.tres" id="10_8s76d"]
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="10_gi3wp"]
+[ext_resource type="Texture2D" uid="uid://dy5y4612c4x1c" path="res://addons/duelyst_animated_sprites/assets/health_bar/greenbar (1).png" id="11_5052i"]
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="11_shvi8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nssai"]
@@ -459,10 +461,16 @@ zoom = Vector2(4, 4)
 position = Vector2(-13.2419, -17.9533)
 scale = Vector2(0.977029, 0.977029)
 sprite_frames = ExtResource("11_shvi8")
-animation = &"hit"
-frame = 2
-frame_progress = 1.0
+animation = &"attack"
 speed_scale = 2.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="Player"]
+texture_repeat = 1
+offset_left = -153.809
+offset_top = -86.7744
+offset_right = -8.80948
+offset_bottom = 58.2256
+texture_progress = ExtResource("11_5052i")
 
 [node name="Enemy" type="CharacterBody2D" parent="."]
 position = Vector2(552, 517)
@@ -470,10 +478,6 @@ script = ExtResource("10_gi3wp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
 scale = Vector2(0.56, 0.56)
-sprite_frames = ExtResource("11_shvi8")
+sprite_frames = ExtResource("10_8s76d")
 animation = &"run"
-frame_progress = 0.821405
 speed_scale = 2.0
-
-[node name="DatNode" type="Node2D" parent="."]
-position = Vector2(519.528, 528.603)
