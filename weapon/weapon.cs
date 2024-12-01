@@ -21,3 +21,4 @@ public abstract partial class Weapon : Node2D
 
     public abstract void Use(Vector2 targetPosition);
 }
+
