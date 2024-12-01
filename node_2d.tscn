@@ -474,3 +474,6 @@ sprite_frames = ExtResource("11_shvi8")
 animation = &"run"
 frame_progress = 0.821405
 speed_scale = 2.0
+
+[node name="DatNode" type="Node2D" parent="."]
+position = Vector2(519.528, 528.603)
