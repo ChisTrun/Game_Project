@@ -17,7 +17,9 @@ public partial class Player : CharacterBody2D
 	private bool isHitting = false;
 	private bool isKnockedBack = false; // Cờ để kiểm tra trạng thái knockback
 	private float knockbackDuration = 0.1f; // Thời gian knockback
-	private float knockbackSpeed = 200.0f; // Tốc độ knockback
+	private float knockbackSpeed = 200.0f; // Tốc độ knockback\
+
+	private Weapon weapon;
 	private Vector2 knockbackDirection; // Hướng knockback
 
 	[Export]
@@ -25,21 +27,34 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public int currentHealth;
 
-    private TextureProgressBar healthBar;
+	private TextureProgressBar healthBar;
 
+	private Weapon GetWeaponFromChildren()
+	{
+		// Duyệt qua tất cả các node con và kiểm tra xem node đó có phải là lớp con của Weapon không
+		foreach (var child in GetChildren())
+		{
+			if (child is Weapon weapon)
+			{
+				return weapon;
+			}
+		}
+		return null; // Trả về null nếu không tìm thấy node Weapon nào
+	}
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthBar = GetNode<TextureProgressBar>("HealthBar");
 
-        GD.Print(healthBar.Value);
+		GD.Print(healthBar.Value);
 
 		animatedSprite.AnimationFinished += OnAnimationFinished;
 
 		// Khởi tạo máu
 		currentHealth = maxHealth;
-		/*healthBar.MaxValue = maxHealth;
-		healthBar.Value = currentHealth;*/
+
+		weapon = GetWeaponFromChildren();
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -67,6 +82,24 @@ public partial class Player : CharacterBody2D
 		MoveAndSlide();
 
 		UpdateAnimation();
+		UpdateDirectionToMouse();
+	}
+
+	private void UpdateDirectionToMouse()
+	{
+		// Lấy vị trí chuột và vị trí player
+		Vector2 mousePosition = GetGlobalMousePosition();
+		Vector2 playerPosition = GlobalPosition;
+
+		// Kiểm tra hướng của chuột so với player
+		if (mousePosition.X < playerPosition.X)
+		{
+			animatedSprite.FlipH = true; // Lật player theo chiều ngang
+		}
+		else
+		{
+			animatedSprite.FlipH = false; // Không lật
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -76,7 +109,7 @@ public partial class Player : CharacterBody2D
 			if (mouseEvent.ButtonIndex == MouseButton.Left)
 			{
 				// Chơi animation tấn công
-				PlayAttackAnimation();
+				PlayerAttack();
 			}
 		}
 	}
@@ -115,7 +148,7 @@ public partial class Player : CharacterBody2D
 			AddChild(timer);
 			timer.WaitTime = knockbackDuration;
 			timer.OneShot = true;
-			timer.Timeout += () => 
+			timer.Timeout += () =>
 			{
 				isKnockedBack = false;
 				timer.QueueFree();
@@ -144,16 +177,21 @@ public partial class Player : CharacterBody2D
 		else
 		{
 			animatedSprite.Play("run");
-			animatedSprite.FlipH = character_direction.X < 0;
 		}
 	}
 
-	private void PlayAttackAnimation()
+	private void PlayerAttack()
 	{
 		if (!isAttacking)
 		{
 			isAttacking = true;
-			animatedSprite.Play("attack");
+			if (weapon != null) {
+				weapon.Use(new Vector2());
+				isAttacking = false;
+			} else {
+				animatedSprite.Play("attack");
+			}
+
 		}
 	}
 
@@ -187,7 +225,7 @@ public partial class Player : CharacterBody2D
 			currentHealth = 13;
 		}
 
-        healthBar.Value = currentHealth;
+		healthBar.Value = currentHealth;
 
 		if (currentHealth == 13)
 		{

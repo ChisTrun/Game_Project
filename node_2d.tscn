@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=30 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
 [ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
+[ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://weapon/sword/sword.tscn" id="15_vgho4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nssai"]
 texture = ExtResource("1_xywr5")
@@ -546,7 +547,7 @@ animation = &"attack"
 speed_scale = 2.0
 
 [node name="Player" type="CharacterBody2D" parent="."]
-
+z_index = 100
 position = Vector2(468, 567)
 scale = Vector2(0.981734, 1.0026)
 script = ExtResource("8_mtmnc")
@@ -565,8 +566,23 @@ sprite_frames = ExtResource("11_shvi8")
 animation = &"attack"
 speed_scale = 2.0
 
+[node name="HealthBar" type="TextureProgressBar" parent="Player"]
+z_index = 100
+texture_repeat = 1
+offset_left = -147.698
+offset_top = -97.7459
+offset_right = -2.69902
+offset_bottom = 47.2538
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("11_5052i")
+
+[node name="Weapon" parent="Player" instance=ExtResource("15_vgho4")]
+position = Vector2(-11.2047, 0)
+scale = Vector2(0.0247207, 0.0247207)
+
 [node name="NPC" type="Node2D" parent="."]
-position = Vector2(460, 506)
+position = Vector2(459, 505)
 script = ExtResource("12_5ywv7")
 
 [node name="Label" type="Label" parent="NPC"]
@@ -583,17 +599,18 @@ scale = Vector2(0.35, 0.381249)
 sprite_frames = ExtResource("12_lope8")
 animation = &"run"
 
-[node name="NPCTrigger" type="Area2D" parent="."]
-position = Vector2(459, 507)
+[node name="NPCTrigger" type="Area2D" parent="NPC"]
+position = Vector2(-1, 1)
 script = ExtResource("14_q34pk")
-NPCPath = NodePath("../NPC")
-DialogueUIPath = NodePath("../DialogueUI")
+NPCPath = NodePath("..")
+DialogueUIPath = NodePath("../../DialogueUI")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/NPCTrigger"]
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_j7wqh")
 
 [node name="DialogueUI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Panel" type="Panel" parent="DialogueUI"]
 anchors_preset = 15
@@ -622,17 +639,5 @@ scale = Vector2(3.2875, 3.48281)
 sprite_frames = ExtResource("12_lope8")
 animation = &"run"
 
-[connection signal="body_entered" from="NPCTrigger" to="NPCTrigger" method="_on_body_entered"]
-[connection signal="body_exited" from="NPCTrigger" to="NPCTrigger" method="_on_body_exited"]
-
-[node name="HealthBar" type="TextureProgressBar" parent="Player"]
-z_index = 100
-texture_repeat = 1
-offset_left = -147.698
-offset_top = -97.7459
-offset_right = -2.69902
-offset_bottom = 47.2538
-value = 100.0
-nine_patch_stretch = true
-texture_progress = ExtResource("11_5052i")
-
+[connection signal="body_entered" from="NPC/NPCTrigger" to="NPC/NPCTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="NPC/NPCTrigger" to="NPC/NPCTrigger" method="_on_body_exited"]

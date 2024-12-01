@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://b32ypnrdbqey5"]
+
+[ext_resource type="Texture2D" uid="uid://c868g1ah5n5yt" path="res://weapon/sword/sword.png" id="1_4iu6w"]
+[ext_resource type="Script" path="res://weapon/MeleeWeapon.cs" id="1_f3bxm"]
+
+[sub_resource type="Animation" id="Animation_qqyey"]
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.00599]
+}
+
+[sub_resource type="Animation" id="Animation_4hgju"]
+resource_name = "attack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.00599, 0.735382]
+}
+
+[sub_resource type="Animation" id="Animation_nyafb"]
+resource_name = "idle"
+length = 0.3
+loop_mode = 2
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54gp2"]
+_data = {
+"RESET": SubResource("Animation_qqyey"),
+"attack": SubResource("Animation_4hgju"),
+"idle": SubResource("Animation_nyafb")
+}
+
+[node name="Sword" type="Node2D"]
+script = ExtResource("1_f3bxm")
+
+[node name="Sword" type="Sprite2D" parent="."]
+position = Vector2(-4, -14)
+rotation = -2.00599
+texture = ExtResource("1_4iu6w")
+offset = Vector2(421.229, -427.933)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_54gp2")
+}
