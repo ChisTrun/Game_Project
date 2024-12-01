@@ -2,7 +2,7 @@ using Godot;
 
 public partial class DamageZone : TileMap
 {  [Export]
-	public int DamagePerSecond = 10; // Sát thương mỗi giây
+	public int DamagePerSecond = 4; // Sát thương mỗi giây
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -26,7 +26,7 @@ public partial class DamageZone : TileMap
 
 			if (cellId != -1 )
 			{
-				player.OnHit(-10);
+				player.OnHit(-DamagePerSecond);
 			}
 		}
 	}

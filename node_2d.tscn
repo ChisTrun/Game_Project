@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://DamageZone/DamageZone.cs" id="8_ydwfu"]
 [ext_resource type="SpriteFrames" uid="uid://b38iok8ul0swf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_2.tres" id="10_8s76d"]
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="10_gi3wp"]
-[ext_resource type="Texture2D" uid="uid://dy5y4612c4x1c" path="res://addons/duelyst_animated_sprites/assets/health_bar/greenbar (1).png" id="11_5052i"]
+[ext_resource type="Texture2D" uid="uid://dy5y4612c4x1c" path="res://addons/duelyst_animated_sprites/assets/health_bar/greenbar(1).png" id="11_5052i"]
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="11_shvi8"]
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
@@ -626,10 +626,13 @@ animation = &"run"
 [connection signal="body_exited" from="NPCTrigger" to="NPCTrigger" method="_on_body_exited"]
 
 [node name="HealthBar" type="TextureProgressBar" parent="Player"]
+z_index = 100
 texture_repeat = 1
-offset_left = -153.809
-offset_top = -86.7744
-offset_right = -8.80946
-offset_bottom = 58.2256
+offset_left = -147.698
+offset_top = -97.7459
+offset_right = -2.69902
+offset_bottom = 47.2538
+value = 100.0
+nine_patch_stretch = true
 texture_progress = ExtResource("11_5052i")
 

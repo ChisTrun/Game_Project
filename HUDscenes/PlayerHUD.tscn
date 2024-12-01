@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ci00fx1hds651"]
 
-[ext_resource type="Texture2D" uid="uid://dy5y4612c4x1c" path="res://addons/duelyst_animated_sprites/assets/health_bar/greenbar (1).png" id="1_0dk4m"]
+[ext_resource type="Texture2D" uid="uid://dy5y4612c4x1c" path="res://addons/duelyst_animated_sprites/assets/health_bar/greenbar(1).png" id="1_0dk4m"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
