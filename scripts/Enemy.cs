@@ -26,10 +26,16 @@ public partial class Enemy : CharacterBody2D
 
 		// Thiết lập điểm tuần tra đầu tiên
 		SetRandomPatrolPoint();
+
+		var area = GetNode<Area2D>("Area2D");
+		area.BodyEntered += OnBodyEntered;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (GetTree().Paused)
+			return;
+
 		if (player == null)
 			return;
 
@@ -97,5 +103,13 @@ public partial class Enemy : CharacterBody2D
 
 		targetPatrolPoint = GlobalPosition + new Vector2(randomX, randomY);
 		GD.Print($"New patrol point: {targetPatrolPoint}");
+	}
+
+	private void OnBodyEntered(Node body)
+	{
+		if (body is Player player)
+		{
+			player.OnHit(-DamagePerSecond);
+		}
 	}
 }

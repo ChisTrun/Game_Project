@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=32 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -18,6 +18,7 @@
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
 [ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://weapon/sword/sword.tscn" id="15_vgho4"]
+[ext_resource type="PackedScene" uid="uid://ce83hhdbf7uf3" path="res://scenes/HealthPotion.tscn" id="19_b6hc6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nssai"]
 texture = ExtResource("1_xywr5")
@@ -512,6 +513,8 @@ sources/5 = SubResource("TileSetAtlasSource_yupim")
 sources/8 = SubResource("TileSetAtlasSource_htch4")
 sources/6 = SubResource("TileSetAtlasSource_4hyb1")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5e4ye"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_6a08o"]
 radius = 6.58807
 
@@ -545,6 +548,13 @@ scale = Vector2(0.977029, 0.977029)
 sprite_frames = ExtResource("10_8s76d")
 animation = &"attack"
 speed_scale = 2.0
+
+[node name="Area2D" type="Area2D" parent="Enemy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D"]
+position = Vector2(-13, -1)
+scale = Vector2(0.76, 0.792332)
+shape = SubResource("CircleShape2D_5e4ye")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 z_index = 100
@@ -638,6 +648,17 @@ position = Vector2(81, 525)
 scale = Vector2(3.2875, 3.48281)
 sprite_frames = ExtResource("12_lope8")
 animation = &"run"
+
+[node name="HealthPotion" parent="." instance=ExtResource("19_b6hc6")]
+position = Vector2(508, 533)
+
+[node name="HealthPotion2" parent="." instance=ExtResource("19_b6hc6")]
+position = Vector2(279, 484)
+scale = Vector2(0.35043, 0.27702)
+
+[node name="HealthPotion3" parent="." instance=ExtResource("19_b6hc6")]
+position = Vector2(85, 575)
+scale = Vector2(0.35043, 0.27702)
 
 [connection signal="body_entered" from="NPC/NPCTrigger" to="NPC/NPCTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="NPC/NPCTrigger" to="NPC/NPCTrigger" method="_on_body_exited"]

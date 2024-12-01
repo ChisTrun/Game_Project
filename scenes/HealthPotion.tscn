@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ce83hhdbf7uf3"]
+
+[ext_resource type="Texture2D" uid="uid://dwjxk8fgygbrc" path="res://addons/duelyst_animated_sprites/assets/health_bar/Health potion.png" id="1_7foss"]
+[ext_resource type="Script" path="res://scripts/HealthPotion.cs" id="1_asqxs"]
+[ext_resource type="Script" path="res://scenes/CollisionShape2d.cs" id="2_beu1l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1qe6u"]
+
+[node name="HealthPotion" type="Area2D"]
+scale = Vector2(0.35043, 0.27702)
+script = ExtResource("1_asqxs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7foss")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(-0.918933, 0.694665)
+shape = SubResource("CapsuleShape2D_1qe6u")
+script = ExtResource("2_beu1l")
