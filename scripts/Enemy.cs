@@ -19,7 +19,7 @@ public partial class Enemy : CharacterBody2D
 	[Export]
 	public int DamagePerSecond = 6; // Sát thương mỗi giây
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		player = GetNodeOrNull<Node2D>("../Player");
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -44,50 +44,7 @@ public partial class Enemy : CharacterBody2D
 		{
 			Patrol(delta);
 		}
-
-		// Trừ máu người chơi khi chạm vào Enemy
-		var playerPosition = player.Position;
-		Vector2 cellSize = GetUsedRect().Size / GetTileset().GetTileSize();
-
-		playerPosition.X = Mathf.Floor(playerPosition.X / cellSize.X) * cellSize.X;
-		playerPosition.Y = Mathf.Floor(playerPosition.Y / cellSize.Y) * cellSize.Y;
-
-		Vector2I cellPosition = LocalToMap(playerPosition);
-
-		int cellId = GetCellSourceId(2, cellPosition);
-
-		if (cellId != -1)
-		{
-		
-            player.OnHit(-DamagePerSecond);
-        }
 	}
-
-    private void KnockBack()
-    {
-        if (!isKnockedBack)
-        {
-            isKnockedBack = true;
-
-            // Tính toán hướng knockback (ngược lại với hướng của player)
-            knockbackDirection = -character_direction.Normalized();
-
-            // Áp dụng knockback lên velocity
-            Velocity = knockbackDirection * knockbackSpeed;
-
-            // Sau thời gian knockback, quay lại trạng thái bình thường
-            var timer = new Timer();
-            AddChild(timer);
-            timer.WaitTime = knockbackDuration;
-            timer.OneShot = true;
-            timer.Timeout += () =>
-            {
-                isKnockedBack = false;
-                timer.QueueFree();
-            };
-            timer.Start();
-        }
-    }
 
     private void Patrol(double delta)
 	{
