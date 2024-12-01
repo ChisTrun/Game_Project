@@ -63,8 +63,8 @@ public partial class Player : CharacterBody2D
 	{
 		if (isDead)
 		{
-            return;
-        }
+			return;
+		}
 
 		if (isAttacking || isKnockedBack)
 		{
@@ -219,55 +219,55 @@ public partial class Player : CharacterBody2D
 
 	public void ChangeHealth(int amount)
 	{
-        if (isDead)
-        {
-            return;
-        }
-        currentHealth += amount;
-        GD.Print("Máu sau khi thay đổi: " + currentHealth + "/" + maxHealth);
+		if (isDead)
+		{
+			return;
+		}
+		currentHealth += amount;
+		GD.Print("Máu sau khi thay đổi: " + currentHealth + "/" + maxHealth);
 
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+		if (currentHealth > maxHealth)
+		{
+			currentHealth = maxHealth;
+		}
 
-        if (currentHealth < 13)
-        {
-            currentHealth = 13;
-        }
+		if (currentHealth < 13)
+		{
+			currentHealth = 13;
+		}
 
-        healthBar.Value = currentHealth;
+		healthBar.Value = currentHealth;
 
-        if (currentHealth == 13)
-        {
-            GD.Print("Player đã chết!");
-            Die();
-        }
-    }
+		if (currentHealth == 13)
+		{
+			GD.Print("Player đã chết!");
+			Die();
+		}
+	}
 
-    private void Die()
-    {
-        isDead = true; // Đánh dấu Player đã chết
+	private void Die()
+	{
+		isDead = true; // Đánh dấu Player đã chết
 
-        // Chuyển animation sang "death"
-        animatedSprite.Play("death");
+		// Chuyển animation sang "death"
+		animatedSprite.Play("death");
 
-        GD.Print("Player đã chết!");
+		GD.Print("Player đã chết!");
 
-        // Đợi animation "death" kết thúc rồi xử lý tiếp
-        animatedSprite.AnimationFinished += OnDeathAnimationFinished;
-    }
+		// Đợi animation "death" kết thúc rồi xử lý tiếp
+		animatedSprite.AnimationFinished += OnDeathAnimationFinished;
+	}
 
-    private void OnDeathAnimationFinished()
-    {
-        if (animatedSprite.Animation == "death")
-        {
-            // Hiển thị thông báo kết thúc game
-            GD.Print("Game Over!");
+	private void OnDeathAnimationFinished()
+	{
+		if (animatedSprite.Animation == "death")
+		{
+			// Hiển thị thông báo kết thúc game
+			GD.Print("Game Over!");
 
-            // Ví dụ: Kết thúc game hoặc chuyển scene
-            GetTree().Paused = true;
-            // GetTree().ChangeScene("res://Scenes/GameOver.tscn"); // Chuyển đến màn hình Game Over
-        }
-    }
+			// Ví dụ: Kết thúc game hoặc chuyển scene
+			GetTree().Paused = true;
+			// GetTree().ChangeScene("res://Scenes/GameOver.tscn"); // Chuyển đến màn hình Game Over
+		}
+	}
 }
