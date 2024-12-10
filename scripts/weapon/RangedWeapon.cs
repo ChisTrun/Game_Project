@@ -21,10 +21,12 @@ public partial class RangedWeapon : Weapon
 				parent.AddChild(projectile);
 
 				// Đặt vị trí ban đầu của đạn
-				projectile.Position = GlobalPosition;
+				projectile.Position = parent.Position;
+
+				GD.Print(parent.Position.ToString());
 
 				// Thêm logic bắn
-				Vector2 direction = (targetPosition - GlobalPosition).Normalized();
+				Vector2 direction = (targetPosition - parent.Position).Normalized();
 				projectile.Velocity = direction * 300; // Giả sử có thuộc tính Velocity
 			}
 			else

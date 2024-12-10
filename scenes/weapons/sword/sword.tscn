@@ -1,7 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b32ypnrdbqey5"]
+[gd_scene load_steps=9 format=3 uid="uid://b32ypnrdbqey5"]
 
-[ext_resource type="Texture2D" uid="uid://c868g1ah5n5yt" path="res://weapon/sword/sword.png" id="1_4iu6w"]
-[ext_resource type="Script" path="res://weapon/MeleeWeapon.cs" id="1_f3bxm"]
+[ext_resource type="Texture2D" uid="uid://c868g1ah5n5yt" path="res://scenes/weapons/sword/sword.png" id="1_4iu6w"]
+[ext_resource type="Script" path="res://scripts/weapon/MeleeWeapon.cs" id="1_c6bgm"]
+[ext_resource type="SpriteFrames" uid="uid://faybbghir6bn" path="res://addons/duelyst_animated_sprites/assets/spriteframes/fx/fx_multislash_full.tres" id="3_sbg47"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3npn5"]
+radius = 19.2876
 
 [sub_resource type="Animation" id="Animation_qqyey"]
 length = 0.2
@@ -9,7 +13,7 @@ loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sword:rotation")
+tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sword:position")
+tracks/1/path = NodePath("Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -37,7 +41,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sword:rotation")
+tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -60,17 +64,32 @@ _data = {
 }
 
 [node name="Sword" type="Node2D"]
-script = ExtResource("1_f3bxm")
-Damage = null
-Range = null
-Cooldown = null
-Type = null
+script = ExtResource("1_c6bgm")
 
-[node name="Sword" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-4, -14)
 rotation = -2.00599
 texture = ExtResource("1_4iu6w")
 offset = Vector2(421.229, -427.933)
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+position = Vector2(-7.44903, 4.25633)
+rotation = 1.98343
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(-129.042, -43.922)
+rotation = -1.18975
+scale = Vector2(39.7197, -39.5278)
+shape = SubResource("CircleShape2D_3npn5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+position = Vector2(29.5902, 26.8796)
+rotation = 2.00599
+scale = Vector2(15.2386, 15.2386)
+sprite_frames = ExtResource("3_sbg47")
+animation = &"go"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

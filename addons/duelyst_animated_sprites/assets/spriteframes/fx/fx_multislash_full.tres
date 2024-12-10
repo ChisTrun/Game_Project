@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=32 format=3 uid="uid://faybbghir6bn"]
 
-[ext_resource type="Texture2D" uid="uid://dd4smrqffstmi" path="res://addons/duelyst_animated_sprites/assets/spritesheets/fx/fx_multislash_full.png" id="1_saood"]
+[ext_resource type="Texture2D" uid="uid://dbq144mv13snd" path="res://addons/duelyst_animated_sprites/assets/spritesheets/fx/fx_multislash_full.png" id="1_saood"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ijoe4"]
 atlas = ExtResource("1_saood")
@@ -126,6 +126,9 @@ region = Rect2(0, 0, 120, 150)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ijoe4")
 }, {
 "duration": 1.0,
@@ -215,7 +218,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b65bk")
 }],
-"loop": true,
-"name": &"full",
-"speed": 9.0
+"loop": false,
+"name": &"go",
+"speed": 30.0
 }]
