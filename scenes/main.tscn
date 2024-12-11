@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=36 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="15_vgho4"]
 [ext_resource type="PackedScene" uid="uid://ce83hhdbf7uf3" path="res://scenes/potion/healthpotion/HealthPotion.tscn" id="19_b6hc6"]
 [ext_resource type="PackedScene" uid="uid://c33u3xpsc10au" path="res://scenes/enemy/witcher.tscn" id="20_x786r"]
+[ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="21_ihm01"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vh82s"]
 
@@ -622,7 +623,7 @@ position = Vector2(-11.2047, 0)
 scale = Vector2(0.0247207, 0.0247207)
 
 [node name="NPC" type="Node2D" parent="."]
-position = Vector2(903, 1763)
+position = Vector2(578, 1218)
 script = ExtResource("12_5ywv7")
 
 [node name="Label" type="Label" parent="NPC"]
@@ -634,7 +635,7 @@ offset_bottom = -36.0
 text = "Hello! Where r u going?"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC"]
-position = Vector2(0, 1.00003)
+position = Vector2(-3, -3.99997)
 scale = Vector2(0.35, 0.381249)
 sprite_frames = ExtResource("12_lope8")
 animation = &"run"
@@ -646,7 +647,7 @@ NPCPath = NodePath("..")
 DialogueUIPath = NodePath("../../DialogueUI")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/NPCTrigger"]
-position = Vector2(-1, 0)
+position = Vector2(1, -1)
 shape = SubResource("CircleShape2D_j7wqh")
 
 [node name="DialogueUI" type="CanvasLayer" parent="."]
@@ -687,6 +688,10 @@ position = Vector2(642, 182)
 
 [node name="HealthPotion3" parent="." instance=ExtResource("19_b6hc6")]
 position = Vector2(580, 340)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_ihm01")
+autoplay = true
 
 [connection signal="body_entered" from="NPC/NPCTrigger" to="NPC/NPCTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="NPC/NPCTrigger" to="NPC/NPCTrigger" method="_on_body_exited"]
