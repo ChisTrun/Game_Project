@@ -1,7 +1,8 @@
 using Godot;
 
 public partial class DamageZone : TileMap
-{  [Export]
+{
+	[Export]
 	public int DamagePerSecond = 4; // Sát thương mỗi giây
 
 	public override void _PhysicsProcess(double delta)
@@ -14,7 +15,7 @@ public partial class DamageZone : TileMap
 			// Lấy vị trí của người chơi
 			var playerPosition = player.Position;
 
- 			Vector2 cellSize = GetUsedRect().Size / GetTileset().GetTileSize();
+			Vector2 cellSize = GetUsedRect().Size / GetTileset().GetTileSize();
 
 			playerPosition.X = Mathf.Floor(playerPosition.X / cellSize.X) * cellSize.X;
 			playerPosition.Y = Mathf.Floor(playerPosition.Y / cellSize.Y) * cellSize.Y;
@@ -22,9 +23,9 @@ public partial class DamageZone : TileMap
 			// Tính toán tọa độ cell mà player đang đứng
 			Vector2I cellPosition = LocalToMap(playerPosition);
 
-			int cellId = GetCellSourceId(2,cellPosition);
+			int cellId = GetCellSourceId(2, cellPosition);
 
-			if (cellId != -1 )
+			if (cellId != -1)
 			{
 				player.OnHit(-DamagePerSecond);
 			}
