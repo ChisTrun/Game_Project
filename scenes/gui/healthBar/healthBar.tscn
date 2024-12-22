@@ -21,10 +21,15 @@ offset_right = 103.152
 offset_bottom = 13.392
 
 [node name="HealthBar2" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = -217.0
-offset_top = -119.0
-offset_right = 71.0
-offset_bottom = -96.0
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.028
+anchor_right = 0.003
+anchor_bottom = 0.028
+offset_left = 0.544
+offset_top = -15.144
+offset_right = 295.544
+offset_bottom = 14.856
 nine_patch_stretch = true
 stretch_margin_left = 4
 stretch_margin_top = 4
