@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=38 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://ce83hhdbf7uf3" path="res://scenes/potion/healthpotion/HealthPotion.tscn" id="19_b6hc6"]
 [ext_resource type="PackedScene" uid="uid://c33u3xpsc10au" path="res://scenes/enemy/witcher.tscn" id="20_x786r"]
 [ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="21_ihm01"]
+[ext_resource type="PackedScene" uid="uid://b63eh8lqbve68" path="res://scenes/gui/coin/coin.tscn" id="21_v0wfq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vh82s"]
 
@@ -530,6 +531,8 @@ radius = 6.08276
 [sub_resource type="CircleShape2D" id="CircleShape2D_6a08o"]
 radius = 6.58807
 
+[sub_resource type="LabelSettings" id="LabelSettings_ibq88"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7wqh"]
 radius = 18.4391
 
@@ -629,6 +632,26 @@ speed_scale = 2.0
 position = Vector2(-11.2047, 0)
 scale = Vector2(0.0247207, 0.0247207)
 
+[node name="Control" type="Control" parent="TileMap/Player"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GoldLabel" type="Label" parent="TileMap/Player/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -13.446
+anchor_top = -11.307
+anchor_right = -13.446
+anchor_bottom = -11.307
+offset_left = 0.0171509
+offset_top = -11.5156
+offset_right = 45.0172
+offset_bottom = 11.4844
+text = "Gold: "
+label_settings = SubResource("LabelSettings_ibq88")
+
 [node name="NPC" type="Node2D" parent="TileMap"]
 position = Vector2(542.975, 355.328)
 scale = Vector2(1.02836, 1.0066)
@@ -657,6 +680,18 @@ DialogueUIPath = NodePath("../../../DialogueUI")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/NPC/NPCTrigger"]
 position = Vector2(1, -1)
 shape = SubResource("CircleShape2D_j7wqh")
+
+[node name="Items" type="Node2D" parent="TileMap"]
+
+[node name="Coins" type="Node2D" parent="TileMap/Items"]
+
+[node name="Coin" parent="TileMap/Items/Coins" instance=ExtResource("21_v0wfq")]
+position = Vector2(379.466, -362.374)
+scale = Vector2(1.02836, 1.0066)
+
+[node name="Coin2" parent="TileMap/Items/Coins" instance=ExtResource("21_v0wfq")]
+position = Vector2(384.607, -244.603)
+scale = Vector2(1.02836, 1.0066)
 
 [node name="DialogueUI" type="CanvasLayer" parent="."]
 visible = false

@@ -31,6 +31,8 @@ public partial class Player : CharacterBody2D
 
 	private bool isDead = false;
 
+	private Label goldLabel;
+
 	private Weapon GetWeaponFromChildren()
 	{
 		// Duyệt qua tất cả các node con và kiểm tra xem node đó có phải là lớp con của Weapon không
@@ -48,6 +50,7 @@ public partial class Player : CharacterBody2D
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthBar = GetNode<TextureProgressBar>("HealthBar/CanvasLayer/HealthBar2");
 		animatedSprite.AnimationFinished += OnAnimationFinished;
+		goldLabel = GetNode<Label>("Control/GoldLabel");
 
 		// Khởi tạo máu
 		currentHealth = maxHealth;
@@ -56,6 +59,7 @@ public partial class Player : CharacterBody2D
 
 		weapon = GetWeaponFromChildren();
 
+		UpdateGoldLabel();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -270,6 +274,20 @@ public partial class Player : CharacterBody2D
 			// Ví dụ: Kết thúc game hoặc chuyển scene
 			GetTree().Paused = true;
 			// GetTree().ChangeScene("res://Scenes/GameOver.tscn"); // Chuyển đến màn hình Game Over
+		}
+	}
+
+	public void ChangeCoin(int amount)
+	{
+		Global.Gold += amount;
+		GD.Print($"Gold: {Global.Gold}");
+	}
+
+	private void UpdateGoldLabel()
+	{
+		if (goldLabel != null)
+		{
+			goldLabel.Text = $"Gold: {Global.Gold}";
 		}
 	}
 }

@@ -52,7 +52,6 @@ public partial class Bullet : Node2D
     {
         if (body is Player player)
         {
-            GD.Print("Player hit by bullet!");
             QueueFree();
 
             // Logic giảm máu người chơi
