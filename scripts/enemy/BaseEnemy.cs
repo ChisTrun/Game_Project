@@ -7,9 +7,13 @@ public abstract partial class BaseEnemy : CharacterBody2D
 	[Export] public float Speed = 100f; // Tốc độ di chuyển cơ bản
 	[Export] public float VisionRange = 100f; // Tốc độ di chuyển cơ bản
 	[Export] public int MaxHealth = 100; // Máu tối đa
+	[Export] public float AttackCooldown = 2.0f; // Thời gian hồi giữa các lần bắn
+
 	private int _currentHealth;
 	protected bool IsAttacking = false;
-	protected bool IsDead  = false;
+	protected bool IsDead = false;
+
+	protected bool isTakeDamage = false;
 	private AnimatedSprite2D _animatedSprite2D;
 
 	public override void _Ready()
@@ -40,7 +44,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		if (_player == null) return;
 		if (IsDead) return;
 		FacePlayer(); // Lật hướng về phía người chơi
-		
+
 		Vector2 velocity = PerformBehavior(delta);
 		if (velocity != Vector2.Zero)
 		{
@@ -52,6 +56,12 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		}
 
 		Velocity = velocity;
+
+		var collision = GetLastSlideCollision();
+		if (collision != null)
+		{
+			GD.Print($"Collided with: {collision.GetCollider()}");
+		}
 		MoveAndSlide();
 	}
 
@@ -60,14 +70,18 @@ public abstract partial class BaseEnemy : CharacterBody2D
 	// Nhận sát thương
 	public virtual void TakeDamage(int damage)
 	{
+		if (IsDead) return; // Không nhận sát thương nếu đã chết
+		isTakeDamage = true;
 		_currentHealth -= damage;
 		GD.Print($"{Name} took {damage} damage. Current health: {_currentHealth}");
-		_animatedSprite2D.Play("hit");
+
 		if (_currentHealth <= 0)
 		{
 			Die();
 		}
+
 	}
+
 
 	// Hành động khi kẻ địch chết
 	protected virtual void Die()
@@ -85,18 +99,28 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		if (_player == null || _animatedSprite2D == null) return;
 
 		// Kiểm tra vị trí người chơi so với kẻ địch và lật hình
-		_animatedSprite2D.FlipH = _player.GlobalPosition.X < GlobalPosition.X;
+		_animatedSprite2D.FlipH = _player.Position.X < Position.X;
 	}
 
 	// Phương thức chung để di chuyển về hướng mục tiêu
 	protected Vector2 GetDirectionTowards(Vector2 targetPosition)
 	{
-		return (targetPosition - GlobalPosition).Normalized() * Speed;
+		return (targetPosition - Position).Normalized() * Speed;
 	}
 
 	// Phương thức chung để lùi khỏi mục tiêu
 	protected Vector2 GetDirectionAwayFrom(Vector2 targetPosition)
 	{
-		return (GlobalPosition - targetPosition).Normalized() * Speed;
+		float distance = Position.DistanceTo(targetPosition);
+		GD.Print($"Distance to player: {distance}");
+
+		if (distance < 5.0f) // 5.0f là ngưỡng tối thiểu
+		{
+			return Vector2.Zero; // Không di chuyển
+		}
+
+		GD.Print((Position - targetPosition).Normalized() * Speed);
+
+		return (Position - targetPosition).Normalized() * Speed;
 	}
 }
