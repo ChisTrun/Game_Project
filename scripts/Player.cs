@@ -23,7 +23,7 @@ public partial class Player : CharacterBody2D
 	private Vector2 knockbackDirection; // Hướng knockback
 
 	[Export]
-	public int maxHealth = 82;
+	public int maxHealth = 100;
 	[Export]
 	public int currentHealth;
 
@@ -46,14 +46,13 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		healthBar = GetNode<TextureProgressBar>("HealthBar");
-
-		GD.Print(healthBar.Value);
-
+		healthBar = GetNode<TextureProgressBar>("CanvasLayer/HealthBar2");
 		animatedSprite.AnimationFinished += OnAnimationFinished;
 
 		// Khởi tạo máu
 		currentHealth = maxHealth;
+		healthBar.MaxValue = maxHealth;
+		healthBar.Value = currentHealth;
 
 		weapon = GetWeaponFromChildren();
 
@@ -231,14 +230,14 @@ public partial class Player : CharacterBody2D
 			currentHealth = maxHealth;
 		}
 
-		if (currentHealth < 13)
+		if (currentHealth < 0)
 		{
-			currentHealth = 13;
+			currentHealth = 0;
 		}
 
 		healthBar.Value = currentHealth;
 
-		if (currentHealth == 13)
+		if (currentHealth == 0)
 		{
 			GD.Print("Player đã chết!");
 			Die();

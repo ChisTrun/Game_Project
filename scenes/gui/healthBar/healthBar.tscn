@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpf71gkuerr4f"]
+
+[ext_resource type="Texture2D" uid="uid://bs6avc6xgiek3" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarUnder.png" id="1_gcqy3"]
+[ext_resource type="Texture2D" uid="uid://b7ufe7ggp5u4j" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarProgress.png" id="2_s3476"]
+[ext_resource type="Script" path="res://scripts/HealthBarGUI/HealthBar.cs" id="3_dpyfw"]
+
+[node name="HealthBar" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = -0.001
+anchor_top = 0.021
+anchor_right = -0.001
+anchor_bottom = 0.021
+offset_left = 0.152
+offset_top = -13.608
+offset_right = 103.152
+offset_bottom = 13.392
+
+[node name="HealthBar2" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = -217.0
+offset_top = -119.0
+offset_right = 71.0
+offset_bottom = -96.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("1_gcqy3")
+texture_progress = ExtResource("2_s3476")
+script = ExtResource("3_dpyfw")
