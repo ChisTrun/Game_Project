@@ -11,11 +11,13 @@ config_version=5
 [application]
 
 config/name="New Game Project"
-run/main_scene="res://node_2d.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 
 [display]
 
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 mouse_cursor/custom_image="res://OutAssets/img/crosshair_3.png"
 
 [dotnet]

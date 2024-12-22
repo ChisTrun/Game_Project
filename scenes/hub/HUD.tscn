@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyrlspuk46vox"]
+
+[ext_resource type="Texture2D" uid="uid://dvmqbw6nt2wqh" path="res://addons/duelyst_animated_sprites/assets/health_bar/greenbar(3).png" id="1_a50d7"]
+[ext_resource type="Texture2D" uid="uid://dy5y4612c4x1c" path="res://addons/duelyst_animated_sprites/assets/health_bar/greenbar(1).png" id="2_pyjsp"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="HealthBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="HealthBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+value = 13.0
+texture_under = ExtResource("1_a50d7")
+texture_progress = ExtResource("2_pyjsp")

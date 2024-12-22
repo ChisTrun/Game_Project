@@ -102,7 +102,6 @@ public partial class Enemy : CharacterBody2D
 		float randomY = (float)(random.NextDouble() * PatrolAreaSize.Y) - PatrolAreaSize.Y / 2;
 
 		targetPatrolPoint = GlobalPosition + new Vector2(randomX, randomY);
-		GD.Print($"New patrol point: {targetPatrolPoint}");
 	}
 
 	private void OnBodyEntered(Node body)

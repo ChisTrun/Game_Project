@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=34 format=3 uid="uid://dhc03i61t1gvy"]
 
-[ext_resource type="Texture2D" uid="uid://bpw2tv7xv4sdy" path="res://addons/duelyst_animated_sprites/assets/spritesheets/fx/fx_f4_wraithlingfury.png" id="1_f652x"]
+[ext_resource type="Texture2D" uid="uid://darxk0hs6asn6" path="res://addons/duelyst_animated_sprites/assets/spritesheets/fx/fx_f4_wraithlingfury.png" id="1_f652x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v8ov5"]
 atlas = ExtResource("1_f652x")

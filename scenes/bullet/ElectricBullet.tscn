@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://confh6mmujns2"]
+
+[ext_resource type="Script" path="res://scripts/Bullet/Bullet.cs" id="1_pbqec"]
+[ext_resource type="SpriteFrames" uid="uid://cewd3gdv6iivs" path="res://addons/duelyst_animated_sprites/assets/spriteframes/fx/fx_f5_manaburn.tres" id="2_7oscp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5lcp"]
+size = Vector2(20, 14.8912)
+
+[node name="ElectricBullet" type="Node2D"]
+light_mask = 15
+visibility_layer = 15
+z_index = 100
+scale = Vector2(1, 1.011)
+script = ExtResource("1_pbqec")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("2_7oscp")
+animation = &"go"
+frame = 17
+frame_progress = 0.715235
+offset = Vector2(-17.1891, -12)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-8, 7.4456)
+shape = SubResource("RectangleShape2D_i5lcp")
