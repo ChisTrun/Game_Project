@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=35 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://scripts/DamageZone/DamageZone.cs" id="9_f7835"]
 [ext_resource type="SpriteFrames" uid="uid://b38iok8ul0swf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_2.tres" id="10_8s76d"]
 [ext_resource type="Script" path="res://scripts/Enemy.cs" id="10_gi3wp"]
-[ext_resource type="Texture2D" uid="uid://dy5y4612c4x1c" path="res://addons/duelyst_animated_sprites/assets/health_bar/greenbar(1).png" id="11_5052i"]
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="11_shvi8"]
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
@@ -630,7 +629,6 @@ offset_right = -50.5741
 offset_bottom = 21.3213
 value = 100.0
 nine_patch_stretch = true
-texture_progress = ExtResource("11_5052i")
 
 [node name="Weapon" parent="TileMap/Player" instance=ExtResource("15_vgho4")]
 position = Vector2(-11.2047, 0)
