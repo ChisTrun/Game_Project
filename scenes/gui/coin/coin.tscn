@@ -12,8 +12,7 @@ script = ExtResource("1_vwaw1")
 
 [node name="CoinSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_5j4ux")
-frame = 9
-frame_progress = 0.443456
+frame_progress = 0.949068
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_qb1uh")

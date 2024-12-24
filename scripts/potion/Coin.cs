@@ -4,9 +4,13 @@ using System;
 public partial class Coin : Area2D
 {
 	public int Value = 1;
+
+	private AnimatedSprite2D animatedSprite;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		animatedSprite = GetNode<AnimatedSprite2D>("CoinSprite");
+		animatedSprite.Play("default");
 		BodyEntered += OnBodyEntered;
 	}
 

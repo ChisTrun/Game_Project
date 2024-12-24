@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 [autoload]
 
 Global="*res://scripts/Global.cs"
+FloatingTextManager="*res://scripts/FloatingTextManager.cs"
 
 [display]
 

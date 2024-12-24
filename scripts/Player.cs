@@ -33,6 +33,12 @@ public partial class Player : CharacterBody2D
 
 	private Label goldLabel;
 
+	[Signal]
+	public delegate void OnHealthChangedEventHandler(int amount);
+
+	[Signal]
+	public delegate void OnCoinChangedEventHandler(int amount);
+
 	private Weapon GetWeaponFromChildren()
 	{
 		// Duyệt qua tất cả các node con và kiểm tra xem node đó có phải là lớp con của Weapon không
@@ -45,12 +51,14 @@ public partial class Player : CharacterBody2D
 		}
 		return null; // Trả về null nếu không tìm thấy node Weapon nào
 	}
+
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthBar = GetNode<TextureProgressBar>("HealthBar/CanvasLayer/HealthBar2");
 		animatedSprite.AnimationFinished += OnAnimationFinished;
-		goldLabel = GetNode<Label>("Control/GoldLabel");
+		goldLabel = GetNode<Label>("GoldLabel");
+		goldLabel.ZIndex = 10;
 
 		// Khởi tạo máu
 		currentHealth = maxHealth;
@@ -60,6 +68,18 @@ public partial class Player : CharacterBody2D
 		weapon = GetWeaponFromChildren();
 
 		UpdateGoldLabel();
+		// Kết nối signal với FloatingTextManager
+		var manager = GetNode<FloatingTextManager>("/root/FloatingTextManager");
+
+		Connect(nameof(OnHealthChanged), Callable.From<int>((amount) =>
+		{
+			manager.ShowFloatingText(GlobalPosition, (amount > 0 ? "+" : "") + amount, amount > 0 ? Colors.Green : Colors.Red);
+		}));
+
+		Connect(nameof(OnCoinChanged), Callable.From<int>((amount) =>
+		{
+			manager.ShowFloatingText(GlobalPosition, "+" + amount, Colors.Yellow);
+		}));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -244,6 +264,8 @@ public partial class Player : CharacterBody2D
 
 		healthBar.Value = currentHealth;
 
+		EmitSignal(SignalName.OnHealthChanged, amount);
+
 		if (currentHealth == 0)
 		{
 			GD.Print("Player đã chết!");
@@ -280,7 +302,8 @@ public partial class Player : CharacterBody2D
 	public void ChangeCoin(int amount)
 	{
 		Global.Gold += amount;
-		GD.Print($"Gold: {Global.Gold}");
+		UpdateGoldLabel();
+		EmitSignal(SignalName.OnCoinChanged, amount);
 	}
 
 	private void UpdateGoldLabel()
