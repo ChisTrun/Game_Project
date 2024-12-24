@@ -46,7 +46,7 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		healthBar = GetNode<TextureProgressBar>("CanvasLayer/HealthBar2");
+		healthBar = GetNode<TextureProgressBar>("HealthBar/CanvasLayer/HealthBar2");
 		animatedSprite.AnimationFinished += OnAnimationFinished;
 
 		// Khởi tạo máu
@@ -190,10 +190,13 @@ public partial class Player : CharacterBody2D
 		if (!isAttacking)
 		{
 			isAttacking = true;
-			if (weapon != null) {
+			if (weapon != null)
+			{
 				weapon.Use(new Vector2());
 				isAttacking = false;
-			} else {
+			}
+			else
+			{
 				animatedSprite.Play("attack");
 			}
 

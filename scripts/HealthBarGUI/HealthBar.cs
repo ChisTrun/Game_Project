@@ -7,12 +7,11 @@ public partial class HealthBar : TextureProgressBar
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		player = GetTree().Root.GetNodeOrNull<Player>("world/Player");
+		player = GetNode<Player>("../../../../Player");
 
 		if (player == null)
 		{
 			GD.PrintErr("Player not found");
-			return;
 		}
 
 		this._Update();
@@ -20,7 +19,10 @@ public partial class HealthBar : TextureProgressBar
 
 	public void _Update()
 	{
-		this.Value = player.currentHealth * 100 / player.maxHealth;
+		if (player != null)
+		{
+			this.Value = player.currentHealth * 100 / player.maxHealth;
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
