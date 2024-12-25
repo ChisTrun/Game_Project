@@ -5,9 +5,12 @@ public partial class HealthPotion : Area2D
 {
 	public int HealAmount = 10;
 
+	private AudioStreamPlayer2D pickupSound;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		pickupSound = GetNode<AudioStreamPlayer2D>("PickupSound");
 		BodyEntered += OnBodyEntered;
 	}
 
@@ -23,11 +26,20 @@ public partial class HealthPotion : Area2D
 		{
 			// Hồi máu cho Player
 			player.ChangeHealth(HealAmount);
+			PlayPickupSound();
 
 			GD.Print($"Player đã hồi {HealAmount} máu!");
 
 			// Xóa bình máu sau khi nhặt
 			QueueFree();
+		}
+	}
+
+	private void PlayPickupSound()
+	{
+		if (pickupSound != null && !pickupSound.Playing)
+		{
+			pickupSound.Play();
 		}
 	}
 }

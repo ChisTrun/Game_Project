@@ -31,12 +31,10 @@ public partial class RangedEnemy : BaseEnemy
 
 		if (distanceToPlayer < RetreatDistance)
 		{
-			GD.Print("RangedEnemy retreats from player");
 			return GetDirectionAwayFrom(_player.Position);
 		}
 		else if (distanceToPlayer < ShootDistance)
 		{
-			GD.Print("RangedEnemy is in shooting range");
 			if (_canShoot)
 			{
 				Shoot();
@@ -46,7 +44,6 @@ public partial class RangedEnemy : BaseEnemy
 		else if (distanceToPlayer < VisionRange)
 		{
 			// Lại gần player
-			GD.Print("RangedEnemy moves towards player");
 			return GetDirectionTowards(_player.Position);
 		}
 
@@ -62,7 +59,6 @@ public partial class RangedEnemy : BaseEnemy
 		}
 
 		_canShoot = false;
-		GD.Print("RangedEnemy shoots!");
 
 		// Tạo viên đạn
 		Node2D bullet = (Node2D)BulletScene.Instantiate();
@@ -70,8 +66,6 @@ public partial class RangedEnemy : BaseEnemy
 		// Đặt vị trí viên đạn (cộng thêm offset nếu cần)
 		bullet.Position = Position + BulletSpawnOffset;
 		GetParent().AddChild(bullet);
-
-		GD.Print(Position + BulletSpawnOffset);
 
 		// Gán hướng cho viên đạn
 		if (bullet is Bullet bulletScript)
