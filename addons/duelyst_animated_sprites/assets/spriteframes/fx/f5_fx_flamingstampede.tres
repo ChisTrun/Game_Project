@@ -222,7 +222,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bey6b")
 }],
-"loop": true,
+"loop": false,
 "name": &"flamingstampede",
 "speed": 9.0
 }]

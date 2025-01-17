@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsvcc0lsu253e"]
+
+[ext_resource type="Script" path="res://scripts/enemy/MeleeEnemy.cs" id="1_kgt8j"]
+[ext_resource type="AudioStream" uid="uid://2flx7odqail4" path="res://scenes/enemy/sound/creep2/mixkit-heavy-sword-smashes-metal-2795.wav" id="2_56idy"]
+[ext_resource type="SpriteFrames" uid="uid://by3to8n2exsts" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/f1_grandmasterzir.tres" id="2_p6pos"]
+[ext_resource type="AudioStream" uid="uid://ks6xexa5i7tt" path="res://scenes/enemy/sound/creep1/mixkit-weak-fast-blow-2145.wav" id="3_hkfnp"]
+[ext_resource type="AudioStream" uid="uid://qkdkavtruiej" path="res://scenes/enemy/sound/creep2/horse-neigh-261131.mp3" id="4_bp1jj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4t8tg"]
+radius = 21.8611
+
+[node name="MeleCreep03" type="CharacterBody2D"]
+script = ExtResource("1_kgt8j")
+AttackSound = ExtResource("2_56idy")
+HitSound = ExtResource("3_hkfnp")
+DeadSound = ExtResource("4_bp1jj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_p6pos")
+animation = &"run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 9)
+rotation = 3.14159
+scale = Vector2(0.60663, 0.707551)
+shape = SubResource("CircleShape2D_4t8tg")

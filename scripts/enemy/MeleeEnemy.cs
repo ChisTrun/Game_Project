@@ -3,42 +3,70 @@ using System;
 
 public partial class MeleeEnemy : BaseEnemy
 {
-	private float attackRange = 40f; // Phạm vi tấn công
+	[Export] public float AttackRange = 40f; // Phạm vi tấn công
+	private bool _canAttack = true;
 
 	protected override Vector2 PerformBehavior(double delta)
 	{
 		if (_player == null)
 			return Vector2.Zero;
 
-		float distanceToPlayer = GlobalPosition.DistanceTo(_player.GlobalPosition);
+		float distanceToPlayer = Position.DistanceTo(_player.Position);
 
-		if (distanceToPlayer > attackRange && !IsAttacking)
+		if (distanceToPlayer > VisionRange)
 		{
-			// Di chuyển về phía người chơi
-			return GetDirectionTowards(_player.GlobalPosition);
+			GD.Print("Player is out of vision range.");
+			return Vector2.Zero;
 		}
-		else if (!IsAttacking)
+
+		if (distanceToPlayer > AttackRange && !IsAttacking)
+		{
+			return GetDirectionTowards(_player.Position);
+		}
+		else if (!IsAttacking && _canAttack)
 		{
 			Attack();
-			return Vector2.Zero; // Không di chuyển khi tấn công
+			return Vector2.Zero;
 		}
 
-		return Vector2.Zero; // Không di chuyển nếu đang tấn công hoặc đã ở trong phạm vi
+		return Vector2.Zero;
 	}
 
 	private void Attack()
 	{
-		IsAttacking = true;
-		GD.Print("MeleeEnemy attacks!");
+		if (!IsAttacking && _canAttack)
+		{
+			IsAttacking = true;
+			_animatedSprite2D.Play("attack");
+			_canAttack = false;
+			CreateSound(AttackSound);
+			if (Position.DistanceTo(_player.Position) <= AttackRange)
+			{
+				Player player = _player as Player;
+				player.OnHit(-1 * Damage);
+				GD.Print("Damage dealt to player!");
+			}
 
-		// Logic gây sát thương ở đây
+			_animatedSprite2D.AnimationFinished += OnAttackAnimationFinished;
+		}
+	}
 
-		// Tạo một Timer để delay tấn công
-		Timer timer = new Timer();
-		timer.WaitTime = 1.0f; // Delay trước khi có thể tấn công lại
-		timer.OneShot = true;
-		timer.Timeout += () => IsAttacking = false;
-		AddChild(timer);
-		timer.Start();
+	private void OnAttackAnimationFinished()
+	{
+		GD.Print("Attack animation finished.");
+		if (_animatedSprite2D.Animation == "attack")
+		{
+			GD.Print("Attack animation finished.");
+			_animatedSprite2D.AnimationFinished -= OnAttackAnimationFinished;
+			IsAttacking = false;
+			// Reset timer để cho phép tấn công lại
+			Timer timer = new Timer();
+			timer.WaitTime = AttackCooldown;
+			timer.OneShot = true;
+			timer.Timeout += () => _canAttack = true;
+			AddChild(timer);
+			timer.Start();
+
+		}
 	}
 }

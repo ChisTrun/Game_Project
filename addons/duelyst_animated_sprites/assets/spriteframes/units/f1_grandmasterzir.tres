@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=63 format=3 uid="uid://by3to8n2exsts"]
 
-[ext_resource type="Texture2D" uid="uid://dklg588ix57a7" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/f1_grandmasterzir.png" id="1_k1ytl"]
+[ext_resource type="Texture2D" uid="uid://cop7ukxs8gyyi" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/f1_grandmasterzir.png" id="1_k1ytl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dfw1r"]
 atlas = ExtResource("1_k1ytl")
@@ -291,9 +291,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ib0ny")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
-"speed": 9.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -367,7 +367,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d24e1")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 9.0
 }, {
