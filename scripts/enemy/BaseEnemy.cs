@@ -40,7 +40,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		}
 	}
 
-	private void OnDeathAnimationFinished()
+	protected virtual void OnDeathAnimationFinished()
 	{
 		if (_animatedSprite2D.Animation == "death")
 		{
