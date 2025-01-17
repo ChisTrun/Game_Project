@@ -269,7 +269,7 @@ public partial class Player : CharacterBody2D
 
 	private void PlayerAttack()
 	{
-		if (!isAttacking)
+		if (!isAttacking && !isDead)
 		{
 			isAttacking = true;
 			if (weapon != null)

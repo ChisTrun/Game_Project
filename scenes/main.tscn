@@ -1,6 +1,4 @@
-
-[gd_scene load_steps=45 format=3 uid="uid://droymiq6oax8w"]
-
+[gd_scene load_steps=55 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -17,7 +15,6 @@
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="11_shvi8"]
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
-[ext_resource type="PackedScene" uid="uid://dkn7qg33rwcvn" path="res://scenes/map/map2.tscn" id="14_230ou"]
 [ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
 [ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="15_bfaun"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="15_vgho4"]
@@ -30,9 +27,10 @@
 [ext_resource type="AudioStream" uid="uid://ch11fokvtwsa7" path="res://scenes/weapons/gun/shot.mp3" id="21_8jxpw"]
 [ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="21_ihm01"]
 [ext_resource type="PackedScene" uid="uid://b63eh8lqbve68" path="res://scenes/gui/coin/coin.tscn" id="21_v0wfq"]
-
+[ext_resource type="PackedScene" uid="uid://c85nkm33qdoc1" path="res://scenes/enemy/mele_creep_01.tscn" id="24_7smk7"]
 [ext_resource type="FontFile" uid="uid://us6am02ejyf5" path="res://Font/RockSalt-Regular.ttf" id="24_rpiys"]
 [ext_resource type="FontFile" uid="uid://h1bnjip4in3n" path="res://Font/MarcellusSC-Regular.ttf" id="25_kdlmx"]
+[ext_resource type="PackedScene" uid="uid://e8qsd0xewb4n" path="res://scenes/enemy/mele_creep_03.tscn" id="26_4hee3"]
 [ext_resource type="Script" path="res://scripts/Menu/MenuGameManage.cs" id="26_j72ft"]
 [ext_resource type="Texture2D" uid="uid://dvqquxj1w7phd" path="res://OutAssets/img/setting2.jpg" id="27_4vsl5"]
 [ext_resource type="Script" path="res://scripts/Menu/ButtonEffect.cs" id="28_pkqmu"]
@@ -40,10 +38,6 @@
 [ext_resource type="Script" path="res://scripts/Menu/SoundChangeSlider.cs" id="30_gecpr"]
 [ext_resource type="Texture2D" uid="uid://fwtjsq5a2ce0" path="res://OutAssets/img/Settings-icon-symbol-vector2.png" id="32_s27x2"]
 [ext_resource type="Script" path="res://scripts/Menu/MenuButtonOpen.cs" id="33_23ekh"]
-
-[ext_resource type="PackedScene" uid="uid://c85nkm33qdoc1" path="res://scenes/enemy/mele_creep_01.tscn" id="24_7smk7"]
-[ext_resource type="PackedScene" uid="uid://e8qsd0xewb4n" path="res://scenes/enemy/mele_creep_03.tscn" id="26_4hee3"]
-
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vh82s"]
 
@@ -621,9 +615,6 @@ collision_layer = 20
 collision_mask = 2
 ShootDistance = 150.0
 RetreatDistance = 80.0
-
-MainScene2 = ExtResource("14_230ou")
-
 Speed = 40.0
 VisionRange = 200.0
 CoinScene = ExtResource("21_v0wfq")
