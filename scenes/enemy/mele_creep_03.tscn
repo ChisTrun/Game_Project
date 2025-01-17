@@ -14,9 +14,7 @@ script = ExtResource("1_j2qeo")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.8723e-06, 0.000106812)
 sprite_frames = ExtResource("2_bdmr4")
-animation = &"death"
-frame = 19
-frame_progress = 1.0
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 9)
