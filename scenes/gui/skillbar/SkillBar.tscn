@@ -1,0 +1,104 @@
+[gd_scene load_steps=3 format=3 uid="uid://drk71414kanoi"]
+
+[ext_resource type="Script" path="res://scripts/Skill/SkillBar.cs" id="1_pwvd5"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8yc0t"]
+
+[node name="SkillBar" type="CanvasLayer"]
+script = ExtResource("1_pwvd5")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="TextureRect" parent="Control"]
+custom_minimum_size = Vector2(536, 50)
+layout_mode = 0
+offset_left = -219.0
+offset_top = -53.0
+offset_right = 281.0
+offset_bottom = -3.0
+texture = SubResource("CanvasTexture_8yc0t")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = -52.0
+offset_right = 318.0
+offset_bottom = -2.0
+
+[node name="SkillSlot1" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot1"]
+layout_mode = 2
+
+[node name="SkillSlot2" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot2"]
+layout_mode = 2
+
+[node name="SkillSlot3" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot3"]
+layout_mode = 2
+
+[node name="SkillSlot4" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot4"]
+layout_mode = 2
+
+[node name="SkillSlot5" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot5"]
+layout_mode = 2
+
+[node name="SkillSlot6" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot6"]
+layout_mode = 2
+
+[node name="SkillSlot7" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot7"]
+layout_mode = 2
+
+[node name="SkillSlot8" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot8"]
+layout_mode = 2
+
+[node name="SkillSlot9" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot9"]
+layout_mode = 2
+
+[node name="SkillSlot10" type="PanelContainer" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Control/HBoxContainer/SkillSlot10"]
+layout_mode = 2
