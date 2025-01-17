@@ -11,9 +11,6 @@ public partial class RangedWeapon : Weapon
 	[Export]
 	public Vector2 BulletSpawnOffset { get; set; } = Vector2.Zero; // Offset khi tạo đạn
 
-	[Export]
-	public float AttackCooldown { get; set; } = 1f; // Thời gian hồi chiêu
-
 	private bool _canShoot = true;
 
 	public override void _Process(double delta)
@@ -61,7 +58,9 @@ public partial class RangedWeapon : Weapon
 		GD.Print("Spawn Position: " + spawnPosition);
 
 		// Tạo viên đạn
-		Node2D projectile = (Node2D)ProjectileScene.Instantiate();
+		Bullet projectile = (Bullet)ProjectileScene.Instantiate();
+
+		projectile.damge = this.Damage;	
 
 		// Đặt vị trí viên đạn
 		projectile.Position = spawnPosition;
@@ -76,7 +75,7 @@ public partial class RangedWeapon : Weapon
 
 		// Hẹn thời gian hồi chiêu
 		Timer timer = new Timer();
-		timer.WaitTime = AttackCooldown;
+		timer.WaitTime = Cooldown;
 		timer.OneShot = true;
 		timer.Timeout += () => _canShoot = true;
 		AddChild(timer);

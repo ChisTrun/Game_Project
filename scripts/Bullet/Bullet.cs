@@ -4,6 +4,7 @@ using System;
 public partial class Bullet : Node2D
 {
 	public Vector2 Direction { get; set; } = Vector2.Zero; // Đảm bảo có giá trị mặc định
+	[Export] public int damge = 10;	
 	[Export] public float speed = 200f;
 	[Export] public bool isPlayerBullet = false; // Xác định đạn của người chơi hay kẻ địch
 	[Export] public float maxDistance = 500f; // Khoảng cách tối đa đạn có thể bay trước khi biến mất
@@ -65,7 +66,7 @@ public partial class Bullet : Node2D
 			if (body is BaseEnemy enemy)
 			{
 				QueueFree();
-				enemy.TakeDamage(20);
+				enemy.TakeDamage(this.damge);
 			}
 		}
 		else
@@ -74,7 +75,7 @@ public partial class Bullet : Node2D
 			if (body is Player player)
 			{
 				QueueFree();
-				player.OnHit(-20); // Logic giảm máu của người chơi
+				player.OnHit(-this.damge); // Logic giảm máu của người chơi
 			}
 		}
 	}

@@ -601,12 +601,11 @@ collision_layer = 20
 collision_mask = 2
 ShootDistance = 150.0
 RetreatDistance = 80.0
+Damage = 11
 Speed = 40.0
 VisionRange = 200.0
-
 CoinScene = ExtResource("21_v0wfq")
 HealthPotionScene = ExtResource("19_b6hc6")
-
 
 [node name="Player" type="CharacterBody2D" parent="TileMap"]
 z_index = 1
@@ -653,8 +652,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Weapon2" parent="TileMap/Player" instance=ExtResource("18_qdj0c")]
 position = Vector2(-10.186, 1.99438)
 scale = Vector2(0.0424873, 0.0424873)
+Damage = 2
 Range = 20.0
-Cooldown = 0.02
+Cooldown = 0.001
 
 [node name="NPC" type="Node2D" parent="TileMap"]
 position = Vector2(542.975, 355.328)

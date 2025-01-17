@@ -63,8 +63,9 @@ public partial class RangedEnemy : BaseEnemy
 		_canShoot = false;
 
 		// Tạo viên đạn
-		Node2D bullet = (Node2D)BulletScene.Instantiate();
+		Bullet bullet = (Bullet)BulletScene.Instantiate();
 
+		bullet.damge = this.Damage;
 		// Đặt vị trí viên đạn (cộng thêm offset nếu cần)
 		bullet.Position = Position + BulletSpawnOffset;
 		GetParent().AddChild(bullet);
