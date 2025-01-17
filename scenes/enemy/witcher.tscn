@@ -15,7 +15,6 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_od6dt")
 BulletScene = ExtResource("2_gynyg")
-BulletSpawnOffset = Vector2(35, 35)
 
 [node name="EnemyHealthBar" type="TextureProgressBar" parent="."]
 anchors_preset = -1

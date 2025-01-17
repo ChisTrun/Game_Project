@@ -1,6 +1,6 @@
 using Godot;
 
-public enum WeaponType { Melee, Ranged } 
+public enum WeaponType { Melee, Ranged }
 
 public abstract partial class Weapon : Node2D
 {
@@ -12,9 +12,6 @@ public abstract partial class Weapon : Node2D
 
 	[Export]
 	public float Cooldown { get; set; } = 1.0f;
-
-	[Export]
-	public WeaponType Type { get; set; } = WeaponType.Melee;
 
 	[Export]
 	public Texture WeaponSprite { get; set; }
