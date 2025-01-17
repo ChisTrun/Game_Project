@@ -44,6 +44,13 @@ public partial class Player : CharacterBody2D
 	[Signal]
 	public delegate void OnCoinChangedEventHandler(int amount);
 
+	private bool isDashing = false;
+	private float dashCooldown = Global.PlayerSkillCD;
+	private float dashSpeed = 280.0f;
+	private float dashDuration = 0.2f;
+	private float dashTimer = 0.0f;
+	private AnimatedSprite2D dashEffect;
+
 	private void GetWeaponFromChildren()
 	{
 		weaponList = new List<Weapon>();
@@ -75,6 +82,8 @@ public partial class Player : CharacterBody2D
 		animatedSprite.AnimationFinished += OnAnimationFinished;
 		goldLabel = GetNode<Label>("GoldLabel");
 		goldLabel.ZIndex = 10;
+		dashEffect = GetNode<AnimatedSprite2D>("DashEffect"); // Đường dẫn đến node hiệu ứng
+		dashEffect.Visible = false;
 
 		// Khởi tạo máu
 		currentHealth = maxHealth;
@@ -113,6 +122,17 @@ public partial class Player : CharacterBody2D
 		{
 			// Không di chuyển khi đang tấn công hoặc bị knockback
 			return;
+		}
+
+		if (isDashing)
+		{
+			MoveAndSlide();
+			return; // Không thực hiện các hành vi khác trong khi Dash
+		}
+
+		if (dashTimer > 0.0f)
+		{
+			dashTimer -= (float)delta;
 		}
 
 		// Lấy đầu vào từ bàn phím
@@ -168,6 +188,11 @@ public partial class Player : CharacterBody2D
 			{
 				// Chuyển vũ khí khi nhấn phím E
 				SwitchWeapon();
+			}
+			if (keyEvent.Keycode == Key.Space && !isDashing && dashTimer <= 0.0f)
+			{
+				// Dash
+				StartDash();
 			}
 		}
 
@@ -366,6 +391,68 @@ public partial class Player : CharacterBody2D
 		weapon.SetProcess(true);
 
 		GD.Print($"Switched to weapon: {weapon.Name}");
+	}
+
+	private void StartDash()
+	{
+		isDashing = true;
+		dashTimer = dashCooldown + dashDuration; // Đặt lại thời gian hồi chiêu
+		Vector2 dashDirection;
+
+		// Kiểm tra hướng Dash
+		if (character_direction != Vector2.Zero)
+		{
+			dashDirection = character_direction.Normalized(); // Dash theo hướng di chuyển
+		}
+		else
+		{
+			Vector2 mousePosition = GetGlobalMousePosition();
+			dashDirection = (mousePosition - GlobalPosition).Normalized(); // Dash theo hướng chuột
+		}
+
+		Velocity = dashDirection * dashSpeed; // Áp dụng vận tốc Dash
+
+		GD.Print("Dash activated!");
+
+		// Hiển thị hiệu ứng Dash phía sau CollisionShape2D
+		if (dashEffect != null)
+		{
+			// Lấy vị trí của CollisionShape2D
+			CollisionShape2D collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+			Vector2 collisionCenter = collisionShape.GlobalPosition;
+
+			// Tính toán vị trí phía sau từ tâm của CollisionShape2D
+			Vector2 effectPosition = collisionCenter - (dashDirection * 40); // khoảng cách từ tâm đến hiệu ứng
+			dashEffect.GlobalPosition = effectPosition;
+
+			// Tính toán góc xoay của hiệu ứng
+			float angle = Mathf.Atan2(-dashDirection.Y, -dashDirection.X);
+			dashEffect.Rotation = angle;
+
+			dashEffect.Visible = true;
+			dashEffect.Play("chainlightningblue");
+		}
+
+		// Tạo Timer để dừng Dash
+		var dashEndTimer = new Timer();
+		AddChild(dashEndTimer);
+		dashEndTimer.WaitTime = dashDuration;
+		dashEndTimer.OneShot = true;
+		dashEndTimer.Timeout += () =>
+		{
+			isDashing = false;
+			GD.Print("Dash ended.");
+
+			// Ẩn hiệu ứng sau Dash
+			if (dashEffect != null)
+			{
+				dashEffect.Visible = false;
+				dashEffect.Stop();
+			}
+
+			dashEndTimer.QueueFree();
+		};
+		dashEndTimer.Start();
 	}
 
 }

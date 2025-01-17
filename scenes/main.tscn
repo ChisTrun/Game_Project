@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=40 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="15_vgho4"]
 [ext_resource type="PackedScene" uid="uid://ctyu86it2m3mw" path="res://scenes/weapons/gun/gun.tscn" id="18_qdj0c"]
 [ext_resource type="PackedScene" uid="uid://ce83hhdbf7uf3" path="res://scenes/potion/healthpotion/HealthPotion.tscn" id="19_b6hc6"]
+[ext_resource type="SpriteFrames" uid="uid://rpo6vf1aams3" path="res://addons/duelyst_animated_sprites/assets/spriteframes/fx/fx_chainlightning.tres" id="20_i2qe6"]
 [ext_resource type="PackedScene" uid="uid://c33u3xpsc10au" path="res://scenes/enemy/witcher.tscn" id="20_x786r"]
 [ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="21_ihm01"]
 [ext_resource type="PackedScene" uid="uid://b63eh8lqbve68" path="res://scenes/gui/coin/coin.tscn" id="21_v0wfq"]
@@ -654,6 +655,11 @@ scale = Vector2(0.0424873, 0.0424873)
 Damage = 2
 Range = 20.0
 Cooldown = 0.001
+
+[node name="DashEffect" type="AnimatedSprite2D" parent="TileMap/Player"]
+position = Vector2(-12.2232, -0.000426139)
+sprite_frames = ExtResource("20_i2qe6")
+animation = &"chainlightningblue"
 
 [node name="NPC" type="Node2D" parent="TileMap"]
 position = Vector2(542.975, 355.328)

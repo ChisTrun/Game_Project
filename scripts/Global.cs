@@ -14,4 +14,6 @@ public partial class Global : Node
 	public static float PlayerDeceleration = 10.0f;
 
 	public static float PlayerBaseDamage = 10.0f;
+
+	public static float PlayerSkillCD = 1.0f;
 }
