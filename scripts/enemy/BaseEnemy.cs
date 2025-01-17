@@ -4,7 +4,7 @@ using System;
 public abstract partial class BaseEnemy : CharacterBody2D
 {
 	protected Node2D _player;
-	[Export] public int Damage = 10; // Sát thương cơ bản
+	[Export] public int Damage = 10;
 	[Export] public float Speed = 100f; // Tốc độ di chuyển cơ bản
 	[Export] public float VisionRange = 100f; // Tốc độ di chuyển cơ bản
 	[Export] public int MaxHealth = 100; // Máu tối đa
@@ -56,11 +56,11 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		FacePlayer(); // Lật hướng về phía người chơi
 
 		Vector2 velocity = PerformBehavior(delta);
-		if (velocity != Vector2.Zero)
+		if (velocity != Vector2.Zero && !IsAttacking)
 		{
 			_animatedSprite2D.Play("run");
 		}
-		else
+		else if (velocity == Vector2.Zero && !IsAttacking)
 		{
 			_animatedSprite2D.Play("idle");
 		}

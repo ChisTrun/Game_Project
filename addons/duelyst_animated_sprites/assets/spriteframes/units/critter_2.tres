@@ -292,7 +292,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5cmla")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 9.0
 }, {

@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=113 format=3 uid="uid://ci2fl7is2e7p"]
 
-[ext_resource type="Texture2D" uid="uid://c7fsnx750xh5k" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/f1_general_skinroguelegacy.png" id="1_g1hrc"]
+[ext_resource type="Texture2D" uid="uid://knjk215s3m4n" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/f1_general_skinroguelegacy.png" id="1_g1hrc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_du0b4"]
 atlas = ExtResource("1_g1hrc")
