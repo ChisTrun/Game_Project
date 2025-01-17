@@ -53,6 +53,16 @@ public partial class MeleeWeapon : Weapon
 		{
 			// Chơi animation tấn công
 			_animationPlayer.Play("attack");
+			if (AttackSound != null)
+			{
+				var audioPlayer = new AudioStreamPlayer2D
+				{
+					Stream = AttackSound,
+					Position = Position
+				};
+				GetParent().AddChild(audioPlayer);
+				audioPlayer.Play();
+			}
 		}
 		else
 		{

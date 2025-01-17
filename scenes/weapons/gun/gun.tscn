@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctyu86it2m3mw"]
+[gd_scene load_steps=5 format=3 uid="uid://ctyu86it2m3mw"]
 
 [ext_resource type="Script" path="res://scripts/weapon/RangedWeapon.cs" id="1_w6xyq"]
 [ext_resource type="PackedScene" uid="uid://ci5gtk61e8set" path="res://scenes/bullet/PlayerBullet.tscn" id="2_mjk4b"]
 [ext_resource type="Texture2D" uid="uid://bot6lqa3gkyt" path="res://scenes/weapons/gun/gun.png" id="3_002i6"]
+[ext_resource type="AudioStream" uid="uid://ch11fokvtwsa7" path="res://scenes/weapons/gun/shot.mp3" id="4_w0ldy"]
 
 [node name="Gun" type="Node2D"]
 position = Vector2(3, -3)
 script = ExtResource("1_w6xyq")
+ShootSound = ExtResource("4_w0ldy")
 ProjectileScene = ExtResource("2_mjk4b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

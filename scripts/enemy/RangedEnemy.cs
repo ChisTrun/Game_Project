@@ -62,22 +62,20 @@ public partial class RangedEnemy : BaseEnemy
 
 		_canShoot = false;
 
-		// Tạo viên đạn
 		Bullet bullet = (Bullet)BulletScene.Instantiate();
 
 		bullet.damge = this.Damage;
-		// Đặt vị trí viên đạn (cộng thêm offset nếu cần)
 		bullet.Position = Position + BulletSpawnOffset;
 		GetParent().AddChild(bullet);
 
-		// Gán hướng cho viên đạn
+
+		CreateSound(AttackSound);
+
 		if (bullet is Bullet bulletScript)
 		{
-			// Tính toán hướng từ enemy tới player
 			bulletScript.Direction = (_player.Position - Position).Normalized();
 		}
-
-		// Hẹn thời gian hồi chiêu
+		
 		Timer timer = new Timer();
 		timer.WaitTime = AttackCooldown;
 		timer.OneShot = true;
