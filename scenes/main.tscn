@@ -601,11 +601,8 @@ collision_layer = 20
 collision_mask = 2
 ShootDistance = 150.0
 RetreatDistance = 80.0
-Damage = 11
 Speed = 40.0
 VisionRange = 200.0
-CoinScene = ExtResource("21_v0wfq")
-HealthPotionScene = ExtResource("19_b6hc6")
 
 [node name="Player" type="CharacterBody2D" parent="TileMap"]
 z_index = 1
