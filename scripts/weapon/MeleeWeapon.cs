@@ -89,7 +89,7 @@ public partial class MeleeWeapon : Weapon
 			if (body is BaseEnemy enemy)
 			{
 				_animatedSprite2D.Play("go");
-				enemy.TakeDamage(10); // Gọi hàm gây sát thương, ví dụ 10 đơn vị sát thương
+				enemy.TakeDamage(Damage); // Gọi hàm gây sát thương, ví dụ 10 đơn vị sát thương
 				GD.Print($"Damaged enemy: {enemy.Name}");
 			}
 		}

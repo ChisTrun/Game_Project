@@ -21,7 +21,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 	[Export] public float RunSoundCooldown = 0.5f; // Cooldown for run sound
 
 	private TextureProgressBar _healthBar;
-	private int _currentHealth;
+	private float _currentHealth;
 	protected bool IsAttacking = false;
 	protected bool IsDead = false;
 	protected bool isTakeDamage = false;
@@ -107,7 +107,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 
 	protected abstract Vector2 PerformBehavior(double delta);
 
-	public virtual void TakeDamage(int damage)
+	public virtual void TakeDamage(float damage)
 	{
 		if (IsDead) return;
 		isTakeDamage = true;

@@ -11,7 +11,8 @@ script = ExtResource("1_8g1ua")
 isPlayerBullet = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.0420304, 0.0363974)
+position = Vector2(0, 1)
+scale = Vector2(0.0639178, 0.0553514)
 sprite_frames = ExtResource("2_2bygb")
 animation = &"purpleflame"
 frame_progress = 0.0830767

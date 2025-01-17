@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://bn2rcjovoj4jw"]
+
+[ext_resource type="Script" path="res://scripts/enemy/MeleeEnemy.cs" id="1_wmw0e"]
+[ext_resource type="AudioStream" uid="uid://2flx7odqail4" path="res://scenes/enemy/sound/creep2/mixkit-heavy-sword-smashes-metal-2795.wav" id="2_i60v7"]
+[ext_resource type="AudioStream" uid="uid://ks6xexa5i7tt" path="res://scenes/enemy/sound/creep1/mixkit-weak-fast-blow-2145.wav" id="3_k4gfj"]
+[ext_resource type="AudioStream" uid="uid://qkdkavtruiej" path="res://scenes/enemy/sound/creep2/horse-neigh-261131.mp3" id="4_yr11s"]
+[ext_resource type="SpriteFrames" uid="uid://cseeqayuwnpu0" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/f3_onyxpantheran.tres" id="5_v28t7"]
+[ext_resource type="Texture2D" uid="uid://bs6avc6xgiek3" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarUnder.png" id="6_ak31l"]
+[ext_resource type="Texture2D" uid="uid://b7ufe7ggp5u4j" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarProgress.png" id="7_tsayk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4t8tg"]
+radius = 21.8611
+
+[node name="MeleCreep03" type="CharacterBody2D"]
+collision_layer = 20
+collision_mask = 2
+script = ExtResource("1_wmw0e")
+AttackSound = ExtResource("2_i60v7")
+HitSound = ExtResource("3_k4gfj")
+DeadSound = ExtResource("4_yr11s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.480001, 0.475809)
+sprite_frames = ExtResource("5_v28t7")
+animation = &"death"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 9)
+rotation = 3.14159
+scale = Vector2(0.60663, 0.707551)
+shape = SubResource("CircleShape2D_4t8tg")
+
+[node name="EnemyHealthBar" type="TextureProgressBar" parent="."]
+z_index = 100
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.028
+anchor_right = 0.003
+anchor_bottom = 0.028
+offset_left = -25.0
+offset_top = -14.0
+offset_right = 23.0
+offset_bottom = -6.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("6_ak31l")
+texture_progress = ExtResource("7_tsayk")

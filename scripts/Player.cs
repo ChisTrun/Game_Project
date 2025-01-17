@@ -31,7 +31,7 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public int maxHealth = 100;
 	[Export]
-	public int currentHealth;
+	public float currentHealth;
 
 	private TextureProgressBar healthBar;
 
@@ -240,7 +240,7 @@ public partial class Player : CharacterBody2D
 
 	}
 
-	public void OnHit(int amount)
+	public void OnHit(float amount)
 	{
 		if (!isHitting)
 		{
@@ -340,7 +340,7 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	public void ChangeHealth(int amount)
+	public void ChangeHealth(float amount)
 	{
 		if (isDead)
 		{

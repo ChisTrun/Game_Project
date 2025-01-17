@@ -14,8 +14,8 @@ radius = 21.8611
 
 [node name="Witcher" type="CharacterBody2D"]
 z_index = 1
-collision_layer = 0
-collision_mask = 0
+collision_layer = 20
+collision_mask = 2
 script = ExtResource("1_od6dt")
 BulletScene = ExtResource("2_gynyg")
 AttackSound = ExtResource("3_dcx4v")
