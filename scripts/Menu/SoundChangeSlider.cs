@@ -56,7 +56,7 @@ public partial class SoundChangeSlider : HSlider
 
 		// Áp dụng giá trị thực tế vào âm lượng
 		AudioServer.SetBusVolumeDb(0, Mathf.Lerp(-80, 0, actualValue / 120));
-
+		GD.Print(AudioServer.GetBusVolumeDb(0));
 		// Cập nhật màu mục tiêu
 		_targetModulateColor = new Color(1.0f, 0.5f, 0.5f);
 	}
