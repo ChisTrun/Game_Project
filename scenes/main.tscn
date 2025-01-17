@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=45 format=3 uid="uid://droymiq6oax8w"]
+
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -15,6 +17,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="11_shvi8"]
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
+[ext_resource type="PackedScene" uid="uid://dkn7qg33rwcvn" path="res://scenes/map/map2.tscn" id="14_230ou"]
 [ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
 [ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="15_bfaun"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="15_vgho4"]
@@ -27,8 +30,20 @@
 [ext_resource type="AudioStream" uid="uid://ch11fokvtwsa7" path="res://scenes/weapons/gun/shot.mp3" id="21_8jxpw"]
 [ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="21_ihm01"]
 [ext_resource type="PackedScene" uid="uid://b63eh8lqbve68" path="res://scenes/gui/coin/coin.tscn" id="21_v0wfq"]
+
+[ext_resource type="FontFile" uid="uid://us6am02ejyf5" path="res://Font/RockSalt-Regular.ttf" id="24_rpiys"]
+[ext_resource type="FontFile" uid="uid://h1bnjip4in3n" path="res://Font/MarcellusSC-Regular.ttf" id="25_kdlmx"]
+[ext_resource type="Script" path="res://scripts/Menu/MenuGameManage.cs" id="26_j72ft"]
+[ext_resource type="Texture2D" uid="uid://dvqquxj1w7phd" path="res://OutAssets/img/setting2.jpg" id="27_4vsl5"]
+[ext_resource type="Script" path="res://scripts/Menu/ButtonEffect.cs" id="28_pkqmu"]
+[ext_resource type="Texture2D" uid="uid://ddh5n8nbf1nar" path="res://OutAssets/img/ruby2.png" id="29_k7g1j"]
+[ext_resource type="Script" path="res://scripts/Menu/SoundChangeSlider.cs" id="30_gecpr"]
+[ext_resource type="Texture2D" uid="uid://fwtjsq5a2ce0" path="res://OutAssets/img/Settings-icon-symbol-vector2.png" id="32_s27x2"]
+[ext_resource type="Script" path="res://scripts/Menu/MenuButtonOpen.cs" id="33_23ekh"]
+
 [ext_resource type="PackedScene" uid="uid://c85nkm33qdoc1" path="res://scenes/enemy/mele_creep_01.tscn" id="24_7smk7"]
 [ext_resource type="PackedScene" uid="uid://e8qsd0xewb4n" path="res://scenes/enemy/mele_creep_03.tscn" id="26_4hee3"]
+
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vh82s"]
 
@@ -542,6 +557,8 @@ font_color = Color(1, 0.898039, 0, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_j7wqh"]
 radius = 18.4391
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jwmd4"]
+
 [node name="world" type="Node2D"]
 position = Vector2(-48, -37)
 
@@ -604,6 +621,9 @@ collision_layer = 20
 collision_mask = 2
 ShootDistance = 150.0
 RetreatDistance = 80.0
+
+MainScene2 = ExtResource("14_230ou")
+
 Speed = 40.0
 VisionRange = 200.0
 CoinScene = ExtResource("21_v0wfq")
@@ -783,6 +803,190 @@ animation = &"run"
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("21_ihm01")
 autoplay = true
+
+[node name="NoticeUI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="NoticeUI"]
+anchors_preset = -1
+anchor_left = 0.019
+anchor_top = 0.029
+anchor_right = 0.019
+anchor_bottom = 0.029
+offset_left = 105.112
+offset_top = 176.208
+offset_right = 1004.11
+offset_bottom = 328.208
+
+[node name="WinLabel" type="Label" parent="NoticeUI"]
+visible = false
+offset_left = 138.0
+offset_top = 193.0
+offset_right = 1007.0
+offset_bottom = 312.0
+theme_override_colors/font_color = Color(0.584314, 0.0901961, 0.0196078, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.447059, 0, 1)
+theme_override_fonts/font = ExtResource("24_rpiys")
+theme_override_font_sizes/font_size = 50
+text = "Witcher Has Been Defeated!"
+
+[node name="GameOverLabel" type="Label" parent="NoticeUI"]
+visible = false
+offset_left = 388.0
+offset_top = 189.0
+offset_right = 808.0
+offset_bottom = 308.0
+theme_override_colors/font_color = Color(0.584314, 0.0901961, 0.0196078, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.447059, 0, 1)
+theme_override_fonts/font = ExtResource("24_rpiys")
+theme_override_font_sizes/font_size = 50
+text = "GAME OVER!"
+
+[node name="Continue" type="Label" parent="NoticeUI"]
+offset_left = 466.0
+offset_top = 293.0
+offset_right = 732.0
+offset_bottom = 336.0
+theme_override_colors/font_color = Color(0.65834, 0.65834, 0.65834, 1)
+theme_override_fonts/font = ExtResource("25_kdlmx")
+theme_override_font_sizes/font_size = 30
+text = "-Continue after 5s-"
+
+[node name="Menu" type="CanvasLayer" parent="." node_paths=PackedStringArray("_quitButton", "_newGameButton", "_settingBox", "_buttonBox", "_closeButton", "_settingButton", "_continueButton")]
+visible = false
+script = ExtResource("26_j72ft")
+_quitButton = NodePath("Button/Quit")
+_newGameButton = NodePath("Button/NewGame")
+_settingBox = NodePath("SettingBox")
+_buttonBox = NodePath("Button")
+_closeButton = NodePath("SettingBox/CloseButton")
+_settingButton = NodePath("Button/Setting")
+_continueButton = NodePath("Button/Continue")
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+offset_left = 187.0
+offset_top = 158.0
+offset_right = 988.0
+offset_bottom = 535.0
+texture = ExtResource("27_4vsl5")
+expand_mode = 1
+
+[node name="GameOverLabel" type="Label" parent="Menu"]
+visible = false
+offset_left = 380.0
+offset_top = 192.0
+offset_right = 800.0
+offset_bottom = 311.0
+theme_override_colors/font_color = Color(0.584314, 0.0901961, 0.0196078, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.447059, 0, 1)
+theme_override_fonts/font = ExtResource("24_rpiys")
+theme_override_font_sizes/font_size = 50
+text = "GAME OVER!"
+
+[node name="Button" type="Control" parent="Menu"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Setting" type="Button" parent="Menu/Button"]
+layout_mode = 2
+offset_left = 364.0
+offset_top = 368.0
+offset_right = 484.0
+offset_bottom = 428.0
+theme_override_fonts/font = ExtResource("24_rpiys")
+theme_override_font_sizes/font_size = 20
+text = "Setting"
+script = ExtResource("28_pkqmu")
+
+[node name="Continue" type="Button" parent="Menu/Button"]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 418.0
+offset_right = 648.0
+offset_bottom = 478.0
+theme_override_fonts/font = ExtResource("24_rpiys")
+theme_override_font_sizes/font_size = 20
+text = "Continue"
+script = ExtResource("28_pkqmu")
+
+[node name="Quit" type="Button" parent="Menu/Button"]
+layout_mode = 0
+offset_left = 691.0
+offset_top = 368.0
+offset_right = 811.0
+offset_bottom = 428.0
+theme_override_fonts/font = ExtResource("24_rpiys")
+theme_override_font_sizes/font_size = 20
+text = "Quit"
+script = ExtResource("28_pkqmu")
+
+[node name="NewGame" type="Button" parent="Menu/Button"]
+layout_mode = 2
+offset_left = 529.0
+offset_top = 316.0
+offset_right = 649.0
+offset_bottom = 372.0
+theme_override_fonts/font = ExtResource("24_rpiys")
+theme_override_font_sizes/font_size = 20
+text = "Restart"
+script = ExtResource("28_pkqmu")
+
+[node name="SettingBox" type="Control" parent="Menu"]
+visible = false
+modulate = Color(0.690196, 0.690196, 0.690196, 1)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 205.0
+offset_top = 275.0
+offset_right = 948.0
+offset_bottom = 603.0
+
+[node name="HSlider" type="HSlider" parent="Menu/SettingBox"]
+layout_mode = 0
+offset_left = 241.0
+offset_top = 17.0
+offset_right = 661.0
+offset_bottom = 113.0
+theme_override_icons/grabber = ExtResource("29_k7g1j")
+theme_override_icons/grabber_highlight = ExtResource("29_k7g1j")
+theme_override_icons/grabber_disabled = ExtResource("29_k7g1j")
+theme_override_icons/tick = ExtResource("29_k7g1j")
+script = ExtResource("30_gecpr")
+GrabberTexture = ExtResource("29_k7g1j")
+
+[node name="CloseButton" type="Button" parent="Menu/SettingBox"]
+layout_mode = 0
+offset_left = 341.0
+offset_top = 127.0
+offset_right = 430.0
+offset_bottom = 195.0
+theme_override_fonts/font = ExtResource("24_rpiys")
+theme_override_font_sizes/font_size = 25
+text = "Close"
+script = ExtResource("28_pkqmu")
+
+[node name="Label" type="Label" parent="Menu/SettingBox"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 36.0
+offset_right = 226.0
+offset_bottom = 87.0
+theme_override_colors/font_color = Color(0.756863, 0.611765, 0.305882, 1)
+theme_override_fonts/font = ExtResource("25_kdlmx")
+theme_override_font_sizes/font_size = 40
+text = "Volume"
+
+[node name="MenuButton" type="Button" parent="."]
+offset_left = 767.0
+offset_top = 432.0
+offset_right = 831.0
+offset_bottom = 496.0
+scale = Vector2(0.3, 0.3)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jwmd4")
+icon = ExtResource("32_s27x2")
+script = ExtResource("33_23ekh")
 
 [connection signal="body_entered" from="TileMap/NPC/NPCTrigger" to="TileMap/NPC/NPCTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="TileMap/NPC/NPCTrigger" to="TileMap/NPC/NPCTrigger" method="_on_body_exited"]

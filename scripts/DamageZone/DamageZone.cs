@@ -3,7 +3,7 @@ using Godot;
 public partial class DamageZone : TileMap
 {
 	[Export]
-	public int DamagePerSecond = 4; // Sát thương mỗi giây
+	public int DamagePerSecond = 40; // Sát thương mỗi giây
 
 	public override void _PhysicsProcess(double delta)
 	{
