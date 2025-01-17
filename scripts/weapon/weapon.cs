@@ -4,6 +4,10 @@ public enum WeaponType { Melee, Ranged }
 
 public abstract partial class Weapon : Node2D
 {
+
+	[Export]
+	public AudioStream AttackSound { get; set; } // Âm thanh khi bắn
+
 	[Export]
 	public int Damage { get; set; } = 10;
 

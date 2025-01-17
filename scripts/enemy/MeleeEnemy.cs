@@ -37,11 +37,9 @@ public partial class MeleeEnemy : BaseEnemy
 		if (!IsAttacking && _canAttack)
 		{
 			IsAttacking = true;
-			GD.Print("animatedSprite2D.Play(attack)", _animatedSprite2D);
 			_animatedSprite2D.Play("attack");
 			_canAttack = false;
-			GD.Print("MeleeEnemy attacks!");
-
+			CreateSound(AttackSound);
 			if (Position.DistanceTo(_player.Position) <= AttackRange)
 			{
 				Player player = _player as Player;
