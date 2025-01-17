@@ -13,7 +13,6 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_od6dt")
 BulletScene = ExtResource("2_gynyg")
-BulletSpawnOffset = Vector2(35, 35)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.8723e-06, 0.000106812)

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci5gtk61e8set"]
+
+[ext_resource type="Script" path="res://scripts/Bullet/Bullet.cs" id="1_8g1ua"]
+[ext_resource type="SpriteFrames" uid="uid://dnuq0mo18tedx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/fx/fx_f2_eightgates_purpleflame.tres" id="2_2bygb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36dyg"]
+size = Vector2(2.5, 2.25)
+
+[node name="PlayerBullet" type="Node2D"]
+script = ExtResource("1_8g1ua")
+isPlayerBullet = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.0420304, 0.0363974)
+sprite_frames = ExtResource("2_2bygb")
+animation = &"purpleflame"
+frame_progress = 0.0830767
+offset = Vector2(-17.1891, -12)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 2)
+shape = SubResource("RectangleShape2D_36dyg")

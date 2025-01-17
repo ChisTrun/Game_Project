@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
@@ -11,6 +12,8 @@ public partial class Player : CharacterBody2D
 	private Vector2 target_velocity = Vector2.Zero;
 
 	private AnimatedSprite2D animatedSprite;
+
+	private List<Weapon> weaponList;
 
 	private bool isAttacking = false; // Cờ để kiểm tra trạng thái tấn công
 
@@ -39,17 +42,28 @@ public partial class Player : CharacterBody2D
 	[Signal]
 	public delegate void OnCoinChangedEventHandler(int amount);
 
-	private Weapon GetWeaponFromChildren()
+	private void GetWeaponFromChildren()
 	{
-		// Duyệt qua tất cả các node con và kiểm tra xem node đó có phải là lớp con của Weapon không
+		weaponList = new List<Weapon>();
+
 		foreach (var child in GetChildren())
 		{
 			if (child is Weapon weapon)
 			{
-				return weapon;
+				weaponList.Add(weapon);
+				weapon.Visible = false;
+				weapon.SetPhysicsProcess(false);
+				weapon.SetProcess(false);
 			}
 		}
-		return null; // Trả về null nếu không tìm thấy node Weapon nào
+
+		if (weaponList.Count > 0)
+		{
+			weapon = weaponList[0];
+			weapon.Visible = true;
+			weapon.SetPhysicsProcess(true);
+			weapon.SetProcess(true);
+		}
 	}
 
 	public override void _Ready()
@@ -65,7 +79,11 @@ public partial class Player : CharacterBody2D
 		healthBar.MaxValue = maxHealth;
 		healthBar.Value = currentHealth;
 
-		weapon = GetWeaponFromChildren();
+		GetWeaponFromChildren();
+		if (weaponList.Count > 0)
+		{
+			weapon = weaponList[0];
+		}
 
 		UpdateGoldLabel();
 		// Kết nối signal với FloatingTextManager
@@ -142,6 +160,15 @@ public partial class Player : CharacterBody2D
 				PlayerAttack();
 			}
 		}
+		if (@event is InputEventKey keyEvent && keyEvent.Pressed)
+		{
+			if (keyEvent.Keycode == Key.E)
+			{
+				// Chuyển vũ khí khi nhấn phím E
+				SwitchWeapon();
+			}
+		}
+
 	}
 
 	public void OnHit(int amount)
@@ -216,7 +243,8 @@ public partial class Player : CharacterBody2D
 			isAttacking = true;
 			if (weapon != null)
 			{
-				weapon.Use(new Vector2());
+				Vector2 mousePosition = GetGlobalMousePosition();
+				weapon.Use(mousePosition);
 				isAttacking = false;
 			}
 			else
@@ -313,4 +341,29 @@ public partial class Player : CharacterBody2D
 			goldLabel.Text = $"Gold: {Global.Gold}";
 		}
 	}
+
+	private void SwitchWeapon()
+	{
+		if (weaponList.Count == 0)
+			return;
+
+		int currentIndex = weaponList.IndexOf(weapon);
+
+		int nextIndex = (currentIndex + 1) % weaponList.Count;
+
+		if (weapon != null)
+		{
+			weapon.Visible = false;
+			weapon.SetPhysicsProcess(false);
+			weapon.SetProcess(false);
+		}
+
+		weapon = weaponList[nextIndex];
+		weapon.Visible = true;
+		weapon.SetPhysicsProcess(true);
+		weapon.SetProcess(true);
+
+		GD.Print($"Switched to weapon: {weapon.Name}");
+	}
+
 }

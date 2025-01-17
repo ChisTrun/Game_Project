@@ -5,38 +5,84 @@ public partial class RangedWeapon : Weapon
 	[Export]
 	public PackedScene ProjectileScene { get; set; } // Scene của đạn
 
+	[Export]
+	public float ProjectileSpeed { get; set; } = 300f; // Vận tốc đạn, mặc định là 300
+
+	[Export]
+	public Vector2 BulletSpawnOffset { get; set; } = Vector2.Zero; // Offset khi tạo đạn
+
+	[Export]
+	public float AttackCooldown { get; set; } = 1f; // Thời gian hồi chiêu
+
+	private bool _canShoot = true;
+
+	public override void _Process(double delta)
+	{
+		Vector2 mousePosition = GetGlobalMousePosition();
+
+		// Tính toán hướng từ đối tượng đến chuột
+		Vector2 direction = mousePosition - GlobalPosition;
+
+		// Xoay đối tượng theo góc của hướng
+		int flip = 1;
+		Rotation = direction.Angle();
+		if (mousePosition.X < GlobalPosition.X)
+		{
+			flip = -1;
+		}
+
+		Scale = new Vector2(Scale.X, flip * Mathf.Abs(Scale.Y));
+	}
+
 	public override void Use(Vector2 targetPosition)
 	{
-		GD.Print("Firing ranged weapon!");
-
-		if (ProjectileScene != null)
+		if (!_canShoot)
 		{
-			// Tạo instance cho đạn
-			CharacterBody2D projectile = (CharacterBody2D)ProjectileScene.Instantiate();
-
-			// Lấy parent để thêm đạn vào cây scene
-			Node2D parent = GetParent<Node2D>();
-			if (parent != null)
-			{
-				parent.AddChild(projectile);
-
-				// Đặt vị trí ban đầu của đạn
-				projectile.Position = parent.Position;
-
-				GD.Print(parent.Position.ToString());
-
-				// Thêm logic bắn
-				Vector2 direction = (targetPosition - parent.Position).Normalized();
-				projectile.Velocity = direction * 300; // Giả sử có thuộc tính Velocity
-			}
-			else
-			{
-				GD.PrintErr("Parent is null. Cannot add projectile.");
-			}
+			GD.Print("Cannot shoot: Weapon is cooling down.");
+			return;
 		}
-		else
+
+		if (ProjectileScene == null)
 		{
-			GD.PrintErr("ProjectileScene is not assigned!");
+			GD.PrintErr("Cannot shoot: ProjectileScene is null!");
+			return;
 		}
+
+		_canShoot = false;
+
+		// Lấy vị trí chuột toàn cục
+		Vector2 mousePosition = GetGlobalMousePosition();
+		GD.Print("Mouse Position: " + mousePosition);
+
+		// Tính toán vị trí spawn của viên đạn (sử dụng Position thay vì GlobalPosition)
+		Vector2 spawnPosition = Position + BulletSpawnOffset;
+
+		// Kiểm tra tọa độ spawn trước khi tạo viên đạn
+		GD.Print("Spawn Position: " + spawnPosition);
+
+		// Tạo viên đạn
+		Node2D projectile = (Node2D)ProjectileScene.Instantiate();
+
+		// Đặt vị trí viên đạn
+		projectile.Position = spawnPosition;
+		GetParent().AddChild(projectile);
+
+		// Gán hướng cho viên đạn
+		if (projectile is Bullet bulletScript)
+		{
+			bulletScript.Direction = (mousePosition - GlobalPosition).Normalized(); // Dùng vị trí chuột
+			bulletScript.speed = ProjectileSpeed;
+		}
+
+		// Hẹn thời gian hồi chiêu
+		Timer timer = new Timer();
+		timer.WaitTime = AttackCooldown;
+		timer.OneShot = true;
+		timer.Timeout += () => _canShoot = true;
+		AddChild(timer);
+		timer.Start();
+
+		GD.Print("Fired a ranged weapon!");
 	}
+
 }

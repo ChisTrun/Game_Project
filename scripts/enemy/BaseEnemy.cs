@@ -38,7 +38,6 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		}
 	}
 
-
 	public override void _PhysicsProcess(double delta)
 	{
 		if (_player == null) return;
