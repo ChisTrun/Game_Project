@@ -6,6 +6,7 @@ public partial class SoundChangeSlider : HSlider
 	[Export] private Color SliderColor = new Color(0.1f, 0.1f, 0.1f); // Màu nền thanh trượt (xám tối)
 	[Export] private Color GrabberColor = new Color(0.8f, 0.0f, 0.8f); // Màu nút kéo (tím neon)
 	[Export] private Texture2D GrabberTexture; // Hình ảnh cho nút kéo
+	private int volumeScale = 40;
 
 	private Color _currentModulateColor = Colors.White; // Màu hiện tại
 	private Color _targetModulateColor = Colors.White; // Màu mục tiêu
@@ -50,7 +51,11 @@ public partial class SoundChangeSlider : HSlider
 		GD.Print($"Volume changed to: {value}");
 
 		// Điều chỉnh âm lượng (Linear Interpolation từ -80dB đến 0dB)
-		AudioServer.SetBusVolumeDb(0, Mathf.Lerp(-80, 0, (float)value / 100));
+		// Chuyển giá trị từ phạm vi 0-100 sang 20-120
+		float actualValue = Mathf.Lerp(40, 140, (float)value / 100);
+
+		// Áp dụng giá trị thực tế vào âm lượng
+		AudioServer.SetBusVolumeDb(0, Mathf.Lerp(-80, 0, actualValue / 120));
 
 		// Cập nhật màu mục tiêu
 		_targetModulateColor = new Color(1.0f, 0.5f, 0.5f);
