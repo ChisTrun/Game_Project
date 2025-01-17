@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=54 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -15,16 +15,15 @@
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="11_shvi8"]
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
+[ext_resource type="PackedScene" uid="uid://dkn7qg33rwcvn" path="res://scenes/map/map2.tscn" id="14_jtwr3"]
 [ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
 [ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="15_bfaun"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="15_vgho4"]
 [ext_resource type="PackedScene" uid="uid://ctyu86it2m3mw" path="res://scenes/weapons/gun/gun.tscn" id="18_qdj0c"]
-[ext_resource type="AudioStream" uid="uid://kqqq4r8g5t62" path="res://scenes/weapons/sword/sword.wav" id="19_2gopp"]
 [ext_resource type="PackedScene" uid="uid://ce83hhdbf7uf3" path="res://scenes/potion/healthpotion/HealthPotion.tscn" id="19_b6hc6"]
 [ext_resource type="SpriteFrames" uid="uid://rpo6vf1aams3" path="res://addons/duelyst_animated_sprites/assets/spriteframes/fx/fx_chainlightning.tres" id="20_i2qe6"]
 [ext_resource type="PackedScene" uid="uid://dsvcc0lsu253e" path="res://scenes/enemy/mele_creep_02.tscn" id="20_orq5k"]
 [ext_resource type="PackedScene" uid="uid://c33u3xpsc10au" path="res://scenes/enemy/witcher.tscn" id="20_x786r"]
-[ext_resource type="AudioStream" uid="uid://ch11fokvtwsa7" path="res://scenes/weapons/gun/shot.mp3" id="21_8jxpw"]
 [ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="21_ihm01"]
 [ext_resource type="PackedScene" uid="uid://b63eh8lqbve68" path="res://scenes/gui/coin/coin.tscn" id="21_v0wfq"]
 [ext_resource type="PackedScene" uid="uid://c85nkm33qdoc1" path="res://scenes/enemy/mele_creep_01.tscn" id="24_7smk7"]
@@ -615,6 +614,7 @@ collision_layer = 20
 collision_mask = 2
 ShootDistance = 150.0
 RetreatDistance = 80.0
+MainScene2 = ExtResource("14_jtwr3")
 Speed = 40.0
 VisionRange = 200.0
 CoinScene = ExtResource("21_v0wfq")
@@ -648,7 +648,6 @@ speed_scale = 2.0
 [node name="Weapon1" parent="TileMap/Player" instance=ExtResource("15_vgho4")]
 position = Vector2(-1.00977, 0)
 scale = Vector2(0.0247207, 0.0247207)
-AttackSound = ExtResource("19_2gopp")
 
 [node name="GoldLabel" type="Label" parent="TileMap/Player"]
 offset_left = -192.516
@@ -665,7 +664,6 @@ metadata/_edit_use_anchors_ = true
 [node name="Weapon2" parent="TileMap/Player" instance=ExtResource("18_qdj0c")]
 position = Vector2(0, 1.99414)
 scale = Vector2(0.0424873, 0.0424873)
-AttackSound = ExtResource("21_8jxpw")
 Damage = 2
 Range = 20.0
 Cooldown = 0.001
@@ -719,20 +717,29 @@ scale = Vector2(1.02836, 1.0066)
 [node name="MeleCreep06" parent="TileMap" instance=ExtResource("26_4hee3")]
 position = Vector2(202.587, 506.317)
 scale = Vector2(1.02836, 1.0066)
+AttackSound = null
+HitSound = null
+DeadSound = null
 Damage = 30
 Speed = 20.0
 VisionRange = 150.0
 MaxHealth = 150
 AttackCooldown = 3.0
-RunSoundCooldown = 10.0
+RunSoundCooldown = 0.5
 
 [node name="MeleCreep01" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(448.366, 327.143)
+AttackSound = null
+HitSound = null
+DeadSound = null
 VisionRange = 100.0
 MaxHealth = 20
 
 [node name="MeleCreep03" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(590.28, 269.767)
+AttackSound = null
+HitSound = null
+DeadSound = null
 VisionRange = 100.0
 MaxHealth = 20
 
@@ -741,25 +748,48 @@ position = Vector2(934.781, 341.236)
 scale = Vector2(1.00958, 1.00921)
 collision_layer = 20
 collision_mask = 2
+AttackSound = null
+HitSound = null
+DeadSound = null
 Speed = 80.0
 AttackCooldown = 1.0
 
 [node name="MeleCreep04" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(77.1272, 317.077)
+AttackSound = null
+HitSound = null
+DeadSound = null
 VisionRange = 100.0
 
 [node name="MeleCreep05" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(149.113, 43.2836)
+AttackSound = null
+HitSound = null
+DeadSound = null
 VisionRange = 100.0
 
 [node name="MeleCreep07" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(890.562, 67.4419)
+AttackSound = null
+HitSound = null
+DeadSound = null
 
 [node name="MeleCreep08" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(927.583, 3.01978)
+AttackSound = null
+HitSound = null
+DeadSound = null
 
 [node name="MeleCreep09" parent="TileMap" instance=ExtResource("26_4hee3")]
 position = Vector2(503.897, -312.044)
+AttackSound = null
+HitSound = null
+DeadSound = null
+RunSoundCooldown = 0.5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_ihm01")
+autoplay = true
 
 [node name="DialogueUI" type="CanvasLayer" parent="."]
 visible = false
@@ -790,10 +820,6 @@ position = Vector2(81, 525)
 scale = Vector2(3.2875, 3.48281)
 sprite_frames = ExtResource("12_lope8")
 animation = &"run"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("21_ihm01")
-autoplay = true
 
 [node name="NoticeUI" type="CanvasLayer" parent="."]
 visible = false
@@ -969,12 +995,12 @@ theme_override_fonts/font = ExtResource("25_kdlmx")
 theme_override_font_sizes/font_size = 40
 text = "Volume"
 
-[node name="MenuButton" type="Button" parent="."]
-offset_left = 767.0
-offset_top = 432.0
-offset_right = 831.0
-offset_bottom = 496.0
-scale = Vector2(0.3, 0.3)
+[node name="MenuButtonUI" type="CanvasLayer" parent="."]
+
+[node name="MenuButton" type="Button" parent="MenuButtonUI"]
+offset_left = 1087.0
+offset_right = 1151.0
+offset_bottom = 64.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jwmd4")
 icon = ExtResource("32_s27x2")
 script = ExtResource("33_23ekh")

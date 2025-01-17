@@ -20,7 +20,7 @@ public partial class SoundChangeSlider : HSlider
 		this.MinValue = 0;
 		this.MaxValue = 100;
 		this.Step = 1;
-		this.Value = 50; // Giá trị mặc định
+		this.Value = Global.VolumeValue; // Giá trị mặc định
 
 		// Cấu hình thanh trượt
 		SetupSlider();
@@ -49,7 +49,7 @@ public partial class SoundChangeSlider : HSlider
 	public void OnValueChanged(double value)
 	{
 		GD.Print($"Volume changed to: {value}");
-
+		Global.VolumeValue = value;
 		// Điều chỉnh âm lượng (Linear Interpolation từ -80dB đến 0dB)
 		// Chuyển giá trị từ phạm vi 0-100 sang 20-120
 		float actualValue = Mathf.Lerp(40, 140, (float)value / 100);
