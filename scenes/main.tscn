@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=56 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -15,6 +15,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="11_shvi8"]
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
+[ext_resource type="PackedScene" uid="uid://dkn7qg33rwcvn" path="res://scenes/map/map2.tscn" id="14_230ou"]
 [ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
 [ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="15_bfaun"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="15_vgho4"]
@@ -615,6 +616,7 @@ collision_layer = 20
 collision_mask = 2
 ShootDistance = 150.0
 RetreatDistance = 80.0
+MainScene2 = ExtResource("14_230ou")
 Speed = 40.0
 VisionRange = 200.0
 CoinScene = ExtResource("21_v0wfq")
@@ -676,7 +678,7 @@ sprite_frames = ExtResource("20_i2qe6")
 animation = &"chainlightningblue"
 
 [node name="NPC" type="Node2D" parent="TileMap"]
-position = Vector2(542.975, 355.328)
+position = Vector2(509.039, 508.331)
 scale = Vector2(1.02836, 1.0066)
 script = ExtResource("12_5ywv7")
 
@@ -690,9 +692,10 @@ text = "Hello! Where r u going?"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TileMap/NPC"]
 position = Vector2(-3, -3.99997)
-scale = Vector2(0.35, 0.381249)
+scale = Vector2(0.790001, 0.860535)
 sprite_frames = ExtResource("12_lope8")
-animation = &"run"
+animation = &"idle"
+frame_progress = 0.553037
 
 [node name="NPCTrigger" type="Area2D" parent="TileMap/NPC"]
 position = Vector2(-1, 1)
@@ -724,6 +727,8 @@ Speed = 20.0
 VisionRange = 150.0
 MaxHealth = 150
 AttackCooldown = 3.0
+CoinScene = ExtResource("21_v0wfq")
+HealthPotionScene = ExtResource("15_bfaun")
 RunSoundCooldown = 10.0
 
 [node name="MeleCreep01" parent="TileMap" instance=ExtResource("24_7smk7")]
