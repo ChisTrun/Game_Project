@@ -10,7 +10,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 	[Export] public float AttackCooldown = 2.0f; // Thời gian hồi giữa các lần bắn
 	[Export] public PackedScene CoinScene; // Scene vàng
 	[Export] public PackedScene HealthPotionScene; // Scene bình máu
-	private ProgressBar _healthBar;
+	private TextureProgressBar _healthBar;
 
 	private int _currentHealth;
 	protected bool IsAttacking = false;
@@ -31,7 +31,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 			_animatedSprite2D.AnimationFinished += OnDeathAnimationFinished;
 		}
 		
-		_healthBar = GetNode<ProgressBar>("HealthBar");
+		_healthBar = GetNode<TextureProgressBar>("EnemyHealthBar");
 		if (_healthBar != null)
 		{
 			_healthBar.MaxValue = MaxHealth;

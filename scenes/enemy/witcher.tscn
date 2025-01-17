@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c33u3xpsc10au"]
+[gd_scene load_steps=7 format=3 uid="uid://c33u3xpsc10au"]
 
 [ext_resource type="Script" path="res://scripts/enemy/RangedEnemy.cs" id="1_od6dt"]
 [ext_resource type="SpriteFrames" uid="uid://b8ypob0cyp62g" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/f2_caligrapher.tres" id="2_6vxyn"]
 [ext_resource type="PackedScene" uid="uid://confh6mmujns2" path="res://scenes/bullet/ElectricBullet.tscn" id="2_gynyg"]
+[ext_resource type="Texture2D" uid="uid://bs6avc6xgiek3" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarUnder.png" id="4_qdfi4"]
+[ext_resource type="Texture2D" uid="uid://b7ufe7ggp5u4j" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarProgress.png" id="5_hv42d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnn12"]
 radius = 21.8611
@@ -15,6 +17,24 @@ script = ExtResource("1_od6dt")
 BulletScene = ExtResource("2_gynyg")
 BulletSpawnOffset = Vector2(35, 35)
 
+[node name="EnemyHealthBar" type="TextureProgressBar" parent="."]
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.028
+anchor_right = 0.003
+anchor_bottom = 0.028
+offset_left = -23.0
+offset_top = -15.0
+offset_right = 25.0
+offset_bottom = -7.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("4_qdfi4")
+texture_progress = ExtResource("5_hv42d")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.8723e-06, 0.000106812)
 sprite_frames = ExtResource("2_6vxyn")
@@ -25,10 +45,3 @@ position = Vector2(-1, 3)
 rotation = 3.14159
 scale = Vector2(0.60663, 0.707551)
 shape = SubResource("CircleShape2D_wnn12")
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -15.0
-offset_top = -37.0
-offset_right = -11.0
-offset_bottom = -10.0
-rotation = 4.71239
