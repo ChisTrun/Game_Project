@@ -8,6 +8,8 @@ public abstract partial class BaseEnemy : CharacterBody2D
 	[Export] public AudioStream AttackSound { get; set; }
 	[Export] public AudioStream HitSound { get; set; }
 	[Export] public AudioStream DeadSound { get; set; }
+	[Export] public PackedScene MainScene2;
+
 
 	[Export] public int Damage = 10;
 	[Export] public float Speed = 100f;
@@ -38,6 +40,21 @@ public abstract partial class BaseEnemy : CharacterBody2D
 			GetParent().AddChild(audioStreamPlayer2D);
 			audioStreamPlayer2D.Play();
 			lastSoundTime = currentTime;
+		}
+	}
+
+	public void DropLoot()
+	{
+		Random random = new Random();
+
+		for (int i = 0; i < 5; i++)
+		{
+			PackedScene lootScene = random.Next(0, 2) == 0 ? CoinScene : HealthPotionScene;
+			if (lootScene == null) continue;
+
+			Node2D loot = (Node2D)lootScene.Instantiate();
+			loot.Position = Position + new Vector2(random.Next(-20, 20), random.Next(-20, 20)); // Rải vật phẩm gần vị trí enemy
+			GetParent().AddChild(loot);
 		}
 	}
 
@@ -106,6 +123,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		if (_currentHealth <= 0)
 		{
 			Die();
+			DropLoot();
 		}
 	}
 
@@ -114,6 +132,27 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		IsDead = true;
 		CreateSound(DeadSound);
 		_animatedSprite2D.Play("death");
+		Timer timer = new Timer();
+		timer.WaitTime = 5; // 5 giây
+		timer.OneShot = true;
+		timer.Autostart = true;
+		AddChild(timer);
+		GD.Print("Timer Started!");
+
+		timer.Timeout += () =>
+		{
+			GD.Print("Chuyển 1");
+			if (MainScene2 != null)
+			{
+				GD.Print("Chuyển");
+				GetTree().ChangeSceneToPacked(MainScene2); // Chuyển đến Scene Main
+				
+			}
+			else
+			{
+				GD.PrintErr("MainScene is not set! Please assign it in the inspector.");
+			}
+		};
 	}
 
 	protected void FacePlayer()

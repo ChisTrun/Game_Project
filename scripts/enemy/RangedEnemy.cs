@@ -8,7 +8,6 @@ public partial class RangedEnemy : BaseEnemy
 	[Export] public float RetreatDistance = 50f; // Khoảng cách tối thiểu để giữ an toàn
 	[Export] public PackedScene BulletScene { get; set; } // Scene đạn được truyền từ editor
 	[Export] public Vector2 BulletSpawnOffset = Vector2.Zero; // Offset để đạn xuất phát đúng từ enemy
-	[Export] public PackedScene MainScene2;
 
 	private float fadeInTime = 1.5f;
 	private float elapsedTime = 0f;
@@ -92,26 +91,12 @@ public partial class RangedEnemy : BaseEnemy
 	}
 	
 	
-	private void DropLoot()
-	{
-		Random random = new Random();
-
-		for (int i = 0; i < 5; i++)
-		{
-			PackedScene lootScene = random.Next(0, 2) == 0 ? CoinScene : HealthPotionScene;
-			if (lootScene == null) continue;
-
-			Node2D loot = (Node2D)lootScene.Instantiate();
-			loot.Position = Position + new Vector2(random.Next(-20, 20), random.Next(-20, 20)); // Rải vật phẩm gần vị trí enemy
-			GetParent().AddChild(loot);
-		}
-	}
+	
 	protected override void Die()
 	{
 		IsDead = true;
 		GD.Print($"{Name} died.");
 		_animatedSprite2D.Play("death");
-		DropLoot();
 		
 		CanvasLayer gameover = GetNode<CanvasLayer>("../../NoticeUI");
 		Label winLabel = gameover.GetNode<Label>("WinLabel");
