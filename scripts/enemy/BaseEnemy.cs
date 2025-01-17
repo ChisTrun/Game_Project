@@ -8,13 +8,16 @@ public abstract partial class BaseEnemy : CharacterBody2D
 	[Export] public float VisionRange = 100f; // Tốc độ di chuyển cơ bản
 	[Export] public int MaxHealth = 100; // Máu tối đa
 	[Export] public float AttackCooldown = 2.0f; // Thời gian hồi giữa các lần bắn
+	[Export] public PackedScene CoinScene; // Scene vàng
+	[Export] public PackedScene HealthPotionScene; // Scene bình máu
+	private TextureProgressBar _healthBar;
 
 	private int _currentHealth;
 	protected bool IsAttacking = false;
 	protected bool IsDead = false;
 
 	protected bool isTakeDamage = false;
-	private AnimatedSprite2D _animatedSprite2D;
+	protected AnimatedSprite2D _animatedSprite2D;
 
 	public override void _Ready()
 	{
@@ -27,6 +30,13 @@ public abstract partial class BaseEnemy : CharacterBody2D
 			// Đăng ký signal AnimationFinished để biết khi animation chết đã hoàn tất
 			_animatedSprite2D.AnimationFinished += OnDeathAnimationFinished;
 		}
+		
+		_healthBar = GetNode<TextureProgressBar>("EnemyHealthBar");
+		if (_healthBar != null)
+		{
+			_healthBar.MaxValue = MaxHealth;
+			_healthBar.Value = _currentHealth;
+		}
 	}
 
 	private void OnDeathAnimationFinished()
@@ -37,7 +47,6 @@ public abstract partial class BaseEnemy : CharacterBody2D
 			QueueFree(); // Xóa node khỏi scene sau khi animation death kết thúc
 		}
 	}
-
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -60,7 +69,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		var collision = GetLastSlideCollision();
 		if (collision != null)
 		{
-			GD.Print($"Collided with: {collision.GetCollider()}");
+			// GD.Print($"Collided with: {collision.GetCollider()}");
 		}
 		MoveAndSlide();
 	}
@@ -70,10 +79,16 @@ public abstract partial class BaseEnemy : CharacterBody2D
 	// Nhận sát thương
 	public virtual void TakeDamage(int damage)
 	{
-		if (IsDead) return; // Không nhận sát thương nếu đã chết
+		if (IsDead) return;
 		isTakeDamage = true;
 		_currentHealth -= damage;
 		GD.Print($"{Name} took {damage} damage. Current health: {_currentHealth}");
+
+		// Cập nhật thanh máu
+		if (_healthBar != null)
+		{
+			_healthBar.Value = _currentHealth;
+		}
 
 		if (_currentHealth <= 0)
 		{
@@ -112,14 +127,14 @@ public abstract partial class BaseEnemy : CharacterBody2D
 	protected Vector2 GetDirectionAwayFrom(Vector2 targetPosition)
 	{
 		float distance = Position.DistanceTo(targetPosition);
-		GD.Print($"Distance to player: {distance}");
+		// GD.Print($"Distance to player: {distance}");
 
 		if (distance < 5.0f) // 5.0f là ngưỡng tối thiểu
 		{
 			return Vector2.Zero; // Không di chuyển
 		}
 
-		GD.Print((Position - targetPosition).Normalized() * Speed);
+		// GD.Print((Position - targetPosition).Normalized() * Speed);
 
 		return (Position - targetPosition).Normalized() * Speed;
 	}

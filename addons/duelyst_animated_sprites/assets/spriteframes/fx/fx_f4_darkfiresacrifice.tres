@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=27 format=3 uid="uid://nmyp4r1l67ih"]
 
-[ext_resource type="Texture2D" uid="uid://dilkwahjrqjg0" path="res://addons/duelyst_animated_sprites/assets/spritesheets/fx/fx_f4_darkfiresacrifice.png" id="1_tidnm"]
+[ext_resource type="Texture2D" uid="uid://d3far0gwx514n" path="res://addons/duelyst_animated_sprites/assets/spritesheets/fx/fx_f4_darkfiresacrifice.png" id="1_tidnm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3h7m1"]
 atlas = ExtResource("1_tidnm")

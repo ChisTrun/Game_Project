@@ -3,5 +3,5 @@ using System;
 
 public partial class Global : Node
 {
-    public static int Gold = 0;
+	public static int Gold = 0;
 }
