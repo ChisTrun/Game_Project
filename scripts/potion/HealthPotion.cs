@@ -3,7 +3,7 @@ using System;
 
 public partial class HealthPotion : Area2D
 {
-	public int HealAmount = 10;
+	public int HealAmount = Global.HealHealth;
 
 	private AudioStreamPlayer2D pickupSound;
 
