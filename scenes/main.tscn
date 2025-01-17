@@ -1,4 +1,6 @@
-[gd_scene load_steps=40 format=3 uid="uid://droymiq6oax8w"]
+
+[gd_scene load_steps=42 format=3 uid="uid://droymiq6oax8w"]
+
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -20,10 +22,16 @@
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="15_vgho4"]
 [ext_resource type="PackedScene" uid="uid://ctyu86it2m3mw" path="res://scenes/weapons/gun/gun.tscn" id="18_qdj0c"]
 [ext_resource type="PackedScene" uid="uid://ce83hhdbf7uf3" path="res://scenes/potion/healthpotion/HealthPotion.tscn" id="19_b6hc6"]
+
 [ext_resource type="SpriteFrames" uid="uid://rpo6vf1aams3" path="res://addons/duelyst_animated_sprites/assets/spriteframes/fx/fx_chainlightning.tres" id="20_i2qe6"]
+
+[ext_resource type="PackedScene" uid="uid://dsvcc0lsu253e" path="res://scenes/enemy/mele_creep_02.tscn" id="20_orq5k"]
+
 [ext_resource type="PackedScene" uid="uid://c33u3xpsc10au" path="res://scenes/enemy/witcher.tscn" id="20_x786r"]
 [ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="21_ihm01"]
 [ext_resource type="PackedScene" uid="uid://b63eh8lqbve68" path="res://scenes/gui/coin/coin.tscn" id="21_v0wfq"]
+[ext_resource type="PackedScene" uid="uid://c85nkm33qdoc1" path="res://scenes/enemy/mele_creep_01.tscn" id="24_7smk7"]
+[ext_resource type="PackedScene" uid="uid://e8qsd0xewb4n" path="res://scenes/enemy/mele_creep_03.tscn" id="26_4hee3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vh82s"]
 
@@ -609,7 +617,7 @@ HealthPotionScene = ExtResource("19_b6hc6")
 
 [node name="Player" type="CharacterBody2D" parent="TileMap"]
 z_index = 1
-position = Vector2(559.429, -327.143)
+position = Vector2(545.032, 544.568)
 scale = Vector2(1.00958, 1.00921)
 collision_layer = 9
 script = ExtResource("8_mtmnc")
@@ -701,6 +709,50 @@ scale = Vector2(1.02836, 1.0066)
 [node name="Coin2" parent="TileMap/Items/Coins" instance=ExtResource("21_v0wfq")]
 position = Vector2(384.607, -244.603)
 scale = Vector2(1.02836, 1.0066)
+
+[node name="MeleCreep06" parent="TileMap" instance=ExtResource("26_4hee3")]
+position = Vector2(202.587, 506.317)
+scale = Vector2(1.02836, 1.0066)
+Damage = 30
+Speed = 20.0
+VisionRange = 150.0
+MaxHealth = 150
+AttackCooldown = 3.0
+
+[node name="MeleCreep01" parent="TileMap" instance=ExtResource("24_7smk7")]
+position = Vector2(448.366, 327.143)
+VisionRange = 100.0
+MaxHealth = 20
+
+[node name="MeleCreep03" parent="TileMap" instance=ExtResource("24_7smk7")]
+position = Vector2(590.28, 269.767)
+VisionRange = 100.0
+MaxHealth = 20
+
+[node name="MeleCreep02" parent="TileMap" instance=ExtResource("20_orq5k")]
+position = Vector2(934.781, 341.236)
+scale = Vector2(1.00958, 1.00921)
+collision_layer = 20
+collision_mask = 2
+Speed = 80.0
+AttackCooldown = 1.0
+
+[node name="MeleCreep04" parent="TileMap" instance=ExtResource("24_7smk7")]
+position = Vector2(77.1272, 317.077)
+VisionRange = 100.0
+
+[node name="MeleCreep05" parent="TileMap" instance=ExtResource("24_7smk7")]
+position = Vector2(149.113, 43.2836)
+VisionRange = 100.0
+
+[node name="MeleCreep07" parent="TileMap" instance=ExtResource("24_7smk7")]
+position = Vector2(890.562, 67.4419)
+
+[node name="MeleCreep08" parent="TileMap" instance=ExtResource("24_7smk7")]
+position = Vector2(927.583, 3.01978)
+
+[node name="MeleCreep09" parent="TileMap" instance=ExtResource("26_4hee3")]
+position = Vector2(503.897, -312.044)
 
 [node name="DialogueUI" type="CanvasLayer" parent="."]
 visible = false
