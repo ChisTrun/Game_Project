@@ -2,6 +2,8 @@ using Godot;
 
 public partial class RangedWeapon : Weapon
 {
+
+	
 	[Export]
 	public PackedScene ProjectileScene { get; set; } // Scene của đạn
 
@@ -60,11 +62,22 @@ public partial class RangedWeapon : Weapon
 		// Tạo viên đạn
 		Bullet projectile = (Bullet)ProjectileScene.Instantiate();
 
-		projectile.damge = this.Damage;	
+		projectile.damge = this.Damage;
 
 		// Đặt vị trí viên đạn
 		projectile.Position = spawnPosition;
 		GetParent().AddChild(projectile);
+
+		if (AttackSound != null)
+		{	
+			var audioPlayer = new AudioStreamPlayer2D
+			{
+				Stream = AttackSound,
+				Position = spawnPosition 
+			};
+			GetParent().AddChild(audioPlayer);
+			audioPlayer.Play();
+		}
 
 		// Gán hướng cho viên đạn
 		if (projectile is Bullet bulletScript)

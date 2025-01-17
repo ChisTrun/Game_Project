@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c85nkm33qdoc1"]
+[gd_scene load_steps=6 format=3 uid="uid://c85nkm33qdoc1"]
 
 [ext_resource type="Script" path="res://scripts/enemy/MeleeEnemy.cs" id="1_av2rl"]
 [ext_resource type="SpriteFrames" uid="uid://b38iok8ul0swf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_2.tres" id="2_7pfu1"]
+[ext_resource type="AudioStream" uid="uid://dx0dgalyffge0" path="res://scenes/enemy/sound/creep1/bat_death.mp3" id="2_tmquf"]
+[ext_resource type="AudioStream" uid="uid://ks6xexa5i7tt" path="res://scenes/enemy/sound/creep1/mixkit-weak-fast-blow-2145.wav" id="3_617uf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4t8tg"]
 radius = 21.8611
@@ -10,6 +12,10 @@ radius = 21.8611
 collision_layer = 20
 collision_mask = 2
 script = ExtResource("1_av2rl")
+AttackRange = 20.0
+AttackSound = ExtResource("2_tmquf")
+HitSound = ExtResource("3_617uf")
+DeadSound = ExtResource("2_tmquf")
 VisionRange = 50.0
 MaxHealth = 30
 

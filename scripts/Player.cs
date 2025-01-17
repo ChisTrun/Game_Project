@@ -44,6 +44,10 @@ public partial class Player : CharacterBody2D
 
 	[Signal]
 	public delegate void OnCoinChangedEventHandler(int amount);
+	
+	private float fadeInTime = 1.5f;
+	private float elapsedTime = 0f;
+	private bool isFading = false;
 
 	public bool isDashing = false;
 	public float dashCooldown = Global.PlayerSkillCD;
@@ -303,7 +307,7 @@ public partial class Player : CharacterBody2D
 
 	private void PlayerAttack()
 	{
-		if (!isAttacking)
+		if (!isAttacking && !isDead)
 		{
 			isAttacking = true;
 			if (weapon != null)
@@ -366,18 +370,87 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	private void Die()
+private void Die()
+{
+	isDead = true; // Đánh dấu Player đã chết
+
+	// Chuyển animation sang "death"
+	animatedSprite.Play("death");
+
+	GD.Print("Player đã chết!");
+
+	// Đợi animation "death" kết thúc rồi xử lý tiếp
+	animatedSprite.AnimationFinished += OnDeathAnimationFinished;
+
+	CanvasLayer gameover = GetNode<CanvasLayer>("../../NoticeUI");
+	Label winLabel = gameover.GetNode<Label>("WinLabel");
+	Label gameOverLabel = gameover.GetNode<Label>("GameOverLabel");
+
+	// Ẩn nhãn Win và đặt alpha cho GameOverLabel về 0 (trong suốt)
+	winLabel.Visible = false;
+	gameover.Visible = true;
+	gameOverLabel.Visible = true;
+	
+	var audioPlayer = gameover.GetNodeOrNull<AudioStreamPlayer>("GameOverMusic");
+	if (audioPlayer == null)
 	{
-		isDead = true; // Đánh dấu Player đã chết
-
-		// Chuyển animation sang "death"
-		animatedSprite.Play("death");
-
-		GD.Print("Player đã chết!");
-
-		// Đợi animation "death" kết thúc rồi xử lý tiếp
-		animatedSprite.AnimationFinished += OnDeathAnimationFinished;
+		audioPlayer = new AudioStreamPlayer();
+		gameover.AddChild(audioPlayer);
+		audioPlayer.Stream = ResourceLoader.Load<AudioStream>("res://OutAssets/sound/playerDie.wav"); // Đường dẫn đến nhạc
 	}
+	var audioPlayerTheme = GetNode<AudioStreamPlayer2D>("../../AudioStreamPlayer2D");
+	audioPlayerTheme.Stop();
+	audioPlayer.Play();
+
+	// Bắt đầu hiệu ứng fade-in
+	isFading = true;
+	elapsedTime = 0; // Reset thời gian
+
+	
+
+	// Tạo Timer để hiển thị menu sau 5 giây
+	Timer timer = new Timer();
+	timer.WaitTime = 5; // 5 giây
+	timer.OneShot = true;
+	timer.Autostart = true;
+	AddChild(timer);
+
+	timer.Timeout += () =>
+	{
+		CanvasLayer menu = GetNode<CanvasLayer>("../../Menu");
+		menu.GetNode<Label>("./GameOverLabel").Visible = true;
+		menu.GetNode<Button>("./Button/Continue").Disabled = true;
+		menu.GetNode<Button>("./Button/Setting").Disabled = true;
+		menu.Visible = true;
+		GD.Print("Menu displayed!");
+	};
+}
+
+public override void _Process(double delta)
+{
+	if (isFading)
+	{
+		elapsedTime += (float)delta;
+		float alpha = Mathf.Clamp(elapsedTime / fadeInTime, 0, 1);
+
+		// Lấy tất cả các con trong CanvasLayer và áp dụng fade-in
+		CanvasLayer gameover = GetNode<CanvasLayer>("../../NoticeUI");
+		foreach (Node child in gameover.GetChildren())
+		{
+			if (child is Control control)
+			{
+				control.Modulate = new Color(1, 1, 1, alpha);
+			}
+		}
+
+		// Kết thúc fade-in
+		if (elapsedTime >= fadeInTime)
+		{
+			isFading = false;
+		}
+	}
+}
+
 
 	private void OnDeathAnimationFinished()
 	{
@@ -385,7 +458,7 @@ public partial class Player : CharacterBody2D
 		{
 			// Hiển thị thông báo kết thúc game
 			GD.Print("Game Over!");
-
+			
 			// Ví dụ: Kết thúc game hoặc chuyển scene
 			GetTree().Paused = true;
 			// GetTree().ChangeScene("res://Scenes/GameOver.tscn"); // Chuyển đến màn hình Game Over
