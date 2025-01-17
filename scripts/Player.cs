@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
-	public const float Speed = 100.0f;
-	public const float Acceleration = 10.0f;
-	public const float Deceleration = 10.0f;
+	public float Speed = Global.PlayerSpeed;
+	public float Acceleration = Global.PlayerAcceleration;
+	public float Deceleration = Global.PlayerDeceleration;
+
+	public float BaseDamage = Global.PlayerBaseDamage;
 
 	private Vector2 character_direction = Vector2.Zero;
 	private Vector2 target_velocity = Vector2.Zero;
