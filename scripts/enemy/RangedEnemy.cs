@@ -8,6 +8,8 @@ public partial class RangedEnemy : BaseEnemy
 	[Export] public float RetreatDistance = 50f; // Khoảng cách tối thiểu để giữ an toàn
 	[Export] public PackedScene BulletScene { get; set; } // Scene đạn được truyền từ editor
 	[Export] public Vector2 BulletSpawnOffset = Vector2.Zero; // Offset để đạn xuất phát đúng từ enemy
+	
+
 
 	private bool _canShoot = true;
 
@@ -81,5 +83,29 @@ public partial class RangedEnemy : BaseEnemy
 		timer.Timeout += () => _canShoot = true;
 		AddChild(timer);
 		timer.Start();
+	}
+	
+	
+	private void DropLoot()
+	{
+		Random random = new Random();
+
+		for (int i = 0; i < 5; i++)
+		{
+			PackedScene lootScene = random.Next(0, 2) == 0 ? CoinScene : HealthPotionScene;
+			if (lootScene == null) continue;
+
+			Node2D loot = (Node2D)lootScene.Instantiate();
+			loot.Position = Position + new Vector2(random.Next(-20, 20), random.Next(-20, 20)); // Rải vật phẩm gần vị trí enemy
+			GetParent().AddChild(loot);
+		}
+	}
+	protected override void Die()
+	{
+		IsDead = true;
+		GD.Print($"{Name} died.");
+		_animatedSprite2D.Play("death");
+		DropLoot();
+		// Để việc xóa đối tượng được xử lý sau khi animation death hoàn tất
 	}
 }

@@ -603,7 +603,10 @@ ShootDistance = 150.0
 RetreatDistance = 80.0
 Speed = 40.0
 VisionRange = 200.0
-MaxHealth = 1
+
+CoinScene = ExtResource("21_v0wfq")
+HealthPotionScene = ExtResource("19_b6hc6")
+
 
 [node name="Player" type="CharacterBody2D" parent="TileMap"]
 z_index = 1
