@@ -9,7 +9,7 @@ public abstract partial class Weapon : Node2D
 	public AudioStream AttackSound { get; set; } // Âm thanh khi bắn
 
 	[Export]
-	public int Damage { get; set; } = 10;
+	public float Damage { get; set; } = Global.PlayerBaseDamage;
 
 	[Export]
 	public float Range { get; set; } = 0f;

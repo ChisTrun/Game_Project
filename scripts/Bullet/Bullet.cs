@@ -4,7 +4,7 @@ using System;
 public partial class Bullet : Node2D
 {
 	public Vector2 Direction { get; set; } = Vector2.Zero; // Đảm bảo có giá trị mặc định
-	[Export] public int damge = 10;	
+	[Export] public float damge = 10;	
 	[Export] public float speed = 200f;
 	[Export] public bool isPlayerBullet = false; // Xác định đạn của người chơi hay kẻ địch
 	[Export] public float maxDistance = 500f; // Khoảng cách tối đa đạn có thể bay trước khi biến mất
