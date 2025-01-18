@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=56 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Script" path="res://scripts/SetSound.cs" id="1_s3n7x"]
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://e8qsd0xewb4n" path="res://scenes/enemy/mele_creep_03.tscn" id="26_4hee3"]
 [ext_resource type="Script" path="res://scripts/Menu/MenuGameManage.cs" id="26_j72ft"]
 [ext_resource type="Texture2D" uid="uid://dvqquxj1w7phd" path="res://OutAssets/img/setting2.jpg" id="27_4vsl5"]
+[ext_resource type="PackedScene" uid="uid://drk71414kanoi" path="res://scenes/gui/skillbar/SkillBar.tscn" id="28_7jbnv"]
 [ext_resource type="Script" path="res://scripts/Menu/ButtonEffect.cs" id="28_pkqmu"]
 [ext_resource type="Texture2D" uid="uid://ddh5n8nbf1nar" path="res://OutAssets/img/ruby2.png" id="29_k7g1j"]
 [ext_resource type="Script" path="res://scripts/Menu/SoundChangeSlider.cs" id="30_gecpr"]
@@ -616,8 +617,6 @@ shape = SubResource("CircleShape2D_6afs2")
 [node name="Witcher" parent="TileMap" instance=ExtResource("20_x786r")]
 position = Vector2(541.947, -686.498)
 scale = Vector2(2.2624, 2.21451)
-collision_layer = 20
-collision_mask = 2
 ShootDistance = 150.0
 RetreatDistance = 80.0
 MainScene2 = ExtResource("14_jtwr3")
@@ -670,7 +669,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Weapon2" parent="TileMap/Player" instance=ExtResource("18_qdj0c")]
 position = Vector2(0, 1.99414)
 scale = Vector2(0.0424873, 0.0424873)
-Damage = 2
+AttackSound = ExtResource("21_8jxpw")
 Range = 20.0
 Cooldown = 0.001
 
@@ -680,7 +679,7 @@ sprite_frames = ExtResource("20_i2qe6")
 animation = &"chainlightningblue"
 
 [node name="NPC" type="Node2D" parent="TileMap"]
-position = Vector2(542.975, 355.328)
+position = Vector2(509.039, 508.331)
 scale = Vector2(1.02836, 1.0066)
 script = ExtResource("12_5ywv7")
 
@@ -694,9 +693,10 @@ text = "Hello! Where r u going?"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TileMap/NPC"]
 position = Vector2(-3, -3.99997)
-scale = Vector2(0.35, 0.381249)
+scale = Vector2(0.790001, 0.860535)
 sprite_frames = ExtResource("12_lope8")
-animation = &"run"
+animation = &"idle"
+frame_progress = 0.553037
 
 [node name="NPCTrigger" type="Area2D" parent="TileMap/NPC"]
 position = Vector2(-1, 1)
@@ -723,15 +723,14 @@ scale = Vector2(1.02836, 1.0066)
 [node name="MeleCreep06" parent="TileMap" instance=ExtResource("26_4hee3")]
 position = Vector2(202.587, 506.317)
 scale = Vector2(1.02836, 1.0066)
-AttackSound = null
-HitSound = null
-DeadSound = null
 Damage = 30
 Speed = 20.0
 VisionRange = 150.0
 MaxHealth = 150
 AttackCooldown = 3.0
-RunSoundCooldown = 0.5
+CoinScene = ExtResource("21_v0wfq")
+HealthPotionScene = ExtResource("19_b6hc6")
+RunSoundCooldown = 10.0
 
 [node name="MeleCreep01" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(448.366, 327.143)
@@ -740,6 +739,8 @@ HitSound = null
 DeadSound = null
 VisionRange = 100.0
 MaxHealth = 20
+CoinScene = ExtResource("21_v0wfq")
+HealthPotionScene = ExtResource("19_b6hc6")
 
 [node name="MeleCreep03" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(590.28, 269.767)
@@ -748,15 +749,11 @@ HitSound = null
 DeadSound = null
 VisionRange = 100.0
 MaxHealth = 20
+HealthPotionScene = ExtResource("19_b6hc6")
 
 [node name="MeleCreep02" parent="TileMap" instance=ExtResource("20_orq5k")]
 position = Vector2(934.781, 341.236)
 scale = Vector2(1.00958, 1.00921)
-collision_layer = 20
-collision_mask = 2
-AttackSound = null
-HitSound = null
-DeadSound = null
 Speed = 80.0
 AttackCooldown = 1.0
 
@@ -788,10 +785,13 @@ DeadSound = null
 
 [node name="MeleCreep09" parent="TileMap" instance=ExtResource("26_4hee3")]
 position = Vector2(503.897, -312.044)
-AttackSound = null
-HitSound = null
-DeadSound = null
-RunSoundCooldown = 0.5
+Damage = 30
+Speed = 20.0
+VisionRange = 150.0
+MaxHealth = 150
+AttackCooldown = 3.0
+CoinScene = ExtResource("21_v0wfq")
+HealthPotionScene = ExtResource("19_b6hc6")
 
 [node name="DialogueUI" type="CanvasLayer" parent="."]
 visible = false
@@ -822,6 +822,12 @@ position = Vector2(81, 525)
 scale = Vector2(3.2875, 3.48281)
 sprite_frames = ExtResource("12_lope8")
 animation = &"run"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_ihm01")
+autoplay = true
+
+[node name="SkillBar" parent="." instance=ExtResource("28_7jbnv")]
 
 [node name="NoticeUI" type="CanvasLayer" parent="."]
 visible = false

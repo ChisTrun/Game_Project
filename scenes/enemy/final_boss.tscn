@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://mw3gvgb2xhts"]
+
+[ext_resource type="Script" path="res://scripts/enemy/MeleeEnemy.cs" id="1_24m5b"]
+[ext_resource type="AudioStream" uid="uid://d3d1d4quo3nrc" path="res://scenes/enemy/sound/creep3/punch.wav" id="2_lor2n"]
+[ext_resource type="AudioStream" uid="uid://c7jxkvcsweilk" path="res://scenes/enemy/sound/creep3/metal_hit.wav" id="3_1n84m"]
+[ext_resource type="AudioStream" uid="uid://bxbsd8vx5gnnf" path="res://scenes/enemy/sound/creep3/electric_dead.wav" id="4_kjln1"]
+[ext_resource type="SpriteFrames" uid="uid://itk3m3wf2o5o" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/boss_christmas.tres" id="5_yt7ky"]
+[ext_resource type="Texture2D" uid="uid://bs6avc6xgiek3" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarUnder.png" id="6_bgwck"]
+[ext_resource type="Texture2D" uid="uid://b7ufe7ggp5u4j" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarProgress.png" id="7_a8gsd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4t8tg"]
+radius = 21.8611
+
+[node name="MeleCreep02" type="CharacterBody2D"]
+collision_layer = 20
+collision_mask = 2
+script = ExtResource("1_24m5b")
+AttackSound = ExtResource("2_lor2n")
+HitSound = ExtResource("3_1n84m")
+DeadSound = ExtResource("4_kjln1")
+RunSoundCooldown = 3.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 11)
+scale = Vector2(0.521429, 0.521429)
+sprite_frames = ExtResource("5_yt7ky")
+animation = &"death"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 9)
+rotation = 3.14159
+scale = Vector2(0.60663, 0.707551)
+shape = SubResource("CircleShape2D_4t8tg")
+
+[node name="EnemyHealthBar" type="TextureProgressBar" parent="."]
+z_index = 100
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.028
+anchor_right = 0.003
+anchor_bottom = 0.028
+offset_left = -25.0
+offset_top = -14.0
+offset_right = 23.0
+offset_bottom = -6.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("6_bgwck")
+texture_progress = ExtResource("7_a8gsd")

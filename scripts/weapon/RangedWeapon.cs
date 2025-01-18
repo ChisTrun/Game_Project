@@ -62,7 +62,7 @@ public partial class RangedWeapon : Weapon
 		// Tạo viên đạn
 		Bullet projectile = (Bullet)ProjectileScene.Instantiate();
 
-		projectile.damge = this.Damage;
+		projectile.damge = this.Damage / 2;
 
 		// Đặt vị trí viên đạn
 		projectile.Position = spawnPosition;

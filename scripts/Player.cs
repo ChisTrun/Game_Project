@@ -1,4 +1,5 @@
 using Godot;
+using NewGameProject.scripts.Skills;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +11,7 @@ public partial class Player : CharacterBody2D
 
 	public float BaseDamage = Global.PlayerBaseDamage;
 
-	private Vector2 character_direction = Vector2.Zero;
+	public Vector2 character_direction = Vector2.Zero;
 	private Vector2 target_velocity = Vector2.Zero;
 
 	private AnimatedSprite2D animatedSprite;
@@ -30,7 +31,7 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public int maxHealth = 100;
 	[Export]
-	public int currentHealth;
+	public float currentHealth;
 
 	private TextureProgressBar healthBar;
 
@@ -48,12 +49,12 @@ public partial class Player : CharacterBody2D
 	private float elapsedTime = 0f;
 	private bool isFading = false;
 
-	private bool isDashing = false;
-	private float dashCooldown = Global.PlayerSkillCD;
-	private float dashSpeed = 280.0f;
-	private float dashDuration = 0.2f;
-	private float dashTimer = 0.0f;
-	private AnimatedSprite2D dashEffect;
+	public bool isDashing = false;
+	public float dashCooldown = Global.PlayerSkillCD;
+	public float dashSpeed = 280.0f;
+	public float dashDuration = 0.2f;
+	public float dashTimer = 0.0f;
+	public AnimatedSprite2D dashEffect;
 
 	private void GetWeaponFromChildren()
 	{
@@ -81,6 +82,9 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
+		Global.PlayerInstance = this;
+		Global.InitializeSkills();
+
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthBar = GetNode<TextureProgressBar>("HealthBar/CanvasLayer/HealthBar2");
 		animatedSprite.AnimationFinished += OnAnimationFinished;
@@ -193,16 +197,50 @@ public partial class Player : CharacterBody2D
 				// Chuyển vũ khí khi nhấn phím E
 				SwitchWeapon();
 			}
-			if (keyEvent.Keycode == Key.Space && !isDashing && dashTimer <= 0.0f)
+			/*if (keyEvent.Keycode == Key.Space && !isDashing && dashTimer <= 0.0f)
 			{
-				// Dash
-				StartDash();
+				if (Global.Skills.ContainsKey("Dash") && Global.Skills["Dash"].IsActive && !isDashing && dashTimer <= 0.0f)
+				{
+					Global.Skills["Dash"].Use();
+
+					var skillBar = GetNode<SkillBar>("/root/SkillBar");
+					skillBar.HighlightSkill("Dash");
+				}
+				else
+				{
+					GD.Print("Dash skill is not active!");
+				}
+			}*/
+			if (keyEvent.Keycode == Key.Space && Global.Skills.ContainsKey("Dash"))
+			{
+				var dashSkill = Global.Skills["Dash"];
+
+				if (dashSkill.IsActive && !isDashing && dashTimer <= 0.0f)
+				{
+					dashSkill.Use();
+
+					// Tìm SkillBar và gọi HighlightSkill
+					var skillBar = GetNode<SkillBar>("../../SkillBar");
+					if (skillBar != null)
+					{
+						skillBar.HighlightSkill("Dash");
+					}
+					else
+					{
+						GD.Print("SkillBar node not found!");
+					}
+				}
+				else
+				{
+					GD.Print("Cannot use Dash: Skill not active, cooldown, or already dashing.");
+				}
 			}
+
 		}
 
 	}
 
-	public void OnHit(int amount)
+	public void OnHit(float amount)
 	{
 		if (!isHitting)
 		{
@@ -302,7 +340,7 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	public void ChangeHealth(int amount)
+	public void ChangeHealth(float amount)
 	{
 		if (isDead)
 		{
@@ -465,67 +503,4 @@ public override void _Process(double delta)
 
 		GD.Print($"Switched to weapon: {weapon.Name}");
 	}
-
-	private void StartDash()
-	{
-		isDashing = true;
-		dashTimer = dashCooldown + dashDuration; // Đặt lại thời gian hồi chiêu
-		Vector2 dashDirection;
-
-		// Kiểm tra hướng Dash
-		if (character_direction != Vector2.Zero)
-		{
-			dashDirection = character_direction.Normalized(); // Dash theo hướng di chuyển
-		}
-		else
-		{
-			Vector2 mousePosition = GetGlobalMousePosition();
-			dashDirection = (mousePosition - GlobalPosition).Normalized(); // Dash theo hướng chuột
-		}
-
-		Velocity = dashDirection * dashSpeed; // Áp dụng vận tốc Dash
-
-		GD.Print("Dash activated!");
-
-		// Hiển thị hiệu ứng Dash phía sau CollisionShape2D
-		if (dashEffect != null)
-		{
-			// Lấy vị trí của CollisionShape2D
-			CollisionShape2D collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
-			Vector2 collisionCenter = collisionShape.GlobalPosition;
-
-			// Tính toán vị trí phía sau từ tâm của CollisionShape2D
-			Vector2 effectPosition = collisionCenter - (dashDirection * 40); // khoảng cách từ tâm đến hiệu ứng
-			dashEffect.GlobalPosition = effectPosition;
-
-			// Tính toán góc xoay của hiệu ứng
-			float angle = Mathf.Atan2(-dashDirection.Y, -dashDirection.X);
-			dashEffect.Rotation = angle;
-
-			dashEffect.Visible = true;
-			dashEffect.Play("chainlightningblue");
-		}
-
-		// Tạo Timer để dừng Dash
-		var dashEndTimer = new Timer();
-		AddChild(dashEndTimer);
-		dashEndTimer.WaitTime = dashDuration;
-		dashEndTimer.OneShot = true;
-		dashEndTimer.Timeout += () =>
-		{
-			isDashing = false;
-			GD.Print("Dash ended.");
-
-			// Ẩn hiệu ứng sau Dash
-			if (dashEffect != null)
-			{
-				dashEffect.Visible = false;
-				dashEffect.Stop();
-			}
-
-			dashEndTimer.QueueFree();
-		};
-		dashEndTimer.Start();
-	}
-
 }
