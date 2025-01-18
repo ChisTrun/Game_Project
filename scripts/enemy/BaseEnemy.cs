@@ -10,6 +10,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 	[Export] public AudioStream DeadSound { get; set; }
 	[Export] public PackedScene MainScene2;
 
+	[Export] public bool IsBoss { get; set; } = false;
 
 	[Export] public int Damage = 10;
 	[Export] public float Speed = 100f;
@@ -29,7 +30,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 
 	private double _lastRunSoundTime = 0.0; // Last time the run sound was played
 
-	public void CreateSound(AudioStream sound, float cooldown = 0f,  double lastSoundTime = 0)
+	public void CreateSound(AudioStream sound, float cooldown = 0f, double lastSoundTime = 0)
 	{
 		double currentTime = Time.GetTicksMsec() / 1000.0;
 
@@ -79,7 +80,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 
 	protected virtual void OnDeathAnimationFinished()
 	{
-		if (_animatedSprite2D.Animation == "death")
+		if (_animatedSprite2D.Animation == "death" && !IsBoss)
 		{
 			QueueFree();
 		}
@@ -132,27 +133,50 @@ public abstract partial class BaseEnemy : CharacterBody2D
 		IsDead = true;
 		CreateSound(DeadSound);
 		_animatedSprite2D.Play("death");
-		Timer timer = new Timer();
-		timer.WaitTime = 5; // 5 giây
-		timer.OneShot = true;
-		timer.Autostart = true;
-		AddChild(timer);
-		GD.Print("Timer Started!");
 
-		timer.Timeout += () =>
+		if (this.IsBoss)
 		{
-			GD.Print("Chuyển 1");
-			if (MainScene2 != null)
+			CanvasLayer gameover = GetNode<CanvasLayer>("../../NoticeUI");
+			Label winLabel = gameover.GetNode<Label>("WinLabel");
+			Label gameOverLabel = gameover.GetNode<Label>("GameOverLabel");
+
+			// Ẩn nhãn Win và đặt alpha cho GameOverLabel về 0 (trong suốt)
+			winLabel.Visible = true;
+			gameover.Visible = true;
+			gameOverLabel.Visible = false;
+
+			var audioPlayer = gameover.GetNodeOrNull<AudioStreamPlayer>("WinMusic");
+			if (audioPlayer == null)
 			{
-				GD.Print("Chuyển");
-				GetTree().ChangeSceneToPacked(MainScene2); // Chuyển đến Scene Main
-				
+				audioPlayer = new AudioStreamPlayer();
+				gameover.AddChild(audioPlayer);
+				audioPlayer.Stream = ResourceLoader.Load<AudioStream>("res://OutAssets/sound/winRound.wav"); // Đường dẫn đến nhạc
 			}
-			else
+			var audioPlayerTheme = GetNode<AudioStreamPlayer2D>("../../AudioStreamPlayer2D");
+			audioPlayerTheme.Stop();
+			audioPlayer.Play();
+			Timer timer = new Timer();
+			timer.WaitTime = 5; // 5 giây
+			timer.OneShot = true;
+			timer.Autostart = true;
+			AddChild(timer);
+			GD.Print("Timer Started!");
+
+			timer.Timeout += () =>
 			{
-				GD.PrintErr("MainScene is not set! Please assign it in the inspector.");
-			}
-		};
+				GD.Print("Chuyển 1");
+				if (MainScene2 != null)
+				{
+					GD.Print("Chuyển");
+					GetTree().ChangeSceneToPacked(MainScene2); // Chuyển đến Scene Main
+
+				}
+				else
+				{
+					GD.PrintErr("MainScene is not set! Please assign it in the inspector.");
+				}
+			};
+		}
 	}
 
 	protected void FacePlayer()

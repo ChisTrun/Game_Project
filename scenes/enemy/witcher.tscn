@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c33u3xpsc10au"]
+[gd_scene load_steps=11 format=3 uid="uid://c33u3xpsc10au"]
 
 [ext_resource type="Script" path="res://scripts/enemy/RangedEnemy.cs" id="1_od6dt"]
 [ext_resource type="SpriteFrames" uid="uid://b8ypob0cyp62g" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/f2_caligrapher.tres" id="2_6vxyn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bs6avc6xgiek3" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarUnder.png" id="4_qdfi4"]
 [ext_resource type="Texture2D" uid="uid://b7ufe7ggp5u4j" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarProgress.png" id="5_hv42d"]
 [ext_resource type="AudioStream" uid="uid://bwfovyeley2ld" path="res://scenes/enemy/sound/boss1/mixkit-glass-break-with-hammer-thud-759.wav" id="5_qow8s"]
+[ext_resource type="PackedScene" uid="uid://dkn7qg33rwcvn" path="res://scenes/map/map2.tscn" id="6_58oc2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wnn12"]
 radius = 21.8611
@@ -21,6 +22,8 @@ BulletScene = ExtResource("2_gynyg")
 AttackSound = ExtResource("3_dcx4v")
 HitSound = ExtResource("4_3p1ry")
 DeadSound = ExtResource("5_qow8s")
+MainScene2 = ExtResource("6_58oc2")
+IsBoss = true
 
 [node name="EnemyHealthBar" type="TextureProgressBar" parent="."]
 z_index = 100
