@@ -18,7 +18,6 @@ public partial class Shop : CanvasLayer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GD.Print("Ready shop");
 		itemGrid = GetNode<GridContainer>("ItemGrid");
 		goldLabel = GetNode<Label>("/root/world/TileMap/Player/GoldLabel");
 		if (goldLabel == null)
@@ -68,7 +67,6 @@ public partial class Shop : CanvasLayer
 	}
 	public void UpdateGoldLabel()
 	{
-		GD.Print($"Updating gold label: {Global.Gold}");
 		if (goldLabel != null)
 		{
 			goldLabel.Text = $"Gold: {Global.Gold}";
@@ -138,7 +136,7 @@ public partial class Shop : CanvasLayer
 		}
 
 		var skill = Global.Skills[skillName];
-		GD.Print($"Setting up skill {skillName}");
+		GD.Print($"Setting up skill {skillName} with IsActive: {skill.IsActive}");
 
 		// Set up the skill info
 		var info = skillItem.GetNode<Label>("Info");
@@ -146,13 +144,19 @@ public partial class Shop : CanvasLayer
 
 		var buyButton = skillItem.GetNode<Button>("BuyButton");
 		buyButton.Text = skill.IsActive ? "Owned" : "Buy";
+		buyButton.Disabled = skill.IsActive; // Disable the button if the skill is already owned
 
 		buyButton.Connect("pressed", Callable.From(() =>
 		{
 			if (Global.Gold >= SkillCost && !skill.IsActive)
 			{
+				// Deduct gold and activate the skill
 				Global.Gold -= SkillCost;
 				skill.IsActive = true;
+
+				// Update the skill state in Global.Skills
+				Global.Skills[skillName] = skill;
+
 				GD.Print($"{skill.Name} purchased!");
 				UpdateGoldLabel();
 				UpdateShopUI();
@@ -163,6 +167,7 @@ public partial class Shop : CanvasLayer
 			}
 		}));
 	}
+
 
 	public void UpdateShopUI()
 	{
@@ -182,17 +187,18 @@ public partial class Shop : CanvasLayer
 		{
 			var skillItem = skillItems[skillName];
 			var buyButton = skillItem.GetNode<Button>("BuyButton");
-			var skill = Global.Skills[skillName];
+			var info = skillItem.GetNode<Label>("Info");
 
-			if (skill.IsActive)
+			if (Global.Skills.ContainsKey(skillName))
 			{
-				buyButton.Text = "Owned";
-				buyButton.Disabled = true;
+				var skill = Global.Skills[skillName];
+				info.Text = $"{skill.Name} - {SkillCost} Gold";
+				buyButton.Text = skill.IsActive ? "Owned" : "Buy";
+				buyButton.Disabled = skill.IsActive;
 			}
 			else
 			{
-				buyButton.Text = $"Buy";
-				buyButton.Disabled = false;
+				GD.PrintErr($"Skill {skillName} not found in Global.Skills!");
 			}
 		}
 	}
@@ -200,5 +206,7 @@ public partial class Shop : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		UpdateShopUI();
+		UpdateGoldLabel();
 	}
 }

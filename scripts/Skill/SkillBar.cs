@@ -11,23 +11,6 @@ public partial class SkillBar : CanvasLayer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		/*var container = GetNode<HBoxContainer>("Control/HBoxContainer");
-
-		// Lấy tất cả TextureRect (SkillSlot) bên trong HBoxContainer
-		foreach (Node child in container.GetChildren())
-		{
-			if (child is TextureRect slotNode)
-			{
-				skillSlotNodes.Add(slotNode);
-
-				// Đặt kích thước và chế độ hiển thị
-				slotNode.CustomMinimumSize = new Vector2(50, 50); // Giới hạn kích thước
-				slotNode.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered; // Giữ nguyên tỷ lệ
-				slotNode.ClipContents = true; // Cắt nội dung dư thừa nếu cần
-			}
-		}
-
-		UpdateSkillBar();*/
 		var container = GetNode<HBoxContainer>("Control/HBoxContainer");
 
 		// Lấy tất cả PanelContainer bên trong HBoxContainer
@@ -62,29 +45,11 @@ public partial class SkillBar : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		UpdateSkillBar();
 	}
 
 	public void UpdateSkillBar()
 	{
-		/*var activeSkills = Global.GetActiveSkills();
-
-		for (int i = 0; i < skillSlotNodes.Count; i++)
-		{
-			if (i < activeSkills.Count)
-			{
-				// Lấy thông tin kỹ năng
-				var skillName = activeSkills[i];
-				var skill = Global.Skills[skillName];
-
-				// Đặt hình ảnh kỹ năng
-				skillSlotNodes[i].Texture = GD.Load<Texture2D>(skill.IconPath);
-			}
-			else
-			{
-				// Bỏ trống các ô không có kỹ năng
-				skillSlotNodes[i].Texture = null;
-			}
-		}*/
 
 		// Lấy danh sách các kỹ năng đã kích hoạt
 		var activeSkills = Global.GetActiveSkills();

@@ -5,7 +5,7 @@ using NewGameProject.scripts.Skills;
 
 public partial class Global : Node
 {
-	public static int Gold = 100;
+	public static int Gold = 0;
 
 	public static int HealHealth = 10;
 
@@ -27,12 +27,13 @@ public partial class Global : Node
 
     public static Dictionary<string, Skill> Skills = new();
 
+
 	public static void InitializeSkills()
 	{
         Skills["Dash"] = new Skill(
            name: "Dash",
            cooldown: 1.0f,
-           isActive: false,
+           isActive: Skills.ContainsKey("Dash") ? Skills["Dash"].IsActive : false,
            iconPath: "res://addons/duelyst_animated_sprites/assets/skills/Dash.png",
            onUse: () =>
            {
