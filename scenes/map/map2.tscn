@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://btnnsrw2qlx7f" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/tundra_/tundra_ [bridgeHorizontal].png" id="5_frhse"]
 [ext_resource type="Texture2D" uid="uid://6c7m2baeyiro" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/tundra_/tundra_ [resources].png" id="6_hihdy"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="7_ncn2c"]
-[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthbar/HealthBar.tscn" id="8_mv12y"]
+[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="8_mv12y"]
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="9_8uacu"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="10_t4uuf"]
 [ext_resource type="AudioStream" uid="uid://kqqq4r8g5t62" path="res://scenes/weapons/sword/sword.wav" id="11_jacse"]
@@ -492,7 +492,7 @@ radius = 6.58807
 font_size = 12
 font_color = Color(1, 0.898039, 0, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bde1"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l2nam"]
 
 [node name="world" type="Node2D"]
 
@@ -800,15 +800,15 @@ theme_override_fonts/font = ExtResource("22_mierc")
 theme_override_font_sizes/font_size = 40
 text = "Volume"
 
-[node name="MenuButton" type="Button" parent="."]
-offset_left = 767.0
-offset_top = 432.0
-offset_right = 831.0
-offset_bottom = 496.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6bde1")
-icon = ExtResource("28_3vit5")
-script = ExtResource("29_ujytq")
-
 [node name="Shop" parent="." instance=ExtResource("32_vl7an")]
 visible = false
+
+[node name="MenuCanvas" type="CanvasLayer" parent="."]
+
+[node name="MenuButton" type="Button" parent="MenuCanvas"]
+offset_left = 1088.0
+offset_right = 1152.0
+offset_bottom = 64.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l2nam")
+icon = ExtResource("28_3vit5")
+script = ExtResource("29_ujytq")

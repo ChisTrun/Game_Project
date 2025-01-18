@@ -136,6 +136,14 @@ public abstract partial class BaseEnemy : CharacterBody2D
 
 		if (this.IsBoss)
 		{
+			if (Global.CurrentMap == 1){
+				Global.PlayerPosition = new Vector2(539.0f, 691.0f);
+				Global.CurrentMap = 2;
+			}
+			else{
+				Global.PlayerPosition = new Vector2(360.0f, 358.0f);
+				Global.CurrentMap = 3;
+			}
 			CanvasLayer gameover = GetNode<CanvasLayer>("../../NoticeUI");
 			Label winLabel = gameover.GetNode<Label>("WinLabel");
 			Label gameOverLabel = gameover.GetNode<Label>("GameOverLabel");
@@ -169,30 +177,30 @@ public abstract partial class BaseEnemy : CharacterBody2D
 				if (MainScene2 != null)
 				{
 					GD.Print("Chuyển");
-                    if (Global.PlayerInstance != null)
-                    {
-                        Global.SyncFromPlayer(Global.PlayerInstance);
-                    }
+					if (Global.PlayerInstance != null)
+					{
+						Global.SyncFromPlayer(Global.PlayerInstance);
+					}
 
-                    var newPlayer = GetTree().Root.GetNode<Player>("world/TileMap/Player");
-                    if (newPlayer != null)
-                    {
-                        Global.SyncToPlayer(newPlayer);
-                        Global.PlayerInstance = newPlayer;
-                        var shop = GetTree().Root.GetNode<Shop>("world/Shop");
-                        if (shop != null)
-                        {
-                            shop.UpdateGoldLabel();
-                            shop.UpdateShopUI();
-                        }
-                        GD.Print("Dữ liệu đã được đồng bộ sang Player mới.");
-                    }
-                    else
-                    {
-                        GD.PrintErr("Player node not found in the new scene.");
-                    }
-                    GetTree().ChangeSceneToPacked(MainScene2); // Chuyển đến Scene Main
-                }
+					var newPlayer = GetTree().Root.GetNode<Player>("world/TileMap/Player");
+					if (newPlayer != null)
+					{
+						Global.SyncToPlayer(newPlayer);
+						Global.PlayerInstance = newPlayer;
+						var shop = GetTree().Root.GetNode<Shop>("world/Shop");
+						if (shop != null)
+						{
+							shop.UpdateGoldLabel();
+							shop.UpdateShopUI();
+						}
+						GD.Print("Dữ liệu đã được đồng bộ sang Player mới.");
+					}
+					else
+					{
+						GD.PrintErr("Player node not found in the new scene.");
+					}
+					GetTree().ChangeSceneToPacked(MainScene2); // Chuyển đến Scene Main
+				}
 				else
 				{
 					GD.PrintErr("MainScene is not set! Please assign it in the inspector.");

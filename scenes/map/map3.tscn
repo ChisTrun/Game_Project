@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bhm8bv7wdg1y1" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/taiga_/taiga_.png" id="2_6waqf"]
 [ext_resource type="Texture2D" uid="uid://dgdvrvvlioctv" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/taiga_/taiga_ [resources].png" id="3_uke3o"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="4_hnx6a"]
-[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthbar/HealthBar.tscn" id="5_7j5o8"]
+[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="5_7j5o8"]
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="6_c3t5w"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="7_24fxo"]
 [ext_resource type="AudioStream" uid="uid://kqqq4r8g5t62" path="res://scenes/weapons/sword/sword.wav" id="8_inol3"]
@@ -249,7 +249,7 @@ radius = 6.58807
 font_size = 12
 font_color = Color(1, 0.898039, 0, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xmj5"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sl6t2"]
 
 [node name="world" type="Node2D"]
 
@@ -264,6 +264,7 @@ layer_1/tile_data = PackedInt32Array(1966102, 196610, 1, 2031638, 196610, 2, 196
 [node name="MeleCreep02" parent="TileMap" instance=ExtResource("24_qrkc0")]
 position = Vector2(371, 141)
 scale = Vector2(2.68, 2.68)
+IsBoss = true
 Damage = 50
 Speed = 80.0
 VisionRange = 200.0
@@ -534,15 +535,15 @@ theme_override_fonts/font = ExtResource("16_fuoca")
 theme_override_font_sizes/font_size = 40
 text = "Volume"
 
-[node name="MenuButton" type="Button" parent="."]
-offset_left = 767.0
-offset_top = 432.0
-offset_right = 831.0
-offset_bottom = 496.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1xmj5")
-icon = ExtResource("22_8xgf8")
-script = ExtResource("23_5nday")
-
 [node name="Shop" parent="." instance=ExtResource("25_lpobd")]
 visible = false
+
+[node name="MenuCanvas" type="CanvasLayer" parent="."]
+
+[node name="MenuButton" type="Button" parent="MenuCanvas"]
+offset_left = 1088.0
+offset_right = 1152.0
+offset_bottom = 64.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sl6t2")
+icon = ExtResource("22_8xgf8")
+script = ExtResource("23_5nday")

@@ -97,7 +97,8 @@ public partial class Player : CharacterBody2D
 		dashEffect.Visible = false;
 
 		// Khởi tạo máu
-		currentHealth = maxHealth;
+		currentHealth = Global.CurrentHealth;
+		maxHealth = Global.PlayerMaxHealth;
 		healthBar.MaxValue = maxHealth;
 		healthBar.Value = currentHealth;
 
@@ -120,6 +121,13 @@ public partial class Player : CharacterBody2D
 		{
 			manager.ShowFloatingText(GlobalPosition, "+" + amount, Colors.Yellow);
 		}));
+
+		Speed = Global.PlayerSpeed;
+		Acceleration = Global.PlayerAcceleration;
+		Deceleration = Global.PlayerDeceleration;
+		BaseDamage = Global.PlayerBaseDamage;
+		dashCooldown = Global.PlayerSkillCD;
+		GlobalPosition = Global.PlayerPosition;
 	}
 
 	public override void _ExitTree()
@@ -362,6 +370,7 @@ public partial class Player : CharacterBody2D
 			return;
 		}
 		currentHealth += amount;
+		Global.CurrentHealth = currentHealth;
 		GD.Print("Máu sau khi thay đổi: " + currentHealth + "/" + maxHealth);
 
 		if (currentHealth > maxHealth)

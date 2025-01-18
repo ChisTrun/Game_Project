@@ -1,0 +1,14 @@
+Gold: 0
+HealHealth: 10
+PlayerSpeed: 100
+PlayerAcceleration: 10
+PlayerDeceleration: 10
+PlayerBaseDamage: 10
+PlayerSkillCD: 1
+PlayerPosition: (445.1053, 1347.022)
+CurrentMap : 1
+CurrentHealth: 80
+VolumeValue: 50
+PlayerMaxHealth: 100
+SkillNames: [Dash]
+SkillStates: [false]
