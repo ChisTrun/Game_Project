@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
 [ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
-[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthbar/HealthBar.tscn" id="15_bfaun"]
+[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="15_bfaun"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="15_vgho4"]
 [ext_resource type="PackedScene" uid="uid://ctyu86it2m3mw" path="res://scenes/weapons/gun/gun.tscn" id="18_qdj0c"]
 [ext_resource type="AudioStream" uid="uid://kqqq4r8g5t62" path="res://scenes/weapons/sword/sword.wav" id="19_2gopp"]
@@ -981,12 +981,12 @@ theme_override_fonts/font = ExtResource("25_kdlmx")
 theme_override_font_sizes/font_size = 40
 text = "Volume"
 
-[node name="MenuButton" type="Button" parent="."]
-offset_left = 767.0
-offset_top = 432.0
-offset_right = 831.0
-offset_bottom = 496.0
-scale = Vector2(0.3, 0.3)
+[node name="MenuCavas" type="CanvasLayer" parent="."]
+
+[node name="MenuButton" type="Button" parent="MenuCavas"]
+offset_left = 1088.0
+offset_right = 1152.0
+offset_bottom = 64.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jwmd4")
 icon = ExtResource("32_s27x2")
 script = ExtResource("33_23ekh")

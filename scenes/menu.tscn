@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8rtjmf5n5rmo"]
+[gd_scene load_steps=11 format=3 uid="uid://c8rtjmf5n5rmo"]
 
 [ext_resource type="FontFile" uid="uid://h1bnjip4in3n" path="res://Font/MarcellusSC-Regular.ttf" id="1_vbvbn"]
 [ext_resource type="Script" path="res://scripts/Menu/MenuTitle.cs" id="2_248je"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://scripts/Menu/ButtonManage.cs" id="4_e28j1"]
 [ext_resource type="Script" path="res://scripts/Menu/ButtonEffect.cs" id="4_mj2hw"]
 [ext_resource type="Texture2D" uid="uid://dvqquxj1w7phd" path="res://OutAssets/img/setting2.jpg" id="5_14f6i"]
-[ext_resource type="PackedScene" uid="uid://droymiq6oax8w" path="res://scenes/main.tscn" id="5_dajlw"]
 [ext_resource type="Script" path="res://scripts/Menu/SoundChangeSlider.cs" id="6_hjpih"]
 [ext_resource type="Texture2D" uid="uid://ddh5n8nbf1nar" path="res://OutAssets/img/ruby2.png" id="7_omlmd"]
 [ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="8_t804y"]
@@ -59,6 +58,7 @@ theme_override_font_sizes/font_size = 30
 text = "AWAKENING OF THE BEATS"
 
 [node name="SettingBox" type="Control" parent="."]
+visible = false
 modulate = Color(0.690196, 0.690196, 0.690196, 1)
 anchors_preset = 0
 offset_left = 205.0
@@ -108,7 +108,7 @@ theme_override_fonts/font = ExtResource("1_vbvbn")
 theme_override_font_sizes/font_size = 40
 text = "Volume"
 
-[node name="Button" type="Control" parent="." node_paths=PackedStringArray("_quitButton", "_newGameButton", "_settingBox", "_closeButton", "_settingButton")]
+[node name="Button" type="Control" parent="." node_paths=PackedStringArray("_quitButton", "_newGameButton", "_settingBox", "_closeButton", "_settingButton", "_continueButton")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -118,7 +118,7 @@ _newGameButton = NodePath("NewGame")
 _settingBox = NodePath("../SettingBox")
 _closeButton = NodePath("../SettingBox/CloseButton")
 _settingButton = NodePath("Setting")
-MainScene = ExtResource("5_dajlw")
+_continueButton = NodePath("Continue")
 
 [node name="Setting" type="Button" parent="Button"]
 layout_mode = 2
