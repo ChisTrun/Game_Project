@@ -23,11 +23,20 @@ public partial class Global : Node
 
 	public static double VolumeValue { get; set; } = 50f;
 
-  public static Dictionary<string, Skill> Skills = new Dictionary<string, Skill>();
+  	public static Dictionary<string, Skill> Skills = new Dictionary<string, Skill>();
+	
+	public static Vector2 PlayerPosition = new Vector2(530.0f, 1373.0f);
+	
+	public static int CurrentMap = 1; 
 
 	public static void InitializeSkills()
 	{
-		Skills["Dash"] = new Skill(
+		if (Global.Skills.ContainsKey("Dash")){
+			GD.Print("Has");
+		}
+		else
+		{ 
+			Skills["Dash"] = new Skill(
 		   name: "Dash",
 		   cooldown: 1.0f,
 		   isActive: true,
@@ -43,7 +52,10 @@ public partial class Global : Node
 				   GD.Print("Player instance not set in Global.");
 			   }
 		   }
-	   );
+		);
+		
+		}
+	   
 	}
 
 	public static void ActivateSkill(string skillName)
