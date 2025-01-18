@@ -5,7 +5,7 @@ using NewGameProject.scripts.Skills;
 
 public partial class Global : Node
 {
-	public static int Gold = 100;
+	public static int Gold = 0;
 
 	public static int HealHealth = 10;
 
@@ -33,8 +33,10 @@ public partial class Global : Node
 	
 	public static int CurrentMap = 1; 
 
+
 	public static void InitializeSkills()
 	{
+
 		if (Global.Skills.ContainsKey("Dash")){
 			GD.Print("Has");
 		}
@@ -104,6 +106,70 @@ public partial class Global : Node
 
 
 	public static void ActivateSkill(string skillName)
+
+        Skills["Dash"] = new Skill(
+           name: "Dash",
+           cooldown: 1.0f,
+           isActive: Skills.ContainsKey("Dash") ? Skills["Dash"].IsActive : false,
+           iconPath: "res://addons/duelyst_animated_sprites/assets/skills/Dash.png",
+           onUse: () =>
+           {
+               if (Global.PlayerInstance != null) // Đảm bảo tham chiếu Player tồn tại
+               {
+                   DashAction(Global.PlayerInstance);
+               }
+               else
+               {
+                   GD.Print("Player instance not set in Global.");
+               }
+           }
+       );
+    }
+
+    public static void SyncToPlayer(Player player)
+    {
+        if (player == null)
+        {
+            GD.PrintErr("Player is null during sync!");
+            return;
+        }
+
+        // Đồng bộ các chỉ số cơ bản từ Global
+        player.maxHealth = PlayerMaxHealth;
+        player.currentHealth = CurrentHealth;
+        player.BaseDamage = PlayerBaseDamage;
+        player.Speed = PlayerSpeed;
+        player.Acceleration = PlayerAcceleration;
+        player.Deceleration = PlayerDeceleration;
+
+        GD.Print("Global data synced to Player.");
+    }
+
+
+
+    public static void SyncFromPlayer(Player player)
+    {
+        if (player == null)
+        {
+            GD.PrintErr("Player is null during sync!");
+            return;
+        }
+
+        // Đồng bộ các chỉ số cơ bản từ Player
+        PlayerMaxHealth = player.maxHealth;
+        CurrentHealth = player.currentHealth;
+        PlayerBaseDamage = player.BaseDamage;
+        PlayerSpeed = player.Speed;
+        PlayerAcceleration = player.Acceleration;
+        PlayerDeceleration = player.Deceleration;
+
+        GD.Print("Player data synced to Global.");
+    }
+
+
+
+    public static void ActivateSkill(string skillName)
+
 	{
 		if (Skills.ContainsKey(skillName))
 		{
