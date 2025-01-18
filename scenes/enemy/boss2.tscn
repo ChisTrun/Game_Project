@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bn2rcjovoj4jw"]
+[gd_scene load_steps=10 format=3 uid="uid://bn2rcjovoj4jw"]
 
 [ext_resource type="Script" path="res://scripts/enemy/MeleeEnemy.cs" id="1_wmw0e"]
 [ext_resource type="AudioStream" uid="uid://2flx7odqail4" path="res://scenes/enemy/sound/creep2/mixkit-heavy-sword-smashes-metal-2795.wav" id="2_i60v7"]
 [ext_resource type="AudioStream" uid="uid://ks6xexa5i7tt" path="res://scenes/enemy/sound/creep1/mixkit-weak-fast-blow-2145.wav" id="3_k4gfj"]
 [ext_resource type="AudioStream" uid="uid://qkdkavtruiej" path="res://scenes/enemy/sound/creep2/horse-neigh-261131.mp3" id="4_yr11s"]
+[ext_resource type="PackedScene" uid="uid://bhly2ud2gbyps" path="res://scenes/map/map3.tscn" id="5_fhcbd"]
 [ext_resource type="SpriteFrames" uid="uid://cseeqayuwnpu0" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/f3_onyxpantheran.tres" id="5_v28t7"]
 [ext_resource type="Texture2D" uid="uid://bs6avc6xgiek3" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarUnder.png" id="6_ak31l"]
 [ext_resource type="Texture2D" uid="uid://b7ufe7ggp5u4j" path="res://addons/duelyst_animated_sprites/assets/health_bar/healthbarProgress.png" id="7_tsayk"]
@@ -18,6 +19,8 @@ script = ExtResource("1_wmw0e")
 AttackSound = ExtResource("2_i60v7")
 HitSound = ExtResource("3_k4gfj")
 DeadSound = ExtResource("4_yr11s")
+MainScene2 = ExtResource("5_fhcbd")
+IsBoss = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.480001, 0.475809)
