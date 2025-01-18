@@ -194,7 +194,7 @@ public partial class Shop : CanvasLayer
 				var skill = Global.Skills[skillName];
 				info.Text = $"{skill.Name} - {SkillCost} Gold";
 				buyButton.Text = skill.IsActive ? "Owned" : "Buy";
-				buyButton.Disabled = skill.IsActive;
+				buyButton.Disabled = skill.IsActive || Global.Gold < SkillCost;
 			}
 			else
 			{
