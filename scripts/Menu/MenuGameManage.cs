@@ -30,6 +30,18 @@ private void OnQuitPressed()
 {
 	GD.Print("Quit button pressed, saving game state and exiting...");
 
+	// Lấy trạng thái game
+	var gameState = GetGameState();
+
+	// Lưu trạng thái game
+	SaveToJsonFile("user/save_user.json", gameState);
+	SaveToTxtFile("user/save_user.txt", gameState);
+
+	GetTree().Quit();
+}
+
+private Godot.Collections.Dictionary GetGameState()
+{
 	// Khởi tạo dictionary lưu trạng thái
 	Godot.Collections.Dictionary gameState = new Godot.Collections.Dictionary
 	{
@@ -56,8 +68,11 @@ private void OnQuitPressed()
 	gameState["SkillNames"] = skillNames;
 	gameState["SkillStates"] = skillStates;
 
-	string filePath = "user/save_user.json";
+	return gameState;
+}
 
+private void SaveToJsonFile(string filePath, Godot.Collections.Dictionary gameState)
+{
 	try
 	{
 		// Serialize game state
@@ -69,11 +84,41 @@ private void OnQuitPressed()
 	}
 	catch (Exception ex)
 	{
-		GD.PrintErr($"Failed to save game state: {ex.Message}");
+		GD.PrintErr($"Failed to save game state to JSON: {ex.Message}");
 	}
-
-	GetTree().Quit();
 }
+
+private void SaveToTxtFile(string filePath, Godot.Collections.Dictionary gameState)
+{
+	try
+	{
+		// Tạo nội dung dạng text
+		var lines = new System.Text.StringBuilder();
+
+		foreach (var key in gameState.Keys)
+		{
+			// Ép kiểu tường minh cho giá trị
+			if (gameState[key] is Godot.Variant value && value.Obj is Godot.Collections.Array array)
+			{
+				lines.AppendLine($"{key}: [{string.Join(", ", array)}]");
+			}
+			else
+			{
+				lines.AppendLine($"{key}: {gameState[key]}");
+			}
+		}
+
+		// Save to file
+		File.WriteAllText(filePath, lines.ToString());
+		GD.Print($"Game state saved to {filePath}");
+	}
+	catch (Exception ex)
+	{
+		GD.PrintErr($"Failed to save game state to TXT: {ex.Message}");
+	}
+}
+
+
 
 
 
