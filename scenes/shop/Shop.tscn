@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmkvjvj8ts5jm"]
+
+[ext_resource type="Script" path="res://scripts/Shop/Shop.cs" id="1_ota8u"]
+[ext_resource type="Texture2D" uid="uid://dvqquxj1w7phd" path="res://OutAssets/img/setting2.jpg" id="2_msbgq"]
+[ext_resource type="SpriteFrames" uid="uid://dc8qlabmdbi0m" path="res://addons/duelyst_animated_sprites/assets/spriteframes/icons/artifact_f6_winterblade.tres" id="3_n5kfv"]
+[ext_resource type="FontFile" uid="uid://h1bnjip4in3n" path="res://Font/MarcellusSC-Regular.ttf" id="4_we2g0"]
+[ext_resource type="FontFile" uid="uid://us6am02ejyf5" path="res://Font/RockSalt-Regular.ttf" id="5_k7vyx"]
+[ext_resource type="Script" path="res://scripts/Menu/ButtonEffect.cs" id="6_tonhx"]
+[ext_resource type="SpriteFrames" uid="uid://i8q7u0arrbh0" path="res://addons/duelyst_animated_sprites/assets/spriteframes/icons/bossspell_restoringlight.tres" id="7_rutrv"]
+[ext_resource type="Texture2D" uid="uid://e132eg62h01e" path="res://addons/duelyst_animated_sprites/assets/skills/Dash.png" id="8_bdsxb"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bb54j"]
+
+[node name="Shop" type="CanvasLayer"]
+script = ExtResource("1_ota8u")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -876.0
+offset_top = 35.0
+offset_right = 282.0
+offset_bottom = 1191.0
+grow_horizontal = 0
+scale = Vector2(0.539653, 0.501659)
+texture = ExtResource("2_msbgq")
+
+[node name="Title" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ItemGrid" type="GridContainer" parent="."]
+offset_left = 358.0
+offset_top = 93.0
+offset_right = 639.0
+offset_bottom = 406.0
+scale = Vector2(1.59321, 1.44892)
+columns = 3
+
+[node name="BaseDamageItem" type="VBoxContainer" parent="ItemGrid"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="ItemGrid/BaseDamageItem"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = SubResource("ViewportTexture_bb54j")
+stretch_mode = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ItemGrid/BaseDamageItem/Icon"]
+position = Vector2(44.564, 24.1559)
+sprite_frames = ExtResource("3_n5kfv")
+animation = &"active"
+frame = 2
+frame_progress = 0.712909
+
+[node name="Info" type="Label" parent="ItemGrid/BaseDamageItem"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_we2g0")
+theme_override_font_sizes/font_size = 14
+text = "+5 for X gold"
+
+[node name="BuyButton" type="Button" parent="ItemGrid/BaseDamageItem"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_k7vyx")
+theme_override_font_sizes/font_size = 10
+text = "Buy"
+script = ExtResource("6_tonhx")
+
+[node name="HealthItem" type="VBoxContainer" parent="ItemGrid"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="ItemGrid/HealthItem"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ItemGrid/HealthItem/Icon"]
+position = Vector2(45.1917, 25.3434)
+sprite_frames = ExtResource("7_rutrv")
+animation = &"active"
+
+[node name="Info" type="Label" parent="ItemGrid/HealthItem"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_we2g0")
+theme_override_font_sizes/font_size = 14
+text = "+5 for X gold"
+
+[node name="BuyButton" type="Button" parent="ItemGrid/HealthItem"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_k7vyx")
+theme_override_font_sizes/font_size = 10
+text = "Buy"
+script = ExtResource("6_tonhx")
+
+[node name="Skill1Item" type="VBoxContainer" parent="ItemGrid"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="ItemGrid/Skill1Item"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("8_bdsxb")
+
+[node name="Info" type="Label" parent="ItemGrid/Skill1Item"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_we2g0")
+theme_override_font_sizes/font_size = 14
+text = "+5 for X gold"
+
+[node name="BuyButton" type="Button" parent="ItemGrid/Skill1Item"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_k7vyx")
+theme_override_font_sizes/font_size = 10
+text = "Buy"
+script = ExtResource("6_tonhx")

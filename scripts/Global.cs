@@ -5,7 +5,7 @@ using NewGameProject.scripts.Skills;
 
 public partial class Global : Node
 {
-	public static int Gold = 0;
+	public static int Gold = 100;
 
 	public static int HealHealth = 10;
 
@@ -21,7 +21,9 @@ public partial class Global : Node
 
 	public static float PlayerSkillCD = 1.0f;
 
-    public static Dictionary<string, Skill> Skills = new Dictionary<string, Skill>();
+    public static int PlayerMaxHealth = 100;
+
+    public static Dictionary<string, Skill> Skills = new();
 
 	public static void InitializeSkills()
 	{

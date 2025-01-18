@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://droymiq6oax8w"]
+[gd_scene load_steps=57 format=3 uid="uid://droymiq6oax8w"]
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://scripts/NPC.cs" id="12_5ywv7"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="12_lope8"]
 [ext_resource type="Script" path="res://scripts/NPCTrigger.cs" id="14_q34pk"]
-[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="15_bfaun"]
+[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthbar/HealthBar.tscn" id="15_bfaun"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="15_vgho4"]
 [ext_resource type="PackedScene" uid="uid://ctyu86it2m3mw" path="res://scenes/weapons/gun/gun.tscn" id="18_qdj0c"]
 [ext_resource type="AudioStream" uid="uid://kqqq4r8g5t62" path="res://scenes/weapons/sword/sword.wav" id="19_2gopp"]
@@ -39,6 +39,7 @@
 [ext_resource type="Script" path="res://scripts/Menu/SoundChangeSlider.cs" id="30_gecpr"]
 [ext_resource type="Texture2D" uid="uid://fwtjsq5a2ce0" path="res://OutAssets/img/Settings-icon-symbol-vector2.png" id="32_s27x2"]
 [ext_resource type="Script" path="res://scripts/Menu/MenuButtonOpen.cs" id="33_23ekh"]
+[ext_resource type="PackedScene" uid="uid://dmkvjvj8ts5jm" path="res://scenes/shop/Shop.tscn" id="40_ea65x"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vh82s"]
 
@@ -614,6 +615,7 @@ position = Vector2(541.947, -686.498)
 scale = Vector2(2.2624, 2.21451)
 ShootDistance = 150.0
 RetreatDistance = 80.0
+IsBoss = false
 Speed = 40.0
 VisionRange = 200.0
 CoinScene = ExtResource("21_v0wfq")
@@ -989,6 +991,9 @@ scale = Vector2(0.3, 0.3)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jwmd4")
 icon = ExtResource("32_s27x2")
 script = ExtResource("33_23ekh")
+
+[node name="Shop" parent="." instance=ExtResource("40_ea65x")]
+visible = false
 
 [connection signal="body_entered" from="TileMap/NPC/NPCTrigger" to="TileMap/NPC/NPCTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="TileMap/NPC/NPCTrigger" to="TileMap/NPC/NPCTrigger" method="_on_body_exited"]

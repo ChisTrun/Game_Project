@@ -29,7 +29,7 @@ public partial class Player : CharacterBody2D
 	private Vector2 knockbackDirection; // Hướng knockback
 
 	[Export]
-	public int maxHealth = 100;
+	public int maxHealth = Global.PlayerMaxHealth;
 	[Export]
 	public float currentHealth;
 
@@ -197,20 +197,27 @@ public partial class Player : CharacterBody2D
 				// Chuyển vũ khí khi nhấn phím E
 				SwitchWeapon();
 			}
-			/*if (keyEvent.Keycode == Key.Space && !isDashing && dashTimer <= 0.0f)
+			if (keyEvent.Keycode == Key.P)
 			{
-				if (Global.Skills.ContainsKey("Dash") && Global.Skills["Dash"].IsActive && !isDashing && dashTimer <= 0.0f)
+				var shop = GetNode<Shop>("../../Shop");
+				if (shop != null)
 				{
-					Global.Skills["Dash"].Use();
-
-					var skillBar = GetNode<SkillBar>("/root/SkillBar");
-					skillBar.HighlightSkill("Dash");
+					if (shop.Visible)
+					{
+						shop.Visible = false;
+						/*GetTree().Paused = false;*/
+					}
+					else
+					{
+						shop.Visible = true;
+						/*GetTree().Paused = true;*/
+					}
 				}
 				else
 				{
-					GD.Print("Dash skill is not active!");
+					GD.Print("Shop node not found!");
 				}
-			}*/
+			}
 			if (keyEvent.Keycode == Key.Space && Global.Skills.ContainsKey("Dash"))
 			{
 				var dashSkill = Global.Skills["Dash"];
