@@ -390,9 +390,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cib7q")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
-"speed": 9.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -472,7 +472,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_byauk")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 9.0
 }, {

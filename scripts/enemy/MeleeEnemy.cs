@@ -15,7 +15,11 @@ public partial class MeleeEnemy : BaseEnemy
 
 		if (distanceToPlayer > VisionRange)
 		{
+
 			//GD.Print("Player is out of vision range.");
+
+			/*GD.Print("Player is out of vision range.");*/
+
 			return Vector2.Zero;
 		}
 

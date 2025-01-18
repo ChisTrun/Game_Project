@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=101 format=3 uid="uid://daajxel4cw37e"]
 
-[ext_resource type="Texture2D" uid="uid://ctfc60u6rsmwh" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/neutral_bonereaper.png" id="1_5idly"]
+[ext_resource type="Texture2D" uid="uid://cfqmuv2gekplt" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/neutral_bonereaper.png" id="1_5idly"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_421of"]
 atlas = ExtResource("1_5idly")

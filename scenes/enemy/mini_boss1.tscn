@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://cigqx383d8ipm"]
+
+[ext_resource type="Script" path="res://scripts/enemy/MeleeEnemy.cs" id="1_uktlh"]
+[ext_resource type="AudioStream" uid="uid://d3d1d4quo3nrc" path="res://scenes/enemy/sound/creep3/punch.wav" id="2_m2r6o"]
+[ext_resource type="AudioStream" uid="uid://c7jxkvcsweilk" path="res://scenes/enemy/sound/creep3/metal_hit.wav" id="3_g0wt4"]
+[ext_resource type="AudioStream" uid="uid://bxbsd8vx5gnnf" path="res://scenes/enemy/sound/creep3/electric_dead.wav" id="4_7sp0v"]
+[ext_resource type="SpriteFrames" uid="uid://cbdiq76oo5fc7" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/boss_chaosknight.tres" id="5_h0mlp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4t8tg"]
+radius = 21.8611
+
+[node name="MeleCreep02" type="CharacterBody2D"]
+collision_layer = 20
+collision_mask = 2
+script = ExtResource("1_uktlh")
+AttackSound = ExtResource("2_m2r6o")
+HitSound = ExtResource("3_g0wt4")
+DeadSound = ExtResource("4_7sp0v")
+RunSoundCooldown = 3.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5, -4)
+scale = Vector2(0.521429, 0.521429)
+sprite_frames = ExtResource("5_h0mlp")
+animation = &"attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 9)
+rotation = 3.14159
+scale = Vector2(0.60663, 0.707551)
+shape = SubResource("CircleShape2D_4t8tg")
