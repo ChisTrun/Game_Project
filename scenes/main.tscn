@@ -981,12 +981,12 @@ theme_override_fonts/font = ExtResource("25_kdlmx")
 theme_override_font_sizes/font_size = 40
 text = "Volume"
 
-[node name="MenuButton" type="Button" parent="."]
-offset_left = 767.0
-offset_top = 432.0
-offset_right = 831.0
-offset_bottom = 496.0
-scale = Vector2(0.3, 0.3)
+[node name="MenuCanvas" type="CanvasLayer" parent="."]
+
+[node name="MenuButton" type="Button" parent="MenuCanvas"]
+offset_left = 1089.0
+offset_right = 1153.0
+offset_bottom = 64.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jwmd4")
 icon = ExtResource("32_s27x2")
 script = ExtResource("33_23ekh")

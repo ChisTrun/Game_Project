@@ -120,6 +120,13 @@ public partial class Player : CharacterBody2D
 		{
 			manager.ShowFloatingText(GlobalPosition, "+" + amount, Colors.Yellow);
 		}));
+		
+		Speed = Global.PlayerSpeed;
+		Acceleration = Global.PlayerAcceleration;
+		Deceleration = Global.PlayerDeceleration;
+		BaseDamage = Global.PlayerBaseDamage;
+		dashCooldown = Global.PlayerSkillCD;
+		GlobalPosition = Global.PlayerPosition;
 	}
 
 	public override void _ExitTree()

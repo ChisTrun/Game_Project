@@ -136,10 +136,20 @@ public abstract partial class BaseEnemy : CharacterBody2D
 
 		if (this.IsBoss)
 		{
+			
+			if (Global.CurrentMap == 1){
+				Global.PlayerPosition = new Vector2(539.0f, 691.0f);
+				Global.CurrentMap = 2;
+			}
+			else{
+				Global.PlayerPosition = new Vector2(360.0f, 358.0f);
+				Global.CurrentMap = 3;
+			}
+			
 			CanvasLayer gameover = GetNode<CanvasLayer>("../../NoticeUI");
 			Label winLabel = gameover.GetNode<Label>("WinLabel");
 			Label gameOverLabel = gameover.GetNode<Label>("GameOverLabel");
-
+	
 			// Ẩn nhãn Win và đặt alpha cho GameOverLabel về 0 (trong suốt)
 			winLabel.Visible = true;
 			gameover.Visible = true;

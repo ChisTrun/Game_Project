@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dkn7qg33rwcvn"]
+[gd_scene load_steps=42 format=3 uid="uid://dkn7qg33rwcvn"]
 
 [ext_resource type="Texture2D" uid="uid://cwm68xst1esl" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/tundra_/tundra_ [fencesAndWalls].png" id="1_rcmgt"]
 [ext_resource type="Texture2D" uid="uid://ke7eiumq77do" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/tundra_/tundra_ [ice].png" id="2_ro4iu"]
@@ -492,7 +492,7 @@ radius = 6.58807
 font_size = 12
 font_color = Color(1, 0.898039, 0, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bde1"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_shp7s"]
 
 [node name="world" type="Node2D"]
 
@@ -800,13 +800,13 @@ theme_override_fonts/font = ExtResource("22_mierc")
 theme_override_font_sizes/font_size = 40
 text = "Volume"
 
-[node name="MenuButton" type="Button" parent="."]
-offset_left = 767.0
-offset_top = 432.0
-offset_right = 831.0
-offset_bottom = 496.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6bde1")
+[node name="MenuCanvas" type="CanvasLayer" parent="."]
+
+[node name="MenuButton" type="Button" parent="MenuCanvas"]
+offset_left = 1089.0
+offset_right = 1153.0
+offset_bottom = 64.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_shp7s")
 icon = ExtResource("28_3vit5")
 script = ExtResource("29_ujytq")
 

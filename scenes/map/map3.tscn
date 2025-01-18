@@ -249,7 +249,7 @@ radius = 6.58807
 font_size = 12
 font_color = Color(1, 0.898039, 0, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xmj5"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2damc"]
 
 [node name="world" type="Node2D"]
 
@@ -534,13 +534,13 @@ theme_override_fonts/font = ExtResource("16_fuoca")
 theme_override_font_sizes/font_size = 40
 text = "Volume"
 
-[node name="MenuButton" type="Button" parent="."]
-offset_left = 767.0
-offset_top = 432.0
-offset_right = 831.0
-offset_bottom = 496.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1xmj5")
+[node name="MenuCanvas" type="CanvasLayer" parent="."]
+
+[node name="MenuButton" type="Button" parent="MenuCanvas"]
+offset_left = 1089.0
+offset_right = 1153.0
+offset_bottom = 64.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2damc")
 icon = ExtResource("22_8xgf8")
 script = ExtResource("23_5nday")
 
