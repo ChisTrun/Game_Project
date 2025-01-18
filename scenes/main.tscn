@@ -1,4 +1,6 @@
-[gd_scene load_steps=55 format=3 uid="uid://droymiq6oax8w"]
+
+[gd_scene load_steps=56 format=3 uid="uid://droymiq6oax8w"]
+
 
 [ext_resource type="Texture2D" uid="uid://b4gjusuvm48jq" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desertPath_.png" id="1_xywr5"]
 [ext_resource type="Texture2D" uid="uid://kxrhco8xggvh" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/desert_/desert_ [bridgeAnimatedTiles].png" id="2_bgefe"]
@@ -37,7 +39,9 @@
 [ext_resource type="Script" path="res://scripts/Menu/SoundChangeSlider.cs" id="30_gecpr"]
 [ext_resource type="Texture2D" uid="uid://fwtjsq5a2ce0" path="res://OutAssets/img/Settings-icon-symbol-vector2.png" id="32_s27x2"]
 [ext_resource type="Script" path="res://scripts/Menu/MenuButtonOpen.cs" id="33_23ekh"]
+
 [ext_resource type="PackedScene" uid="uid://d35jdncjfsn55" path="res://HUDscenes/Shop.tscn" id="38_1ecis"]
+
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vh82s"]
 
@@ -611,8 +615,6 @@ shape = SubResource("CircleShape2D_6afs2")
 [node name="Witcher" parent="TileMap" instance=ExtResource("20_x786r")]
 position = Vector2(541.947, -686.498)
 scale = Vector2(2.2624, 2.21451)
-collision_layer = 20
-collision_mask = 2
 ShootDistance = 150.0
 RetreatDistance = 80.0
 Speed = 40.0
@@ -664,7 +666,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Weapon2" parent="TileMap/Player" instance=ExtResource("18_qdj0c")]
 position = Vector2(0, 1.99414)
 scale = Vector2(0.0424873, 0.0424873)
-Damage = 2
+AttackSound = ExtResource("21_8jxpw")
 Range = 20.0
 Cooldown = 0.001
 
@@ -724,23 +726,26 @@ VisionRange = 150.0
 MaxHealth = 150
 AttackCooldown = 3.0
 CoinScene = ExtResource("21_v0wfq")
-HealthPotionScene = ExtResource("15_bfaun")
+HealthPotionScene = ExtResource("19_b6hc6")
+RunSoundCooldown = 10.0
+
 
 [node name="MeleCreep01" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(448.366, 327.143)
 VisionRange = 100.0
 MaxHealth = 20
+CoinScene = ExtResource("21_v0wfq")
+HealthPotionScene = ExtResource("19_b6hc6")
 
 [node name="MeleCreep03" parent="TileMap" instance=ExtResource("24_7smk7")]
 position = Vector2(590.28, 269.767)
 VisionRange = 100.0
 MaxHealth = 20
+HealthPotionScene = ExtResource("19_b6hc6")
 
 [node name="MeleCreep02" parent="TileMap" instance=ExtResource("20_orq5k")]
 position = Vector2(934.781, 341.236)
 scale = Vector2(1.00958, 1.00921)
-collision_layer = 20
-collision_mask = 2
 Speed = 80.0
 AttackCooldown = 1.0
 
@@ -760,6 +765,13 @@ position = Vector2(927.583, 3.01978)
 
 [node name="MeleCreep09" parent="TileMap" instance=ExtResource("26_4hee3")]
 position = Vector2(503.897, -312.044)
+Damage = 30
+Speed = 20.0
+VisionRange = 150.0
+MaxHealth = 150
+AttackCooldown = 3.0
+CoinScene = ExtResource("21_v0wfq")
+HealthPotionScene = ExtResource("19_b6hc6")
 
 [node name="DialogueUI" type="CanvasLayer" parent="."]
 visible = false
@@ -980,6 +992,7 @@ scale = Vector2(0.3, 0.3)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jwmd4")
 icon = ExtResource("32_s27x2")
 script = ExtResource("33_23ekh")
+
 
 [node name="Shop" parent="." instance=ExtResource("38_1ecis")]
 visible = false

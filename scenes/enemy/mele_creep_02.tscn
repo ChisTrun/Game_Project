@@ -10,6 +10,8 @@
 radius = 21.8611
 
 [node name="MeleCreep03" type="CharacterBody2D"]
+collision_layer = 20
+collision_mask = 2
 script = ExtResource("1_kgt8j")
 AttackSound = ExtResource("2_56idy")
 HitSound = ExtResource("3_hkfnp")

@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=78 format=3 uid="uid://c5hx3xboekxct"]
 
-[ext_resource type="Texture2D" uid="uid://iasqddxp2tdl" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/f3_plague_totem.png" id="1_3tl0v"]
+[ext_resource type="Texture2D" uid="uid://d2ilk8j54o3dm" path="res://addons/duelyst_animated_sprites/assets/spritesheets/units/f3_plague_totem.png" id="1_3tl0v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glifl"]
 atlas = ExtResource("1_3tl0v")
