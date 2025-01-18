@@ -59,6 +59,7 @@ theme_override_font_sizes/font_size = 30
 text = "AWAKENING OF THE BEATS"
 
 [node name="SettingBox" type="Control" parent="."]
+visible = false
 modulate = Color(0.690196, 0.690196, 0.690196, 1)
 anchors_preset = 0
 offset_left = 205.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dkn7qg33rwcvn"]
+[gd_scene load_steps=42 format=3 uid="uid://dkn7qg33rwcvn"]
 
 [ext_resource type="Texture2D" uid="uid://cwm68xst1esl" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/tundra_/tundra_ [fencesAndWalls].png" id="1_rcmgt"]
 [ext_resource type="Texture2D" uid="uid://ke7eiumq77do" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/tundra_/tundra_ [ice].png" id="2_ro4iu"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://cigqx383d8ipm" path="res://scenes/enemy/mini_boss1.tscn" id="15_okpm5"]
 [ext_resource type="PackedScene" uid="uid://c85nkm33qdoc1" path="res://scenes/enemy/mele_creep_01.tscn" id="16_a4v2u"]
 [ext_resource type="PackedScene" uid="uid://bn2rcjovoj4jw" path="res://scenes/enemy/boss2.tscn" id="17_uqwkb"]
-[ext_resource type="PackedScene" uid="uid://bhly2ud2gbyps" path="res://scenes/map/map3.tscn" id="18_53tn1"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="18_xbnqh"]
 [ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="19_cnvaw"]
 [ext_resource type="PackedScene" uid="uid://b63eh8lqbve68" path="res://scenes/gui/coin/coin.tscn" id="19_nmi80"]
@@ -583,7 +582,6 @@ position = Vector2(315, 89)
 [node name="MeleCreep06" parent="TileMap" instance=ExtResource("17_uqwkb")]
 position = Vector2(722, 105)
 scale = Vector2(2.88, 2.88)
-MainScene2 = ExtResource("18_53tn1")
 Damage = 40
 Speed = 60.0
 VisionRange = 150.0

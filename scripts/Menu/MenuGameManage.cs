@@ -1,4 +1,6 @@
 using Godot;
+using System.IO;
+using System;
 
 public partial class MenuGameManage : CanvasLayer
 {
@@ -23,11 +25,57 @@ public partial class MenuGameManage : CanvasLayer
 		_settingBox.Visible = false;
 	}
 
-	private void OnQuitPressed()
+
+private void OnQuitPressed()
+{
+	GD.Print("Quit button pressed, saving game state and exiting...");
+
+	// Khởi tạo dictionary lưu trạng thái
+	Godot.Collections.Dictionary gameState = new Godot.Collections.Dictionary
 	{
-		GD.Print("Quit button pressed, exiting game.");
-		GetTree().Quit(); // Thoát ứng dụng
+		{ "Gold", Global.Gold },
+		{ "HealHealth", Global.HealHealth },
+		{ "PlayerSpeed", Global.PlayerSpeed },
+		{ "PlayerAcceleration", Global.PlayerAcceleration },
+		{ "PlayerDeceleration", Global.PlayerDeceleration },
+		{ "PlayerBaseDamage", Global.PlayerBaseDamage },
+		{ "PlayerSkillCD", Global.PlayerSkillCD },
+		{ "PlayerPosition", Global.PlayerInstance?.GlobalPosition ?? Vector2.Zero }
+	};
+
+	// Lưu trạng thái kỹ năng dưới dạng 2 mảng
+	var skillNames = new Godot.Collections.Array();
+	var skillStates = new Godot.Collections.Array();
+
+	foreach (var skill in Global.Skills)
+	{
+		skillNames.Add(skill.Key);
+		skillStates.Add(skill.Value.IsActive);
 	}
+
+	gameState["SkillNames"] = skillNames;
+	gameState["SkillStates"] = skillStates;
+
+	string filePath = "user/save_user.json";
+
+	try
+	{
+		// Serialize game state
+		string jsonString = Json.Stringify(gameState);
+
+		// Save to file
+		File.WriteAllText(filePath, jsonString);
+		GD.Print($"Game state saved to {filePath}");
+	}
+	catch (Exception ex)
+	{
+		GD.PrintErr($"Failed to save game state: {ex.Message}");
+	}
+
+	GetTree().Quit();
+}
+
+
 
 	private void OnNewGamePressed()
 	{
