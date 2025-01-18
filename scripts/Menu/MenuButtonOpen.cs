@@ -12,7 +12,7 @@ public partial class MenuButtonOpen : Button
 	// Phương thức sẽ được gọi khi button được nhấn
 	private void OnButtonPressed()
 	{
-		CanvasLayer menu = GetNode<CanvasLayer>("../../Menu");
+		CanvasLayer menu = GetNode<CanvasLayer>("../Menu");
 		menu.GetNode<Label>("./GameOverLabel").Visible = false;
 		menu.GetNode<Button>("./Button/Continue").Disabled = false;
 		menu.GetNode<Button>("./Button/Setting").Disabled = false;

@@ -20,8 +20,6 @@ public partial class Global : Node
 	public static float PlayerBaseDamage = 10.0f;
 
 	public static float PlayerSkillCD = 1.0f;
-	
-	public static double VolumeValue { get; set; } = 50f;
 
     public static Dictionary<string, Skill> Skills = new Dictionary<string, Skill>();
 
