@@ -1,10 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://bhly2ud2gbyps"]
+[gd_scene load_steps=33 format=3 uid="uid://bhly2ud2gbyps"]
 
 [ext_resource type="Texture2D" uid="uid://c6oku78s6vklu" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/taiga_/taigaPath_.png" id="1_c32qs"]
 [ext_resource type="Texture2D" uid="uid://bhm8bv7wdg1y1" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/taiga_/taiga_.png" id="2_6waqf"]
 [ext_resource type="Texture2D" uid="uid://dgdvrvvlioctv" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/taiga_/taiga_ [resources].png" id="3_uke3o"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="4_hnx6a"]
-[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="5_7j5o8"]
+[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthbar/HealthBar.tscn" id="5_7j5o8"]
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="6_c3t5w"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="7_24fxo"]
 [ext_resource type="AudioStream" uid="uid://kqqq4r8g5t62" path="res://scenes/weapons/sword/sword.wav" id="8_inol3"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://fwtjsq5a2ce0" path="res://OutAssets/img/Settings-icon-symbol-vector2.png" id="22_8xgf8"]
 [ext_resource type="Script" path="res://scripts/Menu/MenuButtonOpen.cs" id="23_5nday"]
 [ext_resource type="PackedScene" uid="uid://mw3gvgb2xhts" path="res://scenes/enemy/final_boss.tscn" id="24_qrkc0"]
+[ext_resource type="PackedScene" uid="uid://dmkvjvj8ts5jm" path="res://scenes/shop/Shop.tscn" id="25_lpobd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dhs76"]
 texture = ExtResource("1_c32qs")
@@ -250,7 +251,7 @@ font_color = Color(1, 0.898039, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xmj5"]
 
-[node name="Map3" type="Node2D"]
+[node name="world" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_qggta")
@@ -542,3 +543,6 @@ scale = Vector2(0.3, 0.3)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_1xmj5")
 icon = ExtResource("22_8xgf8")
 script = ExtResource("23_5nday")
+
+[node name="Shop" parent="." instance=ExtResource("25_lpobd")]
+visible = false

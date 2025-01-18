@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://btnnsrw2qlx7f" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/tundra_/tundra_ [bridgeHorizontal].png" id="5_frhse"]
 [ext_resource type="Texture2D" uid="uid://6c7m2baeyiro" path="res://fantasy_ [version 2.0]/fantasy_ [version 2.0]/tundra_/tundra_ [resources].png" id="6_hihdy"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="7_ncn2c"]
-[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthBar/healthBar.tscn" id="8_mv12y"]
+[ext_resource type="PackedScene" uid="uid://dpf71gkuerr4f" path="res://scenes/gui/healthbar/HealthBar.tscn" id="8_mv12y"]
 [ext_resource type="SpriteFrames" uid="uid://bqndga87u1trf" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/critter_1.tres" id="9_8uacu"]
 [ext_resource type="PackedScene" uid="uid://b32ypnrdbqey5" path="res://scenes/weapons/sword/sword.tscn" id="10_t4uuf"]
 [ext_resource type="AudioStream" uid="uid://kqqq4r8g5t62" path="res://scenes/weapons/sword/sword.wav" id="11_jacse"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://cigqx383d8ipm" path="res://scenes/enemy/mini_boss1.tscn" id="15_okpm5"]
 [ext_resource type="PackedScene" uid="uid://c85nkm33qdoc1" path="res://scenes/enemy/mele_creep_01.tscn" id="16_a4v2u"]
 [ext_resource type="PackedScene" uid="uid://bn2rcjovoj4jw" path="res://scenes/enemy/boss2.tscn" id="17_uqwkb"]
-[ext_resource type="PackedScene" uid="uid://bhly2ud2gbyps" path="res://scenes/map/map3.tscn" id="18_53tn1"]
 [ext_resource type="SpriteFrames" uid="uid://rpat7g65uagx" path="res://addons/duelyst_animated_sprites/assets/spriteframes/units/neutral_tribalranged2.tres" id="18_xbnqh"]
 [ext_resource type="AudioStream" uid="uid://cqwot6a8ka6jv" path="res://addons/videoplayback.wav" id="19_cnvaw"]
 [ext_resource type="PackedScene" uid="uid://b63eh8lqbve68" path="res://scenes/gui/coin/coin.tscn" id="19_nmi80"]
@@ -32,6 +31,7 @@
 [ext_resource type="Script" path="res://scripts/Menu/SoundChangeSlider.cs" id="27_gkev0"]
 [ext_resource type="Texture2D" uid="uid://fwtjsq5a2ce0" path="res://OutAssets/img/Settings-icon-symbol-vector2.png" id="28_3vit5"]
 [ext_resource type="Script" path="res://scripts/Menu/MenuButtonOpen.cs" id="29_ujytq"]
+[ext_resource type="PackedScene" uid="uid://dmkvjvj8ts5jm" path="res://scenes/shop/Shop.tscn" id="32_vl7an"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pkfnn"]
 texture = ExtResource("1_rcmgt")
@@ -494,7 +494,7 @@ font_color = Color(1, 0.898039, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bde1"]
 
-[node name="Map2" type="Node2D"]
+[node name="world" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_x52f5")
@@ -583,7 +583,6 @@ position = Vector2(315, 89)
 [node name="MeleCreep06" parent="TileMap" instance=ExtResource("17_uqwkb")]
 position = Vector2(722, 105)
 scale = Vector2(2.88, 2.88)
-MainScene2 = ExtResource("18_53tn1")
 Damage = 40
 Speed = 60.0
 VisionRange = 150.0
@@ -810,3 +809,6 @@ scale = Vector2(0.3, 0.3)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6bde1")
 icon = ExtResource("28_3vit5")
 script = ExtResource("29_ujytq")
+
+[node name="Shop" parent="." instance=ExtResource("32_vl7an")]
+visible = false

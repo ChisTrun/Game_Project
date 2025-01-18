@@ -153,6 +153,7 @@ public abstract partial class BaseEnemy : CharacterBody2D
 				audioPlayer.Stream = ResourceLoader.Load<AudioStream>("res://OutAssets/sound/winRound.wav"); // Đường dẫn đến nhạc
 			}
 			var audioPlayerTheme = GetNode<AudioStreamPlayer2D>("../../AudioStreamPlayer2D");
+
 			audioPlayerTheme.Stop();
 			audioPlayer.Play();
 			Timer timer = new Timer();
@@ -168,9 +169,30 @@ public abstract partial class BaseEnemy : CharacterBody2D
 				if (MainScene2 != null)
 				{
 					GD.Print("Chuyển");
-					GetTree().ChangeSceneToPacked(MainScene2); // Chuyển đến Scene Main
+                    if (Global.PlayerInstance != null)
+                    {
+                        Global.SyncFromPlayer(Global.PlayerInstance);
+                    }
 
-				}
+                    var newPlayer = GetTree().Root.GetNode<Player>("world/TileMap/Player");
+                    if (newPlayer != null)
+                    {
+                        Global.SyncToPlayer(newPlayer);
+                        Global.PlayerInstance = newPlayer;
+                        var shop = GetTree().Root.GetNode<Shop>("world/Shop");
+                        if (shop != null)
+                        {
+                            shop.UpdateGoldLabel();
+                            shop.UpdateShopUI();
+                        }
+                        GD.Print("Dữ liệu đã được đồng bộ sang Player mới.");
+                    }
+                    else
+                    {
+                        GD.PrintErr("Player node not found in the new scene.");
+                    }
+                    GetTree().ChangeSceneToPacked(MainScene2); // Chuyển đến Scene Main
+                }
 				else
 				{
 					GD.PrintErr("MainScene is not set! Please assign it in the inspector.");

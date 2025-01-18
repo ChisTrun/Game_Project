@@ -615,7 +615,6 @@ position = Vector2(541.947, -686.498)
 scale = Vector2(2.2624, 2.21451)
 ShootDistance = 150.0
 RetreatDistance = 80.0
-IsBoss = false
 Speed = 40.0
 VisionRange = 200.0
 CoinScene = ExtResource("21_v0wfq")
@@ -623,7 +622,7 @@ HealthPotionScene = ExtResource("19_b6hc6")
 
 [node name="Player" type="CharacterBody2D" parent="TileMap"]
 z_index = 1
-position = Vector2(545.032, 544.568)
+position = Vector2(541.947, 542.555)
 scale = Vector2(1.00958, 1.00921)
 collision_layer = 9
 script = ExtResource("8_mtmnc")

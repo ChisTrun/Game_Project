@@ -23,6 +23,8 @@ public partial class Global : Node
 
     public static int PlayerMaxHealth = 100;
 
+    public static float CurrentHealth = PlayerMaxHealth;
+
     public static Dictionary<string, Skill> Skills = new();
 
 	public static void InitializeSkills()
@@ -30,7 +32,7 @@ public partial class Global : Node
         Skills["Dash"] = new Skill(
            name: "Dash",
            cooldown: 1.0f,
-           isActive: true,
+           isActive: false,
            iconPath: "res://addons/duelyst_animated_sprites/assets/skills/Dash.png",
            onUse: () =>
            {
@@ -46,7 +48,49 @@ public partial class Global : Node
        );
     }
 
-	public static void ActivateSkill(string skillName)
+    public static void SyncToPlayer(Player player)
+    {
+        if (player == null)
+        {
+            GD.PrintErr("Player is null during sync!");
+            return;
+        }
+
+        // Đồng bộ các chỉ số cơ bản từ Global
+        player.maxHealth = PlayerMaxHealth;
+        player.currentHealth = CurrentHealth;
+        player.BaseDamage = PlayerBaseDamage;
+        player.Speed = PlayerSpeed;
+        player.Acceleration = PlayerAcceleration;
+        player.Deceleration = PlayerDeceleration;
+
+        GD.Print("Global data synced to Player.");
+    }
+
+
+
+    public static void SyncFromPlayer(Player player)
+    {
+        if (player == null)
+        {
+            GD.PrintErr("Player is null during sync!");
+            return;
+        }
+
+        // Đồng bộ các chỉ số cơ bản từ Player
+        PlayerMaxHealth = player.maxHealth;
+        CurrentHealth = player.currentHealth;
+        PlayerBaseDamage = player.BaseDamage;
+        PlayerSpeed = player.Speed;
+        PlayerAcceleration = player.Acceleration;
+        PlayerDeceleration = player.Deceleration;
+
+        GD.Print("Player data synced to Global.");
+    }
+
+
+
+    public static void ActivateSkill(string skillName)
 	{
         if (Skills.ContainsKey(skillName))
 		{

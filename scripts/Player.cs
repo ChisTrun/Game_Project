@@ -83,7 +83,10 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		Global.PlayerInstance = this;
+		Global.SyncToPlayer(this);
 		Global.InitializeSkills();
+
+		GD.Print(Global.Skills["Dash"].IsActive);
 
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		healthBar = GetNode<TextureProgressBar>("HealthBar/CanvasLayer/HealthBar2");
@@ -117,6 +120,11 @@ public partial class Player : CharacterBody2D
 		{
 			manager.ShowFloatingText(GlobalPosition, "+" + amount, Colors.Yellow);
 		}));
+	}
+
+	public override void _ExitTree()
+	{
+		Global.SyncFromPlayer(this);
 	}
 
 	public override void _PhysicsProcess(double delta)
