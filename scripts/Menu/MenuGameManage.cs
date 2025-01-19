@@ -135,7 +135,7 @@ private void SaveToTxtFile(string filePath, Godot.Collections.Dictionary gameSta
 		if (currentScene != null)
 		{
 			GetTree().ReloadCurrentScene(); // Restart lại scene hiện tại
-		}
+        }
 		else
 		{
 			GD.PrintErr("No current scene is loaded. Unable to restart.");

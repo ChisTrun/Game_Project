@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn2rcjovoj4jw"]
+[gd_scene load_steps=10 format=3 uid="uid://t73twaxuemuy"]
 
 [ext_resource type="Script" path="res://scripts/enemy/MeleeEnemy.cs" id="1_wmw0e"]
 [ext_resource type="AudioStream" uid="uid://2flx7odqail4" path="res://scenes/enemy/sound/creep2/mixkit-heavy-sword-smashes-metal-2795.wav" id="2_i60v7"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://mw3gvgb2xhts"]
+[gd_scene load_steps=9 format=3 uid="uid://dqwoi7d4eqdeh"]
 
 [ext_resource type="Script" path="res://scripts/enemy/MeleeEnemy.cs" id="1_24m5b"]
 [ext_resource type="AudioStream" uid="uid://d3d1d4quo3nrc" path="res://scenes/enemy/sound/creep3/punch.wav" id="2_lor2n"]
